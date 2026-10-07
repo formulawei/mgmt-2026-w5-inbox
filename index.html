@@ -1,0 +1,2042 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="臺大管理學 2026 第五週「規劃與策略規劃」課堂模擬：澄川電控的三次選擇。A classroom strategy simulation for Week 5, Planning and Strategic Planning.">
+<title>W5 澄川電控的三次選擇｜規劃與策略規劃</title>
+<style>
+:root{
+  color-scheme:light;
+  --navy:#002B5C;--navy-700:#0B3A75;--navy-300:#7F95B5;--navy-100:#E1E8F2;--navy-50:#F2F5FA;
+  --gold:#C9A227;--gold-700:#8A6D0F;--gold-100:#F8F0D0;
+  --bg:#EDF0F5;--surface:#FFFFFF;--ink:#12203A;--ink-2:#414E68;--muted:#667189;
+  --line:#D2D9E5;--line-2:#E7EBF2;
+  --ok:#1C7446;--bad:#B3261E;--bad-50:#FCEEEC;--warn:#8A5A00;
+  --dh:#2a78d6;--dc:#4a3aa7;--th:#eb6834;--tc:#1baf7a;
+  --in:#B8901A;--out:#8FA3BF;
+  --font:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 var(--font);-webkit-text-size-adjust:100%}
+html[lang=en] body{line-height:1.6}
+button,input,textarea,select{font:inherit;color:inherit}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+a{color:var(--navy-700)}
+img,svg{max-width:100%}
+
+/* ---------- 版頭與導覽 ---------- */
+.top{position:sticky;top:0;z-index:30;background:var(--navy);color:#fff}
+.top-in{max-width:1180px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:18px}
+.brand{line-height:1.3;min-width:0}
+.brand small{display:block;font-size:13px;color:#C7D3E6}
+.brand strong{font-size:17px;font-weight:600;white-space:nowrap}
+.track{margin-left:auto;display:flex;align-items:center;gap:0;font-size:13px;color:#C7D3E6}
+.track .stop{display:flex;align-items:center;gap:7px}
+.track .lamp{width:14px;height:14px;border-radius:50%;border:2px solid #7F95B5;background:transparent}
+.track .stop.done .lamp{background:var(--gold);border-color:var(--gold)}
+.track .stop.now .lamp{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.28)}
+.track .stop.now,.track .stop.done{color:#fff}
+.track .wire{width:34px;height:2px;background:#52699A;margin:0 8px}
+.track .wire.done{background:var(--gold)}
+.lang{border:1px solid #7F95B5;background:transparent;color:#fff;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:15px;white-space:nowrap}
+.lang:hover{border-color:#fff}
+.tabs{background:var(--surface);border-bottom:1px solid var(--line)}
+.tabs-in{max-width:1180px;margin:auto;padding:0 12px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{border:0;background:none;padding:12px 14px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;color:var(--ink-2);font-size:16px}
+.tabs button:hover:not(:disabled){color:var(--navy)}
+.tabs button[aria-current=true]{color:var(--navy);border-bottom-color:var(--gold);font-weight:600}
+.tabs button:disabled{color:#A3ACBD;cursor:not-allowed}
+
+/* ---------- 版面 ---------- */
+main{max-width:1180px;margin:auto;padding:30px 20px 90px}
+.prose{max-width:43em}
+h1:focus,h2:focus{outline:none}
+h1{font-size:clamp(28px,3.6vw,40px);line-height:1.25;font-weight:700;color:var(--navy);margin:6px 0 14px;letter-spacing:.01em}
+h2{font-size:24px;line-height:1.4;font-weight:700;color:var(--navy);margin:0 0 10px}
+h3{font-size:19px;line-height:1.45;font-weight:600;margin:0 0 6px}
+p+p{margin-top:.7em}
+.lead{font-size:19px;color:var(--ink)}
+.kicker{font-size:15px;color:var(--gold-700);font-weight:600}
+.muted{color:var(--muted)}
+.small{font-size:15px}
+.sec{margin-top:44px}
+.sec>h2{padding-top:18px;border-top:2px solid var(--navy)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stack>*+*{margin-top:14px}
+ul.plain{list-style:none;padding:0}
+ul.rules{list-style:none;padding:0;display:grid;gap:10px}
+ul.rules li{display:grid;grid-template-columns:10.5em 1fr;gap:14px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:6px}
+ul.rules li strong{color:var(--navy)}
+
+/* ---------- 按鈕與表單 ---------- */
+.btn{cursor:pointer;border:1px solid var(--navy-300);background:var(--surface);color:var(--navy);border-radius:6px;padding:9px 16px;font-weight:500}
+.btn:hover:not(:disabled){border-color:var(--navy);background:var(--navy-50)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600;padding:11px 22px}
+.btn.primary:hover:not(:disabled){background:var(--navy-700)}
+.btn.small{padding:5px 12px;font-size:15px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+label.field{display:block;font-weight:600;margin:18px 0 4px}
+.hint{color:var(--muted);font-size:15px}
+textarea,select{display:block;width:100%;border:1px solid #B6C0D1;border-radius:6px;background:#fff;padding:11px 12px}
+textarea{min-height:92px;resize:vertical;line-height:1.65}
+textarea.bad{border-color:var(--bad);background:var(--bad-50)}
+.count{font-size:14px;color:var(--muted);text-align:right;margin-top:2px}
+.count.short{color:var(--bad)}
+.inline-err{color:var(--bad);font-weight:600;margin-top:10px}
+.inline-err:empty{display:none}
+details{margin-top:14px}
+summary{cursor:pointer;font-weight:600;color:var(--navy-700)}
+details>*:not(summary){margin-top:10px}
+
+/* 模式標籤（課綱用語） */
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;letter-spacing:.04em;border-radius:4px;padding:2px 8px;vertical-align:middle;margin-left:8px}
+.mode.noai{background:var(--navy-100);color:var(--navy)}
+.mode.ai{background:var(--gold-100);color:#6B5406}
+
+/* ---------- 開場 ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.hero-fig{background:var(--navy);border-radius:12px;padding:14px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.facts div{padding:16px 18px;border-right:1px solid var(--line-2)}
+.facts div:last-child{border-right:0}
+.facts dt{font-size:14px;color:var(--gold-700);font-weight:700}
+.facts dd{margin:4px 0 0;font-size:16px;line-height:1.6}
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.voice{display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:start}
+.avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--navy);font-size:17px}
+.avatar.b{background:#5B6F92}.avatar.c{background:var(--gold-700)}.avatar.d{background:#3D5A80}
+.voice .who{font-size:14px;color:var(--muted)}
+.voice blockquote{margin:2px 0 0;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:2px 12px 12px 12px;font-size:16px;line-height:1.65}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--navy-50);color:var(--navy);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto;background:var(--surface);border-radius:8px}
+.levels th:first-child,.levels td:first-child{width:7.5em;font-weight:600;background:var(--navy-50);color:var(--navy)}
+.levels td.hl,.levels th.hl{background:var(--gold-100)}
+.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.method svg{margin-bottom:8px}
+.method h3 small{font-weight:400;color:var(--muted);font-size:15px}
+
+/* 暖身 */
+.warm{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.wcard p{font-weight:500}
+.wcard .choices{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.wcard .choices button{font-size:15px;padding:4px 12px;border-radius:999px;border:1px solid var(--navy-300);background:#fff;cursor:pointer;color:var(--navy)}
+.wcard .choices button:hover:not(:disabled){background:var(--navy-50)}
+.wcard .choices button.pick{background:var(--navy);color:#fff;border-color:var(--navy)}
+.wcard .choices button:disabled{cursor:default}
+.wcard .fb{font-size:15px;margin-top:8px;color:var(--ink-2)}
+.wcard.right{border-left:4px solid var(--ok)}
+.wcard.wrong{border-left:4px solid var(--bad)}
+.wcard .mark{font-weight:700}
+.wcard.right .mark{color:var(--ok)}.wcard.wrong .mark{color:var(--bad)}
+
+/* 指標磚 */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:0 0 10px 10px}
+.tile{padding:14px 18px;border-right:1px solid var(--line-2)}
+.tile:last-child{border-right:0}
+.tile .lab{font-size:14px;color:var(--muted)}
+.tile .val{font-size:30px;font-weight:700;color:var(--navy);line-height:1.25}
+.tile .sub{font-size:14px;color:var(--muted)}
+.tile svg{display:block;margin-top:4px}
+
+/* 情境矩陣 */
+.matrix{display:grid;grid-template-columns:auto 1fr 1fr;grid-template-rows:auto 1fr 1fr;gap:8px;max-width:760px}
+.matrix .ylab{grid-column:1;width:4.2em;align-self:center;text-align:right;font-size:14px;line-height:1.4;color:var(--ink-2);font-weight:600}
+.matrix .xhead,.matrix .yhead{font-size:14px;color:var(--ink-2);font-weight:600;text-align:center}
+.matrix .corner{grid-row:1;grid-column:1}
+.quad{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;text-align:left;min-height:108px;position:relative;font:inherit;color:inherit;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;width:100%}
+.quad h4{font-size:17px;display:flex;align-items:center;gap:8px}
+.quad h4 i{width:12px;height:12px;border-radius:3px;flex:none}
+.quad p{font-size:15px;color:var(--ink-2);line-height:1.55;margin-top:4px}
+button.quad{cursor:pointer}
+button.quad:hover:not(:disabled){border-color:var(--navy)}
+.quad.sel{border:2px solid var(--navy);padding:11px 13px;background:var(--navy-50)}
+.quad.actual::after{content:attr(data-badge);position:absolute;top:-10px;right:10px;background:var(--gold);color:#3A2E05;font-size:13px;font-weight:700;padding:1px 8px;border-radius:999px}
+.quad .tag{display:inline-block;font-size:13px;font-weight:700;color:var(--navy);background:var(--navy-100);border-radius:999px;padding:0 8px;margin-top:6px}
+.matrix.mini{max-width:none;gap:4px;grid-template-columns:1fr 1fr;grid-template-rows:auto}
+.matrix.mini .quad{min-height:0;padding:10px 8px 6px;font-size:14px;border-radius:5px;display:block}
+
+/* 回推時間軸 */
+.back{display:grid;grid-template-columns:repeat(3,1fr);gap:0 24px}
+.back .col{grid-row:1;min-width:0}
+.back .c1{grid-column:1}.back .c2{grid-column:2}.back .c3{grid-column:3}
+.back .yr{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:700;color:var(--navy)}
+.back .yr span{font-size:14px;font-weight:600;color:#fff;background:var(--navy);border-radius:999px;width:24px;height:24px;display:grid;place-items:center}
+.back .arrow{height:26px;margin:6px 0 2px}
+.back .arrow svg{width:100%;height:26px;display:block}
+.back label.field{margin-top:6px}
+
+/* ---------- 回合頁 ---------- */
+.roundgrid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:26px;align-items:start}
+.roundgrid>div{min-width:0}
+.panel{position:sticky;top:112px;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:8px;padding:16px 16px 14px;box-shadow:0 6px 18px rgba(0,43,92,.08)}
+.panel h3{font-size:16px;color:var(--navy)}
+.meter{margin-top:12px}
+.meter .row{display:flex;justify-content:space-between;font-size:15px}
+.meter .row b{font-variant-numeric:tabular-nums}
+.bar{height:12px;border-radius:6px;background:var(--navy-100);overflow:hidden;margin-top:4px;display:flex}
+.bar i{display:block;height:100%;background:var(--navy);transition:width .35s ease}
+.bar i.over{background:var(--bad)}
+.slots{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:5px}
+.slots i{height:22px;border-radius:4px;border:1.5px solid var(--navy-300);background:#fff;transition:background .25s,border-color .25s}
+.slots i.on{background:var(--navy);border-color:var(--navy)}
+.slots i.over{background:var(--bad);border-color:var(--bad)}
+.panel dl{margin:12px 0 0;font-size:15px;display:grid;grid-template-columns:1fr auto;gap:3px 10px}
+.panel dt{color:var(--ink-2)}.panel dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.panel .status{margin-top:12px;font-size:15px;font-weight:600;padding:8px 10px;border-radius:6px;background:var(--navy-50);color:var(--navy)}
+.panel .status.err{background:var(--bad-50);color:var(--bad)}
+.signals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.signal{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:6px;padding:10px 14px}
+.signal .src{font-size:13px;font-weight:700;color:var(--gold-700)}
+.signal p{font-size:16px;line-height:1.6}
+.econ{background:var(--navy-50);border-radius:8px;padding:12px 16px;font-size:16px}
+.group-h{display:flex;align-items:baseline;gap:10px;margin:22px 0 10px}
+.group-h h3{margin:0;color:var(--navy)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.action{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;transition:border-color .2s,box-shadow .2s}
+.action.selected{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.action.locked{background:#F4F6F9}
+.action.locked .a-name{color:var(--ink-2)}
+.action label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.action.locked label{cursor:not-allowed}
+.action input{margin-top:5px;width:20px;height:20px;flex:none;accent-color:var(--navy)}
+.a-name{font-weight:600;line-height:1.45}
+.a-desc{font-size:15px;color:var(--ink-2);line-height:1.6;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{font-size:14px;border-radius:999px;padding:1px 10px;background:var(--navy-50);border:1px solid var(--line);color:var(--ink);white-space:nowrap}
+.chip.gain{background:var(--gold-100);border-color:#E7D8A0}
+.chip.ok{border-color:#A9D3BD;background:#EEF7F2;color:var(--ok)}
+.chip.no{border-color:#E6B8B3;background:var(--bad-50);color:var(--bad)}
+.lock-why{font-size:15px;color:var(--bad);font-weight:600;margin-top:8px}
+.pay{margin-top:10px;font-size:14px}
+.pay .ptitle{color:var(--muted)}
+.pay .prow{display:grid;grid-template-columns:8.2em 1fr 2.2em;gap:8px;align-items:center;margin-top:3px}
+html[lang=en] .pay .prow{grid-template-columns:12.5em 1fr 2.2em}
+.pay .pname{white-space:nowrap;display:flex;align-items:center;gap:6px}
+.pay .pname i{width:9px;height:9px;border-radius:2px;flex:none}
+.pay .pbar{height:8px;background:var(--line-2);border-radius:4px;overflow:hidden}
+.pay .pbar i{display:block;height:100%;border-radius:0 4px 4px 0}
+.pay .pval{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:8px 0 4px;padding:0}
+.steps li{list-style:none;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-right-width:0;font-size:15px;line-height:1.5;color:var(--muted)}
+.steps li:first-child{border-radius:8px 0 0 8px}.steps li:last-child{border-right-width:1px;border-radius:0 8px 8px 0}
+.steps li b{display:block;color:var(--ink-2);font-size:16px}
+.steps li.now{background:var(--navy);border-color:var(--navy);color:#DCE5F2}
+.steps li.now b{color:#fff}
+.steps li.done b::after{content:" ✓";color:var(--ok)}
+.prompt{white-space:pre-wrap;font:15px/1.7 var(--font);padding:16px;background:#F3F5F9;border:1px solid var(--line);border-radius:6px;max-height:380px;overflow:auto;margin:10px 0}
+.diff{font-size:16px;padding:10px 14px;border-radius:6px;background:var(--gold-100)}
+.t0box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.checkline{display:flex;gap:10px;align-items:flex-start;margin-top:12px}
+.checkline input{width:20px;height:20px;margin-top:4px;flex:none;accent-color:var(--navy)}
+
+/* ---------- 圖表共用 ---------- */
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.settle>*,.grid2>*,.lab-grid>*,.insights>*{min-width:0}
+.fig h3{font-size:17px;color:var(--navy)}
+.fig .cap{font-size:15px;color:var(--muted);margin-top:8px;max-width:46em}
+.fig>svg,.fig .scroll-x>svg,.method>svg{display:block;width:100%;height:auto}
+.fig svg.chart{max-width:720px}
+.fig .scroll-x>svg.tree{max-width:800px}
+.legend svg{width:16px;height:16px;flex:none}
+.scroll-x{overflow-x:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--ink-2);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;flex:none}
+.legend i.line{height:3px;border-radius:2px;width:18px}
+svg text{font-family:var(--font)}
+.ax{fill:var(--muted);font-size:12.5px}
+.vl{fill:var(--ink);font-size:13px;font-weight:600}
+.grid-l{stroke:var(--line-2);stroke-width:1}
+.base-l{stroke:#B6C0D1;stroke-width:1}
+#tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:#fff;font-size:14px;line-height:1.5;padding:7px 10px;border-radius:6px;max-width:300px;white-space:pre-line;opacity:0;transition:opacity .12s;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+#tip.on{opacity:1}
+
+/* 能力路徑圖 */
+.capmap{min-width:700px}
+.capmap .hd{fill:var(--navy);font-size:15.5px;font-weight:700}
+.capmap .hd2{fill:var(--muted);font-size:13px}
+.capmap .wire{fill:none;stroke:#C5CEDD;stroke-width:2}
+.capmap .wire.live{stroke:var(--navy);stroke-width:2.5}
+.capmap .flow{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-dasharray:3 13;stroke-linecap:round;animation:flow 1.1s linear infinite}
+.capmap .node rect{fill:#fff;stroke:#B6C0D1;stroke-width:1.5}
+.capmap .node text.nm{fill:var(--ink-2);font-size:15px;font-weight:600}
+.capmap .node text.st{fill:var(--muted);font-size:12.5px}
+html[lang=en] .capmap .node text.nm{font-size:14px}
+html[lang=en] .capmap .node text.st{font-size:12px}
+.capmap .node .lamp{fill:#fff;stroke:#9AA6BA;stroke-width:2}
+.capmap .node.on rect{stroke:var(--navy);stroke-width:2;fill:var(--navy-50)}
+.capmap .node.on .lamp{fill:var(--gold);stroke:var(--gold-700)}
+.capmap .node.on text.nm{fill:var(--navy)}
+.capmap .node.half .lamp{fill:url(#halfLamp);stroke:var(--gold-700)}
+.capmap .node.pending rect{stroke:var(--gold-700);stroke-width:2;stroke-dasharray:6 4}
+.capmap .node.pending .lamp{fill:var(--gold-100);stroke:var(--gold-700);animation:pulse 1.4s ease-in-out infinite}
+.capmap .node.planned rect{stroke:var(--navy);stroke-dasharray:3 4;stroke-width:2}
+.capmap .node.planned .lamp{stroke:var(--navy)}
+.capmap .node.open rect{fill:var(--navy);stroke:var(--navy)}
+.capmap .node.open text.nm{fill:#fff}
+.capmap .node.open text.st{fill:#C7D3E6}
+.capmap .node.open .lamp{fill:var(--gold);stroke:#fff}
+@keyframes flow{to{stroke-dashoffset:-16}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* 瀑布圖與折線圖動畫（只在結算揭曉時播放） */
+.reveal .wf-bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow .5s cubic-bezier(.2,.8,.2,1) both}
+.reveal .wf-bar.down{transform-origin:50% 0}
+.reveal .wf-lab,.reveal .wf-con{animation:fade .3s ease both}
+.reveal .story li{animation:slide .4s ease both}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.draw .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s ease forwards}
+.draw .ah{opacity:0;animation:fade .3s ease 1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.signal.in{animation:slide .45s ease both}
+
+/* 結算 */
+.settle{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
+.story{list-style:none;padding:0;display:grid;gap:8px}
+.story li{padding:9px 14px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--navy-300);border-radius:6px;font-size:16px;line-height:1.6}
+.story li.plus{border-left-color:var(--gold)}
+.story li.minus{border-left-color:var(--bad)}
+.pathline{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.pathline .pcol{padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-right-width:0;min-height:120px}
+.pathline .pcol:first-child{border-radius:10px 0 0 10px}
+.pathline .pcol:last-child{border-right-width:1px;border-radius:0 10px 10px 0}
+.pathline .pcol.todo{background:repeating-linear-gradient(135deg,#F6F8FB 0 10px,#EFF2F7 10px 20px);color:var(--muted)}
+.pathline .py{font-weight:700;color:var(--navy);font-size:18px;display:flex;justify-content:space-between;align-items:baseline}
+.pathline .py small{font-weight:500;color:var(--muted);font-size:14px}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pchip{font-size:14px;border-radius:5px;padding:2px 9px;background:var(--navy);color:#fff}
+.pchip.build{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+.pchip.none{background:#fff;color:var(--muted);border:1.5px dashed var(--navy-300)}
+.pchip.drop{background:#fff;color:var(--muted);border:1.5px solid var(--line);text-decoration:line-through}
+
+/* 成果頁 */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.toc a{font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 14px;color:var(--navy)}
+.toc a:hover{border-color:var(--navy)}
+.hbars{display:grid;gap:10px;margin-top:10px}
+.hbar{display:grid;grid-template-columns:12.5em 1fr 3.2em;gap:10px;align-items:center;font-size:15px}
+html[lang=en] .hbar{grid-template-columns:15em 1fr 3.2em}
+.hbar .trk{height:18px;display:flex;gap:2px}
+.hbar .trk i{display:block;height:100%;border-radius:0 4px 4px 0;background:var(--navy);min-width:2px}
+.hbar .trk i.alt{background:var(--navy-300)}
+.hbar .trk i.ext{background:var(--gold)}
+.hbar b{text-align:right;font-variant-numeric:tabular-nums}
+.hbar.me .nm{font-weight:700;color:var(--navy)}
+.insights{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.insight{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:0 0 10px 10px;padding:16px 18px}
+.insight h3{color:var(--navy)}
+.insight .fact{margin-top:8px;padding:10px 12px;background:var(--gold-100);border-radius:6px;font-size:16px}
+.insight .ask{margin-top:8px;font-size:15px;color:var(--ink-2)}
+.beliefs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.belief h4{font-size:16px;color:var(--navy);margin-bottom:6px}
+.lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.lab-col{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px}
+.lab-col h4{font-size:16px;color:var(--navy);display:flex;justify-content:space-between}
+.lab-col h4 small{font-weight:500;color:var(--muted);font-size:14px}
+.lab-col.dead{opacity:.5}
+.lab-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.lab-chips button{font-size:14px;border-radius:5px;padding:3px 9px;border:1.5px solid var(--navy-300);background:#fff;color:var(--navy);cursor:pointer}
+.lab-chips button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.lab-chips button:disabled{border-style:dashed;color:#9AA6BA;border-color:var(--line);cursor:not-allowed}
+.lab-sum{font-size:14px;color:var(--ink-2);margin-top:8px}
+.lab-sum.err{color:var(--bad);font-weight:600}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--navy-300);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:6px 12px;cursor:pointer;font-size:15px;color:var(--navy);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--navy);color:#fff}
+.tree .tn rect{fill:#fff;stroke:var(--navy);stroke-width:1.5}
+.tree .tn.leaf rect{stroke:#B6C0D1}
+.tree .tn text{font-size:13px;fill:var(--ink)}
+.tree .tn text.v{font-weight:700;font-size:14px}
+.tree .te{stroke:#C5CEDD;stroke-width:2;fill:none;transition:stroke .3s,stroke-width .3s}
+.tree .te.best{stroke:var(--gold);stroke-width:4}
+.tree .te.cut{stroke:#D9DEE8;stroke-dasharray:4 5}
+.tree .el{font-size:12.5px;fill:var(--ink-2);paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.tree .tn.solved rect{fill:var(--gold-100);stroke:var(--gold-700);stroke-width:2}
+.tree .tn.dim{opacity:.4}
+.tree .hid{visibility:hidden}
+
+/* 教師頁 */
+.flow{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-top:6px;gap:2px}
+.flow i{display:grid;place-items:center;font-style:normal;font-size:13px;color:#fff;background:var(--navy);min-width:0;overflow:hidden;white-space:nowrap}
+.flow i.ai{background:var(--gold);color:#3A2E05}
+.flow i.rest{background:#A3ACBD}
+.heat td.h{text-align:center;font-variant-numeric:tabular-nums;font-weight:600}
+.board{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.board div{background:#143D2B;color:#EAF2EC;border-radius:6px;padding:14px 16px;font-size:16px;line-height:1.6}
+.board div b{color:#F3E3A0;display:block}
+.sharelink{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.sharelink code{background:#F3F5F9;border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:14px;word-break:break-all;flex:1;min-width:220px}
+
+/* 頁尾、提示 */
+footer{max-width:1180px;margin:auto;padding:0 20px 40px;font-size:14px;color:var(--muted)}
+.backup{margin-top:56px;padding-top:18px;border-top:1px solid var(--line)}
+.backup h2{font-size:19px}
+#toast{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;bottom:26px;transform:translateY(20px);z-index:70;background:var(--ink);color:#fff;padding:12px 18px;border-radius:8px;font-size:16px;max-width:min(92vw,560px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+#toast.on{opacity:1;transform:none}
+.swipe{display:none;font-size:13px;color:var(--muted);margin:4px 0 0}
+#toast.err{background:var(--bad)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- 響應式 ---------- */
+@media(max-width:1020px){
+  .roundgrid{grid-template-columns:minmax(0,1fr)}
+  .panel{position:fixed;top:auto;bottom:0;left:0;right:0;z-index:40;border-radius:12px 12px 0 0;border-top:4px solid var(--gold);padding:10px 16px 12px;box-shadow:0 -8px 22px rgba(0,43,92,.16)}
+  .panel h3,.panel dl{display:none}
+  .panel .meters{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .panel .meter{margin-top:0}
+  .panel .status{margin-top:8px;font-size:14px;padding:5px 10px}
+  .slots i{height:12px}
+  html.has-panel{scroll-padding-bottom:210px}
+  html.has-panel footer{padding-bottom:200px}
+  html.has-panel #toast{bottom:160px}
+}
+@media(max-width:860px){
+  .hero,.settle,.grid2,.voices,.insights,.signals{grid-template-columns:minmax(0,1fr)}
+  .grid3,.methods,.beliefs,.lab-grid{grid-template-columns:minmax(0,1fr)}
+  .grid4,.tiles,.facts{grid-template-columns:1fr 1fr}
+  .tile:nth-child(2n),.facts div:nth-child(2n){border-right:0}
+  .tile:nth-child(-n+2),.facts div:nth-child(-n+2){border-bottom:1px solid var(--line-2)}
+  .actions,.warm{grid-template-columns:1fr}
+  .back{grid-template-columns:1fr;gap:6px}
+  .back .col,.back .c1,.back .c2,.back .c3{grid-column:1;grid-row:auto}
+  .back .arrow{display:none}
+  .steps,.pathline{grid-template-columns:1fr}
+  .steps li,.steps li:first-child,.steps li:last-child{border-right-width:1px;border-radius:0;border-bottom-width:0}
+  .steps li:first-child{border-radius:8px 8px 0 0}.steps li:last-child{border-radius:0 0 8px 8px;border-bottom-width:1px}
+  .pathline .pcol,.pathline .pcol:first-child,.pathline .pcol:last-child{border-right-width:1px;border-radius:0;min-height:0}
+  .pathline .pcol+.pcol{border-top-width:0}
+  ul.rules li{grid-template-columns:1fr;gap:2px}
+  .top-in{flex-wrap:wrap;gap:8px 14px;padding:8px 16px}
+  .track{order:3;margin-left:0;width:100%;justify-content:flex-start}
+  .lang{margin-left:auto}
+  main{padding:22px 16px 80px}
+  .lead{font-size:18px}
+  .hbar,html[lang=en] .hbar{grid-template-columns:1fr 3em;row-gap:2px}
+  .hbar .nm{grid-column:1/3}
+  .matrix{grid-template-columns:auto 1fr 1fr}
+  .quad{min-height:0;padding:10px}
+  .quad h4{font-size:16px}
+  .quad p{font-size:14px}
+  .matrix .ylab{width:3.3em;font-size:13px}
+  html[lang=en] .matrix .ylab{width:4.4em;overflow-wrap:anywhere}
+  .swipe{display:block}
+  .board{grid-template-columns:1fr}
+  table{min-width:560px}
+  html{scroll-padding-top:150px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .draw .ln{stroke-dashoffset:0}
+  .draw .ah{opacity:1}
+}
+@media print{
+  .top,.tabs,.toolbar,.btn,footer,.panel,#toast,.backup,.swipe{display:none!important}
+  body{background:#fff}
+  main{padding:0;max-width:none}
+  .action,.fig,.card{break-inside:avoid}
+  .prompt{max-height:none}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><div class="brand"><small id="brandSmall"></small><strong id="brandTitle"></strong></div><div class="track" id="track" role="img"></div><button class="lang" id="langBtn" type="button">English</button></div></header>
+<nav class="tabs" id="tabs"><div class="tabs-in" id="nav"></div></nav>
+<main id="main"></main>
+<footer id="footer"></footer>
+<div id="toast" aria-hidden="true"></div>
+<div id="tip" aria-hidden="true"></div>
+<div id="live" class="sr" aria-live="polite" role="status"></div>
+<noscript><p style="padding:20px">這個頁面需要啟用 JavaScript。This page requires JavaScript.</p></noscript>
+<script id="portable-id" type="application/json">null</script>
+<script id="portable-state" type="application/json">null</script>
+<script>
+'use strict';
+/*MODEL-START*/
+/* ============================================================
+   模型與案例資料（不碰 DOM，可單獨用 Node 測試）
+   Model and case data: no DOM access, testable in Node
+   ============================================================ */
+const VERSION = 2;
+const YEARS = [2026, 2028, 2030];
+const START_CASH = 100, ENG_CAP = 6;
+const BASE = { hot: 18, cold: 8 };      // 基本營運淨流入
+const PRESSURE = [0, 6, 8];             // 各回合外部成本壓力
+const RELATION_DECAY = 1;               // 當回合未服務既有客戶時，客戶關係減少的點數
+
+let LANG = 'zh';
+const tr = (zh, en) => (LANG === 'en' ? en : zh);
+const T = pair => tr(pair[0], pair[1]);
+/* 英文單複數與次數 */
+const pl = (n, one, many) => n + ' ' + (n === 1 ? one : (many || one + 's'));
+const COLON = () => tr('：', ': ');
+const BAR = () => tr('｜', ' | ');
+const times = n => (n === 1 ? 'once' : n === 2 ? 'twice' : n + ' times');
+const own = (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+
+/* 四種情境：AI／數位採購採用快慢 × 在地投資冷熱 */
+const W = Object.assign(Object.create(null), {
+  dh: { n: ['數位擴張', 'Digital expansion'], ai: true, hot: true, color: '#2a78d6',
+    d: ['客戶要機器可讀取的規格資料，新廠詢價也多。', 'Clients want machine-readable specifications, and new-plant inquiries are plentiful.'],
+    r2: [['proc', '大客戶開始要求機器可讀取的零件與規格資料。', 'Large clients have begun asking for machine-readable parts and specification data.'],
+         ['sales', '新廠詢價增加。', 'New-plant inquiries are increasing.'],
+         ['floor', '技師仍要求由工程師確認規格。', 'Technicians still insist that engineers confirm specifications.']],
+    r3: [['proc', '數位採購需求已經擴大。', 'Demand for digital procurement has expanded.'],
+         ['sales', '在地投資仍然熱絡。', 'Local investment remains strong.'],
+         ['floor', 'AI 能加速規格整理，交付與安全責任仍由公司承擔。', 'AI speeds up specification work; delivery and safety accountability stay with the firm.']] },
+  dc: { n: ['數位價格壓力', 'Digital price pressure'], ai: true, hot: false, color: '#4a3aa7',
+    d: ['數位採購普及，但新廠投資延後，低價標準品進入比價。', 'Digital procurement spreads, but new-plant investment is postponed and low-priced standard products enter price comparisons.'],
+    r2: [['proc', '兩家客戶要求數位規格。', 'Two clients are asking for digital specifications.'],
+         ['sales', '同一批客戶延後了新廠投資。', 'The same clients have postponed new-plant investment.'],
+         ['rival', '低價的海外標準品開始出現在比價表上。', 'Low-priced overseas standard products have started to appear in price comparisons.']],
+    r3: [['proc', '數位採購已經普及。', 'Digital procurement is now widespread.'],
+         ['sales', '在地投資降溫，客戶重視價格與既有設備的延壽。', 'Local investment has cooled; clients focus on price and on extending the life of existing equipment.'],
+         ['fin', '平台服務的收入低於投資熱絡時的水準。', 'Platform-service revenue is below what a strong investment climate would bring.']] },
+  th: { n: ['技師主導成長', 'Technician-led growth'], ai: false, hot: true, color: '#eb6834',
+    d: ['新廠需求旺，採購仍由技師主導，規格要反覆確認。', 'New-plant demand is strong, technicians still lead purchasing, and specifications need repeated checks.'],
+    r2: [['sales', '新廠詢價增加。', 'New-plant inquiries are increasing.'],
+         ['floor', '試用 AI 的技師表示，規格仍需反覆確認。', 'Technicians trying out AI report that specifications still need repeated checks.'],
+         ['proc', '各家客戶的導入流程尚未一致。', 'Adoption processes still differ from client to client.']],
+    r3: [['sales', '在地投資仍然熱絡。', 'Local investment remains strong.'],
+         ['proc', '採購多由技師主導，全面採用平台的速度較慢。', 'Technicians lead most purchasing; full platform adoption is slow.'],
+         ['floor', '規格確認與客製服務受到客戶重視。', 'Clients value specification checks and custom service.']] },
+  tc: { n: ['維修與信任', 'Maintenance and trust'], ai: false, hot: false, color: '#1baf7a',
+    d: ['新建需求低、維修詢問多，客戶重視快速支援與信任。', 'New-build demand is low, repair inquiries rise, and clients value fast support and trust.'],
+    r2: [['sales', '新廠投資延後。', 'New-plant investment has been postponed.'],
+         ['desk', '舊設備的維修詢問增加。', 'Repair inquiries for older equipment are increasing.'],
+         ['proc', '技師尚未把 AI 工具納入正式採購流程。', 'Technicians have not yet brought AI tools into formal procurement.']],
+    r3: [['sales', '新建需求低，維修需求增加。', 'New-build demand is low while repair demand grows.'],
+         ['proc', '技師仍主導規格與選型。', 'Technicians still lead specification and selection.'],
+         ['desk', '快速支援與既有客戶的信任更有價值。', 'Fast support and the trust of existing clients are worth more.']] }
+});
+const WORLD_IDS = ['dh', 'dc', 'th', 'tc'];
+const R1_SIGNALS = [
+  ['sales', '既有客戶仍有客製需求，幾張訂單等著報價。', 'Existing clients still need custom work; several orders are waiting for quotes.'],
+  ['board', '董事會希望投入 AI 規格平台。', 'The board wants to invest in an AI specification platform.'],
+  ['floor', '新人需要培訓，選型規則與物料清單尚未整理。', 'New hires need training; selection rules and bills of materials are still unstructured.'],
+  ['market', '採購數位化的速度與在地投資的走向都還看不清楚。', 'Both the pace of the shift to digital procurement and the direction of local investment remain unclear.']
+];
+const SOURCES = {
+  sales: ['業務回報', 'Sales report'], proc: ['採購端', 'Procurement side'], floor: ['工程現場', 'Engineering floor'],
+  rival: ['同業動態', 'Competitors'], fin: ['財務', 'Finance'], desk: ['客服紀錄', 'Service desk'],
+  board: ['董事會', 'Board'], market: ['市場', 'Market']
+};
+function signals(r, world) { return r === 1 ? R1_SIGNALS : W[world][r === 2 ? 'r2' : 'r3']; }
+function signalText(r, world, li) { return signals(r, world).map(s => s[li + 1]).join(li ? ' ' : ''); }
+
+/* 11 項行動。kind: build = 建構能力（下一回合成熟）；earn = 當期交付（回合末入帳） */
+const A = [
+  { id: 'data', kind: 'build', name: ['整理規則與 BOM 資料', 'Structure rules and BOM data'], short: ['資料整理', 'Data structuring'],
+    desc: ['把物料清單與選型規則整理成可重複使用的資料，作為後續工具的基礎。', 'Turn bills of materials and selection rules into reusable data, the foundation for later tools.'],
+    cost: 18, eng: 3, gain: { data: 1 }, delay: true },
+  { id: 'talent', kind: 'build', name: ['培訓與知識傳承', 'Train staff and transfer know-how'], short: ['培訓', 'Training'],
+    desc: ['讓資深工程師帶著新人整理案例，增加能獨立交付的人手。', 'Have senior engineers work through cases with new hires, adding people who can deliver independently.'],
+    cost: 16, eng: 2, gain: { skill: 1 }, delay: true },
+  { id: 'listen', kind: 'build', name: ['訪談技師與小範圍驗證', 'Interview technicians and run small tests'], short: ['訪談驗證', 'Interviews and tests'],
+    desc: ['查清客戶真正的瓶頸，作為設計協作方案的依據。', 'Find out where clients are really stuck, as the basis for designing collaboration.'],
+    cost: 8, eng: 1, gain: { insight: 1 }, delay: true },
+  { id: 'pilot', kind: 'build', name: ['半自動規格平台試辦', 'Pilot a semi-automated specification platform'], short: ['平台試辦', 'Platform pilot'],
+    desc: ['先選一個產品系列試辦，規格仍由工程師確認，不承諾由 AI 自動產出安全圖面。', 'Pilot one product family with engineers still confirming specifications; no promise that AI produces safety drawings on its own.'],
+    cost: 28, eng: 3, req: { data: 1, skill: 2 }, gain: { pilot: 1 }, delay: true },
+  { id: 'modular', kind: 'build', name: ['建置模組化產品系列', 'Build a modular product family'], short: ['模組建置', 'Modular build'],
+    desc: ['把一種重複出現的需求做成標準模組，保留必要的客製介面。', 'Turn one recurring need into standard modules while keeping the customization interfaces that matter.'],
+    cost: 30, eng: 3, req: { data: 1, skill: 2 }, gain: { modular: 1 }, delay: true },
+  { id: 'maint', kind: 'build', name: ['建立維修交付能力', 'Build maintenance delivery capability'], short: ['維修建置', 'Maintenance build'],
+    desc: ['整理故障案例、備品與支援程序，下一回合起可以承接維修服務包。', 'Organize fault cases, spare parts and support procedures so maintenance packages can be sold from the next round.'],
+    cost: 20, eng: 2, req: { skill: 2 }, gain: { maint: 1 }, delay: true },
+  { id: 'service', kind: 'earn', name: ['承接既有客製服務', 'Serve existing custom orders'], short: ['既有客製服務', 'Existing custom service'],
+    desc: ['完成本回合的客製訂單並維繫客戶關係；有當期收入，但佔用人力。', 'Deliver this round’s custom orders and maintain client relationships; brings revenue now but uses engineering units.'],
+    cost: 12, eng: 2, gain: { relation: 1 }, pay: 'service', repeat: true },
+  { id: 'coop', kind: 'earn', name: ['技師協作與規格確認', 'Collaborate with technicians on specifications'], short: ['技師協作', 'Technician collaboration'],
+    desc: ['運用訪談所得與工程技能改善規格確認流程，累積客戶關係並取得收入。', 'Use interview insights and engineering skills to improve specification checks, building relationships and earning revenue.'],
+    cost: 10, eng: 1, req: { insight: 1, skill: 2 }, gain: { relation: 1 }, pay: 'coop', repeat: true },
+  { id: 'platformSale', kind: 'earn', name: ['推出有限範圍的平台服務', 'Launch a limited-scope platform service'], short: ['平台服務', 'Platform service'],
+    desc: ['在已完成試辦的範圍內接單；當期收入隨情境而異。', 'Take orders within the piloted scope; revenue varies by scenario.'],
+    cost: 24, eng: 3, req: { pilot: 1, data: 1, skill: 2 }, pay: 'platform', repeat: true },
+  { id: 'moduleSale', kind: 'earn', name: ['交付模組化訂單', 'Deliver modular orders'], short: ['模組化訂單', 'Modular orders'],
+    desc: ['用已建好的模組能力接單；在地投資降溫時收入較低。', 'Take orders with the modular capability already built; revenue is lower when local investment is weak.'],
+    cost: 18, eng: 2, req: { modular: 1, data: 1 }, pay: 'module', repeat: true },
+  { id: 'maintSale', kind: 'earn', name: ['承接維修服務包', 'Sell maintenance packages'], short: ['維修服務包', 'Maintenance packages'],
+    desc: ['用已建好的維修能力交付；在地投資降溫時，維修需求反而較高。', 'Deliver with the maintenance capability already built; repair demand is higher when local investment cools.'],
+    cost: 14, eng: 2, req: { maint: 1, skill: 2 }, pay: 'maintenance', repeat: true }
+];
+const ACT = Object.assign(Object.create(null), Object.fromEntries(A.map(a => [a.id, a])));
+const capLabels = {
+  data: ['資料能力', 'Data capability'], skill: ['工程技能', 'Engineering skills'], insight: ['需求理解', 'Client insight'],
+  pilot: ['平台試辦成果', 'Pilot results'], modular: ['模組能力', 'Modular capability'], maint: ['維修能力', 'Maintenance capability'],
+  relation: ['客戶關係', 'Client relationships']
+};
+const CAP_KEYS = ['data', 'skill', 'insight', 'pilot', 'modular', 'maint'];
+const capShort = capLabels;
+
+function payoff(action, world) {
+  const w = W[world];
+  switch (action.pay) {
+    case 'service': return w.hot ? 22 : 16;
+    case 'platform': return w.ai ? (w.hot ? 54 : 28) : (w.hot ? 18 : 10);
+    case 'module': return w.hot ? 36 : 22;
+    case 'maintenance': return w.hot ? 28 : 34;
+    case 'coop': return w.ai ? (w.hot ? 20 : 16) : (w.hot ? 28 : 22);
+    default: return 0;
+  }
+}
+function startSim() {
+  return { cash: START_CASH, caps: { data: 0, skill: 1, insight: 0, pilot: 0, modular: 0, maint: 0, relation: 3 }, pending: [], done: [], spent: 0 };
+}
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function mature(sim, r) {
+  const left = [];
+  for (const p of sim.pending) {
+    if (p.ready <= r) { for (const [k, v] of Object.entries(p.gain)) sim.caps[k] += v; }
+    else left.push(p);
+  }
+  sim.pending = left;
+  return sim;
+}
+function capText(k, v) { return T(capLabels[k]) + ' ≥ ' + v; }
+/* 回傳空字串代表可選；否則回傳不可選的原因 */
+function eligible(a, sim) {
+  if (!a.repeat && sim.done.includes(a.id)) return tr('已投資過，不能重複', 'Already built; cannot be repeated');
+  for (const [k, v] of Object.entries(a.req || {})) {
+    if (sim.caps[k] < v) return tr('尚缺已成熟的「' + capText(k, v) + '」', 'Needs matured “' + capText(k, v) + '”');
+  }
+  return '';
+}
+function totals(ids) {
+  const acts = ids.map(id => ACT[id]);
+  return { cost: acts.reduce((s, a) => s + a.cost, 0), eng: acts.reduce((s, a) => s + a.eng, 0) };
+}
+function check(ids, sim) {
+  if (!Array.isArray(ids) || new Set(ids).size !== ids.length || ids.some(id => !own(ACT, id))) return 'invalid';
+  const { cost, eng } = totals(ids);
+  if (cost > sim.cash) return tr('現金不足。本回合投入 ' + cost + '，可用現金只有 ' + sim.cash + '；回合末的收入不能預支。', 'Not enough cash. This round’s spending is ' + cost + ' but only ' + sim.cash + ' is available, and round-end revenue cannot be spent in advance.');
+  if (eng > ENG_CAP) return tr('工程人力超過上限。已安排 ' + eng + ' 單位，每回合只有 ' + ENG_CAP + ' 單位。', 'Engineering capacity exceeded. ' + eng + ' units are assigned, but each round has only ' + ENG_CAP + '.');
+  for (const id of ids) { const why = eligible(ACT[id], sim); if (why) return T(ACT[id].name) + COLON() + why; }
+  return '';
+}
+function execute(sim, ids, r, world) {
+  const err = check(ids, sim);
+  if (err) throw Error(err);
+  const before = clone(sim);
+  let cost = 0, revenue = 0, eng = 0, tended = false;
+  const built = [], sold = [];
+  for (const id of ids) {
+    const a = ACT[id];
+    cost += a.cost; eng += a.eng;
+    if (a.pay) { const p = payoff(a, world); revenue += p; sold.push({ id, pay: p }); }
+    if (a.gain) {
+      if (a.delay) { sim.pending.push({ id: a.id, gain: a.gain, ready: r + 1 }); built.push(id); }
+      else { for (const [k, v] of Object.entries(a.gain)) sim.caps[k] += v; if (a.gain.relation) tended = true; }
+    }
+    if (!a.repeat) sim.done.push(a.id);
+  }
+  if (!tended) sim.caps.relation = Math.max(0, sim.caps.relation - RELATION_DECAY);
+  const base = W[world].hot ? BASE.hot : BASE.cold;
+  const shock = PRESSURE[r - 1] || 0;
+  sim.cash += base + revenue - cost - shock;
+  sim.spent += cost;
+  return { r, sim, before, cost, revenue, eng, base, shock, built, sold, relDelta: sim.caps.relation - before.caps.relation, after: clone(sim) };
+}
+/* picks：每回合所選行動 id 的陣列。某回合不可行時丟出錯誤。 */
+function simulate(picks, world) {
+  const sim = startSim(), ledger = [];
+  for (let i = 0; i < picks.length; i++) { mature(sim, i + 1); ledger.push(execute(sim, picks[i], i + 1, world)); }
+  return { sim, ledger };
+}
+/* 與 simulate 相同，但不丟錯：回傳在第幾回合失敗 */
+function trySimulate(picks, world) {
+  const sim = startSim(), ledger = [];
+  for (let i = 0; i < picks.length; i++) {
+    mature(sim, i + 1);
+    try { ledger.push(execute(sim, picks[i], i + 1, world)); }
+    catch (e) { return { sim, ledger, failAt: i + 1, error: e.message }; }
+  }
+  return { sim, ledger, failAt: 0, error: '' };
+}
+/* 期末（或某回合開始時）依已成熟能力可選的行動 */
+function openActions(sim) { return A.filter(a => !eligible(a, sim)); }
+/* 延伸試算：若再多一回合（2032），以屆時成熟的能力，在現金與人力限制內可取得的最大行動淨收入 */
+function bestExtension(simEnd, world) {
+  const sim = mature(clone(simEnd), 4);
+  const ok = A.filter(a => a.pay && !eligible(a, sim));
+  let best = { net: 0, ids: [] };
+  for (let m = 1; m < (1 << ok.length); m++) {
+    const ids = ok.filter((_, i) => (m >> i) & 1).map(a => a.id);
+    const t = totals(ids);
+    if (t.cost > sim.cash || t.eng > ENG_CAP) continue;
+    const net = ids.reduce((s, id) => s + payoff(ACT[id], world) - ACT[id].cost, 0);
+    if (net > best.net) best = { net, ids };
+  }
+  return { ...best, caps: sim.caps };
+}
+const BENCH = {
+  idle: { n: ['三回合都不行動', 'No action in any of the 3 rounds'], picks: [[], [], []] },
+  service: { n: ['三回合只接既有客製服務', 'Existing custom service only, all 3 rounds'], picks: [['service'], ['service'], ['service']] }
+};
+/*MODEL-END*/
+
+/* ============================================================
+   圖表與圖解（回傳 SVG／HTML 字串）
+   ============================================================ */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+/* 可聚焦的提示：滑鼠移入或鍵盤聚焦時顯示，並提供無障礙名稱 */
+const tip = s => ` data-tip="${esc(s)}" tabindex="0" role="img" aria-label="${esc(String(s).replace(/\n/g, tr('；', '; ')))}"`;
+const swipe = () => `<p class="swipe">${tr('圖表較寬，可左右滑動查看', 'This chart is wide; swipe sideways to see all of it')}</p>`;
+function niceMax(v) { const steps = [50, 100, 150, 200, 250, 300, 400, 500]; return steps.find(s => s >= v) || Math.ceil(v / 100) * 100; }
+function lines(text, x, y, cls, lh = 14, anchor = 'middle') {
+  return String(text).split('\n').map((t, i) => `<text class="${cls}" x="${x}" y="${y + i * lh}" text-anchor="${anchor}">${esc(t)}</text>`).join('');
+}
+
+/* 開場圖：三次選擇與四種可能的未來 */
+function heroSVG() {
+  const ys = [44, 112, 180, 248], gates = [70, 215, 360];
+  const wires = WORLD_IDS.map((id, i) => `<path class="ln" pathLength="1" style="animation-delay:${0.15 * i}s" d="M70,146 C 190,146 250,${ys[i]} 372,${ys[i]}" fill="none" stroke="#C7D3E6" stroke-width="2"/>`).join('');
+  const ends = WORLD_IDS.map((id, i) => `<circle cx="378" cy="${ys[i]}" r="7" fill="${W[id].color}" stroke="#fff" stroke-width="2"/><text x="394" y="${ys[i] + 5}" fill="#fff" font-size="14.5" font-weight="600">${esc(T(W[id].n))}</text>`).join('');
+  const g = gates.map((x, i) => `<line x1="${x}" y1="26" x2="${x}" y2="266" stroke="#52699A" stroke-width="1"/><circle cx="${x}" cy="26" r="6" fill="${i === 0 ? '#C9A227' : '#002B5C'}" stroke="#C9A227" stroke-width="2"/><text x="${x}" y="14" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">${YEARS[i]}</text><text x="${x}" y="286" text-anchor="middle" fill="#C7D3E6" font-size="12.5">${esc(tr('第 ' + (i + 1) + ' 次選擇', 'Choice ' + (i + 1)))}</text>`).join('');
+  return `<svg class="draw" viewBox="0 0 560 296" role="img" aria-label="${esc(tr('三次選擇分別在 2026、2028、2030 年，未來可能走向四種情境', 'Three choices in 2026, 2028 and 2030, with four possible futures'))}">${g}${wires}<circle cx="70" cy="146" r="9" fill="#C9A227" stroke="#fff" stroke-width="2"/>${ends}</svg>`;
+}
+
+/* 三種方法的小圖解 */
+function methodSVG(kind) {
+  const dot = (x, y, f = '#002B5C') => `<circle cx="${x}" cy="${y}" r="6" fill="${f}"/>`;
+  const txt = (x, y, s, a = 'middle') => `<text x="${x}" y="${y}" text-anchor="${a}" font-size="12.5" fill="#667189">${esc(s)}</text>`;
+  const head = (x, y, dir, c) => `<path class="ah" d="M${x},${y} l${-11 * dir},-6 l0,12 z" fill="${c}"/>`;
+  let body = '';
+  if (kind === 'forward') {
+    body = [20, 46, 72, 98].map((y, i) => `<path class="ln" pathLength="1" style="animation-delay:${i * .12}s" d="M40,59 C 110,59 140,${y} 206,${y}" fill="none" stroke="#002B5C" stroke-width="2"/>${head(216, y, 1, '#002B5C')}`).join('') + dot(40, 59) + txt(40, 86, tr('現在', 'Now')) + txt(216, 128, tr('幾種可能的未來', 'Plausible futures'), 'end');
+  } else if (kind === 'back') {
+    body = `<path class="ln" pathLength="1" d="M200,62 L 150,62" fill="none" stroke="#8A6D0F" stroke-width="2.5"/>${head(140, 62, -1, '#8A6D0F')}<path class="ln" pathLength="1" style="animation-delay:.35s" d="M114,62 L 64,62" fill="none" stroke="#8A6D0F" stroke-width="2.5"/>${head(54, 62, -1, '#8A6D0F')}` + dot(214, 62, '#C9A227') + dot(128, 62) + dot(42, 62) + txt(214, 90, '2030') + txt(128, 90, '2028') + txt(42, 90, '2026') + txt(214, 40, tr('想提供的價值', 'Desired value'), 'end').replace('x="214"', 'x="236"') + txt(42, 40, tr('第一步', 'First step'), 'start').replace('x="42"', 'x="20"') + txt(125, 128, tr('從想要的未來往回推', 'Work back from the desired future'));
+  } else {
+    const e = (x1, y1, x2, y2, best, d) => `<path class="ln" pathLength="1" style="animation-delay:${d}s" d="M${x1},${y1} L${x2},${y2}" fill="none" stroke="${best ? '#C9A227' : '#C5CEDD'}" stroke-width="${best ? 3.5 : 2}"/>`;
+    body = e(120, 30, 200, 14, true, 0) + e(120, 30, 200, 46, false, 0) + e(120, 86, 200, 70, false, .1) + e(120, 86, 200, 102, true, .1) + e(40, 58, 120, 30, true, .5) + e(40, 58, 120, 86, false, .5) +
+      dot(40, 58) + dot(120, 30) + dot(120, 86) + [14, 46, 70, 102].map(y => `<rect x="200" y="${y - 6}" width="12" height="12" rx="2" fill="#7F95B5"/>`).join('') + txt(216, 128, tr('先解末端，再往回推', 'Solve the end first, then work back'), 'end');
+  }
+  return `<svg class="draw" viewBox="0 0 250 136" aria-hidden="true">${body}</svg>`;
+}
+
+/* 能力路徑圖 */
+function capMap(sim, opts = {}) {
+  const planned = new Set(opts.planned || []);
+  const NW = 216, NH = 52, X = [8, 328, 648];
+  const pos = { data: [0, 72], skill: [0, 176], insight: [0, 304], pilot: [1, 56], modular: [1, 138], maint: [1, 220],
+    platformSale: [2, 56], moduleSale: [2, 138], maintSale: [2, 220], coop: [2, 304], service: [2, 386] };
+  const need = { skill: 2 };
+  const has = k => sim.caps[k] >= (need[k] || 1);
+  const pendingOf = k => sim.pending.find(p => p.gain[k]);
+  const builder = { data: 'data', skill: 'talent', insight: 'listen', pilot: 'pilot', modular: 'modular', maint: 'maint' };
+  const out = k => [X[pos[k][0]] + NW, pos[k][1] + NH / 2], inn = k => [X[pos[k][0]], pos[k][1] + NH / 2];
+  const curve = (a, b, dy = 0) => { const [x1, y1] = out(a), [x2, y2] = inn(b); const m = (x1 + x2) / 2; return `M${x1},${y1} C ${m},${y1} ${m},${y2 + dy} ${x2},${y2 + dy}`; };
+  const wires = [['data', 'pilot', -8], ['skill', 'pilot', 8], ['data', 'modular', -8], ['skill', 'modular', 8], ['skill', 'maint', 0],
+    ['pilot', 'platformSale', 0], ['modular', 'moduleSale', 0], ['maint', 'maintSale', 0], ['insight', 'coop', 8]];
+  let w = wires.map(([a, b, dy]) => { const d = curve(a, b, dy), live = has(a); return `<path class="wire${live ? ' live' : ''}" d="${d}"/>${live ? `<path class="flow" d="${d}"/>` : ''}`; }).join('');
+  { // 工程技能 → 技師協作：繞過進階能力那一欄
+    const [x1, y1] = out('skill'), [x2, y2] = inn('coop'); const d = `M${x1},${y1 + 10} C ${x1 + 60},${y1 + 10} ${x1 + 50},288 ${x1 + 120},288 L ${x2 - 110},288 C ${x2 - 50},288 ${x2 - 60},${y2 - 8} ${x2},${y2 - 8}`;
+    const live = has('skill'); w += `<path class="wire${live ? ' live' : ''}" d="${d}"/>${live ? `<path class="flow" d="${d}"/>` : ''}`;
+  }
+  const node = (k, cls, name, st, tipText) => `<g class="node ${cls}" transform="translate(${X[pos[k][0]]},${pos[k][1]})"${tip(tipText)}><rect width="${NW}" height="${NH}" rx="8"/><circle class="lamp" cx="21" cy="26" r="7.5"/><text class="nm" x="38" y="22">${esc(name)}</text><text class="st" x="38" y="40">${esc(st)}</text></g>`;
+  const caps = CAP_KEYS.map(k => {
+    const a = ACT[builder[k]], p = pendingOf(k);
+    let cls = 'off', st = tr('尚未具備', 'Not yet built');
+    if (has(k)) { cls = 'on'; st = tr('已成熟', 'Matured'); }
+    else if (p) { cls = 'pending'; st = p.ready <= 3 ? tr('成熟中，' + YEARS[p.ready - 1] + ' 年可用', 'Maturing; usable in ' + YEARS[p.ready - 1]) : tr('成熟中，模擬結束後才可用', 'Maturing; usable after 2030'); }
+    else if (planned.has(builder[k])) { cls = 'planned'; st = tr('本回合預定投入', 'Planned this round'); }
+    else if (k === 'skill') { cls = 'half'; st = tr('目前 1，需達到 2', 'Level 1; needs level 2'); }
+    return node(k, cls, T(capShort[k]), st, T(a.name) + '\n' + tr('現金 ', 'Cash ') + a.cost + tr('、人力 ', ', engineering units ') + a.eng + tr('；下一回合成熟', '; matures next round'));
+  }).join('');
+  const svc = ['platformSale', 'moduleSale', 'maintSale', 'coop', 'service'].map(id => {
+    const a = ACT[id], lock = eligible(a, sim), pick = planned.has(id);
+    return node(id, lock ? 'off' : 'open', T(a.short), lock ? tr('尚缺前置能力', 'Prerequisites missing') : (pick ? tr('本回合已選', 'Selected this round') : (id === 'service' ? tr('隨時可接，不需前置能力', 'Always open; no prerequisites') : tr('可以接單', 'Open for orders'))),
+      T(a.name) + '\n' + (lock || tr('現金 ', 'Cash ') + a.cost + tr('、人力 ', ', engineering units ') + a.eng));
+  }).join('');
+  const hd = [[tr('基礎能力', 'Foundation capabilities'), tr('本回合投入，下一回合可用', 'Build now, usable next round')],
+    [tr('進階能力', 'Advanced capabilities'), tr('需要基礎能力，再等一回合', 'Need foundations, then one more round')],
+    [tr('可交付的服務', 'Services you can deliver'), tr('前置能力成熟後才能接單', 'Open when prerequisites mature')]]
+    .map((h, i) => `<text class="hd" x="${X[i]}" y="18">${esc(h[0])}</text><text class="hd2" x="${X[i]}" y="37">${esc(h[1])}</text>`).join('');
+  return `<div class="scroll-x"><svg class="capmap" viewBox="0 0 872 452" role="group" aria-label="${esc(tr('能力路徑圖：基礎能力、進階能力與可交付服務之間的前置關係', 'Capability map: prerequisite links between foundation capabilities, advanced capabilities and deliverable services'))}"><defs><linearGradient id="halfLamp"><stop offset="50%" stop-color="#C9A227"/><stop offset="50%" stop-color="#fff"/></linearGradient></defs>${hd}${w}${caps}${svc}</svg></div>${swipe()}
+  <div class="legend"><span><i style="background:#C9A227;border-radius:50%"></i>${tr('已成熟', 'Matured')}</span><span><i style="background:#F8F0D0;border:2px dashed #8A6D0F;border-radius:50%"></i>${tr('成熟中（下一回合才可用）', 'Maturing (usable next round)')}</span><span><i style="background:#fff;border:2px solid #9AA6BA;border-radius:50%"></i>${tr('尚未具備', 'Not yet built')}</span><span><i class="line" style="background:#002B5C"></i>${tr('線路通電：前置能力已具備', 'Live wire: prerequisite in place')}</span><span><i style="background:#002B5C"></i>${tr('可以接單的服務', 'Service open for orders')}</span></div>`;
+}
+
+/* 現金瀑布圖：期初 − 投入 + 基本營運 + 行動收入 − 成本壓力 = 期末 */
+function waterfall(x) {
+  const steps = [
+    { l: tr('回合初\n現金', 'Opening\ncash'), total: x.before.cash },
+    { l: tr('本回合\n投入', 'Spending'), d: -x.cost },
+    { l: tr('基本\n營運', 'Base\ninflow'), d: x.base },
+    { l: tr('行動\n收入', 'Action\nrevenue'), d: x.revenue },
+    { l: tr('成本\n壓力', 'Cost\npressure'), d: -x.shock },
+    { l: tr('回合末\n現金', 'Round-end\ncash'), total: x.after.cash }
+  ];
+  let run = 0, peak = 0;
+  for (const s of steps) { if (s.total != null) { s.lo = 0; s.hi = s.total; run = s.total; } else { s.lo = Math.min(run, run + s.d); s.hi = Math.max(run, run + s.d); run += s.d; } s.end = run; peak = Math.max(peak, s.hi); }
+  const top = niceMax(peak), L = 44, R = 548, T0 = 26, B = 196, bw = 26, slot = (R - L) / steps.length;
+  const y = v => B - (v / top) * (B - T0);
+  const ticks = [0, top / 2, top].map(v => `<line class="grid-l" x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`).join('');
+  const bars = steps.map((s, i) => {
+    const cx = L + slot * (i + .5), isTotal = s.total != null, zero = !isTotal && s.d === 0;
+    const hgt = Math.max(zero ? 2 : 3, y(s.lo) - y(s.hi)), fill = isTotal ? 'var(--navy)' : (s.d > 0 ? 'var(--in)' : 'var(--out)');
+    const lab = isTotal ? String(s.total) : (s.d > 0 ? '+' + s.d : s.d < 0 ? '−' + Math.abs(s.d) : '0');
+    const delay = (i * .28).toFixed(2);
+    const con = i < steps.length - 1 ? `<line class="wf-con base-l" style="animation-delay:${delay}s" x1="${cx + bw / 2}" x2="${cx + slot - bw / 2}" y1="${y(s.end)}" y2="${y(s.end)}"/>` : '';
+    return `<g${tip(s.l.replace('\n', tr('', ' ')) + COLON() + lab)}><rect x="${cx - slot / 2}" y="${T0}" width="${slot}" height="${B - T0}" fill="transparent"/><rect class="wf-bar${!isTotal && s.d < 0 ? ' down' : ''}" style="animation-delay:${delay}s" x="${cx - bw / 2}" y="${y(s.hi)}" width="${bw}" height="${hgt}" rx="${zero ? 1 : 4}" fill="${fill}"/><text class="wf-lab vl" style="animation-delay:${delay}s" x="${cx}" y="${y(s.hi) - 7}" text-anchor="middle">${lab}</text></g>${con}${lines(s.l, cx, B + 18, 'ax')}`;
+  }).join('');
+  return `<div class="scroll-x"><svg class="chart" style="min-width:440px" viewBox="0 0 560 240" role="img" aria-label="${esc(tr('現金結算：回合初 ', 'Cash settlement: opening ') + x.before.cash + tr('，投入 ', ', spending ') + x.cost + tr('，基本營運 ', ', base inflow ') + x.base + tr('，行動收入 ', ', action revenue ') + x.revenue + tr('，成本壓力 ', ', cost pressure ') + x.shock + tr('，回合末 ', ', round-end ') + x.after.cash)}">${ticks}<line class="base-l" x1="${L}" x2="${R}" y1="${B}" y2="${B}"/>${bars}</svg></div>${swipe()}
+  <div class="legend"><span><i style="background:var(--navy)"></i>${tr('現金餘額', 'Cash balance')}</span><span><i style="background:var(--in)"></i>${tr('流入（＋）', 'Inflow (+)')}</span><span><i style="background:var(--out)"></i>${tr('流出（−）', 'Outflow (−)')}</span></div>`;
+}
+
+/* 現金折線圖。series: [{name,color,values:[期初,R1,R2,R3]（不可行時較短）,fail}] */
+function marker(shape, x, y, c) {
+  const s = 5;
+  if (shape === 1) return `<rect x="${x - s}" y="${y - s}" width="${2 * s}" height="${2 * s}" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+  if (shape === 2) return `<path d="M${x},${y - s - 1.5} L${x + s + 1},${y + s} L${x - s - 1},${y + s} z" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+  if (shape === 3) return `<path d="M${x},${y - s - 2} L${x + s + 2},${y} L${x},${y + s + 2} L${x - s - 2},${y} z" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+  return `<circle cx="${x}" cy="${y}" r="${s}" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+}
+function cashLine(series, opts = {}) {
+  const cats = [tr('期初', 'Start'), '2026', '2028', '2030'];
+  const single = series.length === 1, L = 44, R = single ? 600 : 420, T0 = single ? 32 : 18, B = 226;
+  const top = niceMax(Math.max(...series.flatMap(s => s.values), 100));
+  const x = i => L + 14 + (R - L - 28) * i / 3, y = v => B - (v / top) * (B - T0);
+  const step = top <= 100 ? 25 : top <= 250 ? 50 : 100;
+  const grid = Array.from({ length: Math.floor(top / step) + 1 }, (_, i) => i * step / top).map(f => { const v = Math.round(top * f); return `<line class="${f ? 'grid-l' : 'base-l'}" x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`; }).join('');
+  const xl = cats.map((c, i) => `<text class="ax" x="${x(i)}" y="${B + 20}" text-anchor="middle">${esc(c)}</text>`).join('');
+  const paths = series.map((s, k) => `<path class="ln" pathLength="1" style="animation-delay:${k * .15}s" d="${s.values.map((v, i) => (i ? 'L' : 'M') + x(i) + ',' + y(v)).join(' ')}" fill="none" stroke="${s.color}" stroke-width="${s.wide ? 7 : 2.5}" stroke-linejoin="round" stroke-linecap="round"/>`).join('');
+  const marks = series.map((s, k) => s.values.map((v, i) => marker(s.shape ?? k, x(i), y(v), s.color)).join('') + (s.fail ? (() => { const i = s.values.length - 1, px = x(i) + 16, py = y(s.values[i]); return `<path d="M${px - 5},${py - 5} L${px + 5},${py + 5} M${px + 5},${py - 5} L${px - 5},${py + 5}" stroke="var(--bad)" stroke-width="2.5" stroke-linecap="round"/>`; })() : '')).join('');
+  let labels = '';
+  if (single) {
+    labels = series[0].values.map((v, i) => `<text class="vl" x="${x(i)}" y="${y(v) - 12}" text-anchor="middle">${v}</text>`).join('');
+  } else {
+    const ends = series.map((s, k) => { const i = s.values.length - 1; return { k, px: x(i) + (s.fail ? 26 : 0), py: y(s.values[i]), ly: y(s.values[i]), t: s.fail ? s.name + tr('：第 ' + s.fail + ' 回合不可行', ': infeasible in round ' + s.fail) : s.name + ' ' + s.values[i] }; }).sort((a, b) => a.ly - b.ly);
+    for (let i = 1; i < ends.length; i++) if (ends[i].ly - ends[i - 1].ly < 16) ends[i].ly = ends[i - 1].ly + 16;
+    labels = ends.map(e => `<line x1="${e.px + 8}" y1="${e.py}" x2="${R + 12}" y2="${e.ly}" stroke="#B6C0D1" stroke-width="1"/><text class="vl" x="${R + 16}" y="${e.ly + 4}" style="font-weight:500">${esc(e.t)}</text>`).join('');
+  }
+  const hover = cats.map((c, i) => { const rows = series.filter(s => s.values[i] != null).map(s => s.name + COLON() + s.values[i]); return `<rect x="${x(i) - 34}" y="${T0}" width="68" height="${B - T0}" fill="transparent"${tip(c + '\n' + rows.join('\n'))}/>`; }).join('');
+  return `<div class="scroll-x"><svg class="chart${opts.draw ? ' draw' : ''}" style="min-width:${opts.minW || (single ? 440 : 560)}px" viewBox="0 0 ${single ? 620 : 720} 256" role="img" aria-label="${esc(opts.label || tr('各回合末的現金', 'Cash at the end of each round'))}">${grid}${xl}${paths}${marks}${labels}${hover}</svg></div>${swipe()}`;
+}
+function spark(vals) {
+  if (vals.length < 2) return '';
+  const mx = Math.max(...vals, 1), mn = Math.min(...vals, 0), w = 96, h = 26, x = i => 4 + (w - 8) * i / (vals.length - 1), y = v => h - 4 - (h - 8) * (v - mn) / ((mx - mn) || 1);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${vals.map((v, i) => (i ? 'L' : 'M') + x(i) + ',' + y(v)).join(' ')}" fill="none" stroke="#7F95B5" stroke-width="2" stroke-linejoin="round"/><circle cx="${x(vals.length - 1)}" cy="${y(vals[vals.length - 1])}" r="3.5" fill="#002B5C"/></svg>`;
+}
+
+/* 各情境的回合末收入（行動卡內的小長條） */
+function payBars(a) {
+  return `<div class="pay"><div class="ptitle">${tr('各情境的回合末收入', 'Round-end revenue by scenario')}</div>${WORLD_IDS.map(id => { const v = payoff(a, id); return `<div class="prow"><span class="pname"><i style="background:${W[id].color}"></i>${esc(T(W[id].n))}</span><span class="pbar"><i style="width:${Math.round(v / 54 * 100)}%;background:${W[id].color}"></i></span><span class="pval">${v}</span></div>`; }).join('')}</div>`;
+}
+
+/* 有限決策樹：逆向歸納的逐步求解 */
+function treeData(world) {
+  const net = id => payoff(ACT[id], world) - ACT[id].cost;
+  const P = { sale: net('platformSale'), svc: net('service') }, M = { sale: net('maintSale'), svc: net('service') };
+  P.max = Math.max(P.sale, P.svc); M.max = Math.max(M.sale, M.svc);
+  const rootP = -ACT.pilot.cost + P.max, rootM = -ACT.maint.cost + M.max;
+  return { P, M, rootP, rootM, best: Math.max(rootP, rootM) };
+}
+function treeSVG(world, step) {
+  const d = treeData(world), sg = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v);
+  const N = (x, y, w, l1, l2, cls = '') => `<g class="tn ${cls}" transform="translate(${x},${y})"><rect width="${w}" height="48" rx="8"/><text x="${w / 2}" y="20" text-anchor="middle">${esc(l1)}</text><text class="v" x="${w / 2}" y="38" text-anchor="middle">${esc(l2)}</text></g>`;
+  const E = (x1, y1, x2, y2, label, cls) => `<path class="te ${cls}" d="M${x1},${y1} C ${(x1 + x2) / 2},${y1} ${(x1 + x2) / 2},${y2} ${x2},${y2}"/><text class="el" x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 + (y2 < y1 ? -8 : 16)}" text-anchor="middle">${esc(label)}</text>`;
+  const st = (solved, a, b) => !solved ? ['', ''] : [a >= b ? 'best' : 'cut', b >= a ? 'best' : 'cut'];
+  const [pS, pV] = st(step >= 1, d.P.sale, d.P.svc), [mS, mV] = st(step >= 2, d.M.sale, d.M.svc), [rP, rM] = st(step >= 3, d.rootP, d.rootM);
+  const leaf = (y, name, v, cls) => N(560, y, 190, name, tr('淨額 ', 'Net ') + sg(v), 'leaf ' + (cls === 'cut' ? 'dim' : ''));
+  return `<div class="scroll-x"><svg class="tree" style="min-width:640px" viewBox="0 0 760 330" role="img" aria-label="${esc(tr('兩期有限決策樹', 'Two-period finite decision tree'))}">
+  ${E(170, 164, 290, 74, T(ACT.pilot.short) + ' −' + ACT.pilot.cost, rP)}${E(170, 164, 290, 254, T(ACT.maint.short) + ' −' + ACT.maint.cost, rM)}
+  ${E(460, 74, 560, 34, '', pS)}${E(460, 74, 560, 114, '', pV)}${E(460, 254, 560, 214, '', mS)}${E(460, 254, 560, 294, '', mV)}
+  ${N(10, 140, 160, tr('2028：建構哪項能力', '2028: build which?'), step >= 3 ? 'max = ' + sg(d.best) : '?', step >= 3 ? 'solved' : '')}
+  ${N(290, 50, 170, tr('2030：平台試辦已完成', '2030: pilot complete'), step >= 1 ? 'max = ' + sg(d.P.max) : '?', step >= 1 ? 'solved' : '')}
+  ${N(290, 230, 170, tr('2030：維修能力已建立', '2030: maintenance built'), step >= 2 ? 'max = ' + sg(d.M.max) : '?', step >= 2 ? 'solved' : '')}
+  ${leaf(10, T(ACT.platformSale.short), d.P.sale, pS)}${leaf(90, T(ACT.service.short), d.P.svc, pV)}${leaf(190, T(ACT.maintSale.short), d.M.sale, mS)}${leaf(270, T(ACT.service.short), d.M.svc, mV)}
+  </svg></div>${swipe()}`;
+}
+
+/* ============================================================
+   畫面（各分頁的 HTML）
+   ============================================================ */
+const T0_KEYS = ['assumption', 'external', 'resource', 'time', 'trigger'];
+const BRIEF_KEYS = ['individual', 'vision', 'milestone', 'now'];
+const MIN_CHARS = 8, MIN_CHARS_EN = 20, MAX_CHARS = 50000;
+const fields = {
+  individual: ['個人初判：最想走的路徑與一項疑慮', 'Individual initial judgment: preferred path and one concern'],
+  vision: ['2030 年想為客戶提供的價值', 'The value you want to give clients in 2030'],
+  milestone: ['2028 年必須具備的能力與里程碑', 'Capabilities and milestones needed by 2028'],
+  now: ['2026 年先做什麼、放棄什麼', 'What to do first in 2026, and what to give up'],
+  assumption: ['未來假設：你們的選擇建立在哪個關於未來的關鍵假設上？若不成立會怎樣？', 'Assumption about the future: which key assumption does your choice rest on, and what happens if it does not hold?'],
+  external: ['外部配適：哪些需求與訊號支持這個選擇？', 'External fit: which needs and signals support this choice?'],
+  resource: ['資源能力配適：現金、人力與能力夠嗎？放棄了什麼？', 'Resource and capability fit: are cash, engineering capacity and capabilities sufficient, and what are you giving up?'],
+  time: ['時間配適：先後順序、成熟時間與期限合理嗎？', 'Timing fit: do the sequence, the time to mature and the time horizon hold up?'],
+  trigger: ['監測訊號：看到什麼證據就會修訂計畫？', 'Monitoring signal: what evidence would make you revise the plan?'],
+  ai: ['AI 回答原文（含追問與回答）', 'AI reply in full (including your follow-up and its answer)'],
+  judgment: ['對 AI 建議的採納、修正或拒絕，以及理由', 'What you adopt, revise or reject from the AI’s advice, and why'],
+  finalRationale: ['小組最終選擇與修訂理由', 'Final team choice and reasons for any revision'],
+  exit: ['個人反思：哪一項配適判斷改變了？是什麼證據促成的？', 'Individual reflection: which fit judgment changed, and what evidence prompted it?'],
+  cmp: ['把這堂課用到 CMP（Change Management Project）或個人生涯', 'Apply this session to your CMP (Change Management Project) or your own career']
+};
+const BELIEFS = { ...Object.fromEntries(WORLD_IDS.map(id => [id, W[id].n])), unsure: ['還無法判斷', 'Cannot tell yet'] };
+const ROUND_TITLES = [
+  ['先建能力，還是先接訂單？', 'Build capabilities first, or take the orders?'],
+  ['訊號變了，路徑要跟著改嗎？', 'The signals have shifted. Should the path change too?'],
+  ['現在還有哪些路可以走？', 'Which paths are still open now?']
+];
+const ROUND_QUESTIONS = [
+  ['你今天放棄什麼，才能讓未來有什麼？', 'What are you giving up today, and what will that make possible later?'],
+  ['這是訊號，還是你已經把它當成確定的未來？', 'Is this a signal, or are you already treating it as a certain future?'],
+  ['現在做不到的事，是哪個早期選擇造成的？', 'Which earlier choice explains what you cannot do now?']
+];
+const PEOPLE = {
+  chair: { n: ['許董事長', 'Chair Hsu'], i: ['許', 'H'], c: '' },
+  eng: { n: ['資深工程師 阿哲', 'Che, senior engineer'], i: ['哲', 'C'], c: 'b' },
+  sales: { n: ['業務經理 雅婷', 'Ya-Ting, sales manager'], i: ['婷', 'Y'], c: 'c' },
+  fin: { n: ['財務主管 周姐', 'Ms. Chou, finance lead'], i: ['周', 'Ch'], c: 'd' }
+};
+const VOICES = {
+  r1: [
+    ['chair', '同業都在談 AI 平台。我希望到了 2030 年，客戶想到智慧選型就想到澄川。', 'Every competitor is talking about AI platforms. By 2030, I want clients to think of Chengchuan first for smart component selection.'],
+    ['eng', '規則都在我腦袋裡。要我整理成資料可以，但這個月的單誰來畫？', 'The rules live in my head. I can turn them into data, but then who will do the drawings for this month’s orders?'],
+    ['sales', '老客戶下週就要報價。這幾張單不接，他們會去找別家。', 'Our long-standing clients want quotes next week. If we turn down these jobs, they will go elsewhere.'],
+    ['fin', '帳上現金 100。花出去的拿不回來，收入要到回合結束才進帳。', 'We have 100 in cash. What we spend does not come back, and revenue only arrives at the end of the round.']
+  ],
+  r2: {
+    ai: { true: ['chair', '客戶已經在要數位規格了。我們準備到哪裡？', 'Clients are already asking for digital specifications. How far along are we?'],
+          false: ['eng', '技師還是每張圖都打電話來確認。工具再新，流程沒有跟上。', 'Technicians still phone to confirm every drawing. The tools are new, but the process has not caught up.'] },
+    hot: { true: ['sales', '詢價單變多了，人手排得過來嗎？', 'Inquiries are piling up. Do we have enough people to handle them?'],
+           false: ['fin', '新廠案子延後，進帳變少。每一筆投入都要更有把握。', 'New-plant projects are delayed and less cash is coming in. Every commitment needs a stronger case.'] }
+  },
+  r3: {
+    ai: { true: ['chair', '數位採購已經是主流。我們現在拿得出什麼？', 'Digital procurement is now mainstream. What can we actually offer today?'],
+          false: ['eng', '客戶要的還是有人把規格講清楚。', 'Clients still want someone to explain the specifications clearly.'] },
+    hot: { true: ['sales', '案子很多。能不能接，要看我們已經具備哪些能力。', 'There is plenty of work. Whether we can take it depends on the capabilities we already have.'],
+           false: ['fin', '新案少了。手上的能力要用在客戶現在願意付錢的地方。', 'New projects are scarce. Our capabilities should go where clients are willing to pay now.'] }
+  }
+};
+const WARM = [
+  ['in', '帳上可用現金只有 100 單位', 'Only 100 units of cash are available', '現金是公司自己的資源；花在一處，就不能用在另一處。', 'Cash is the firm’s own resource; spent in one place, it is unavailable elsewhere.'],
+  ['out', '客戶多快改用數位採購', 'How fast clients switch to digital procurement', '採用速度由客戶決定，公司只能觀察訊號。', 'Clients decide the pace of adoption; the firm can only watch for signals.'],
+  ['in', '每回合工程人力只有 6 單位', 'Engineering capacity is 6 units per round', '人力上限不會因為現金多而增加。', 'The capacity ceiling does not rise just because cash is plentiful.'],
+  ['out', '在地新廠投資會升溫還是降溫', 'Whether local plant investment heats up or cools down', '投資景氣取決於整體環境。', 'The investment climate depends on the wider environment.'],
+  ['in', '新人還不能獨立交付', 'New hires cannot yet deliver on their own', '技能可以靠培訓改變，但需要時間。', 'Skills can be changed through training, but that takes time.'],
+  ['out', '海外低價標準品會不會進入客戶的比價表', 'Whether low-priced overseas standard products enter clients’ price comparisons', '競爭者的行動不在公司的控制範圍內。', 'Competitors’ moves lie outside the firm’s control.'],
+  ['in', '選型規則與 BOM 還沒整理成資料', 'Selection rules and BOMs are not yet structured as data', '資料成熟度是公司可以投入改善的內部條件。', 'Data readiness is an internal condition the firm can invest in.'],
+  ['out', '技師是否願意把 AI 工具納入正式採購流程', 'Whether technicians are willing to bring AI tools into formal procurement', '使用者的接受度需要觀察與驗證。', 'User acceptance has to be observed and tested.']
+];
+
+/* ---------- 小元件 ---------- */
+function field(k, group, o = {}) {
+  const values = group === 'draft' ? state.draft.text : state[group];
+  return `<label class="field" for="f-${k}">${o.label || T(fields[k])}</label>${o.hint ? `<p class="hint">${o.hint}</p>` : ''}<textarea id="f-${k}" data-field="${k}" data-group="${group}" maxlength="${MAX_CHARS}"${o.req ? ' data-req="1"' : ''}${o.ph ? ` placeholder="${esc(o.ph)}"` : ''}>${esc(values[k] || '')}</textarea>${o.req ? `<div class="count" id="c-${k}"></div>` : ''}`;
+}
+function mode(kind) {
+  return kind === 'ai' ? `<span class="mode ai" title="${tr('這一步需要使用 AI', 'AI is required for this step')}">AI REQUIRED</span>` : `<span class="mode noai" title="${tr('這一步不使用 AI', 'No AI for this step')}">NO AI</span>`;
+}
+function voice(v) {
+  const p = PEOPLE[v[0]];
+  return `<div class="voice"><div class="avatar ${p.c}" aria-hidden="true">${T(p.i)}</div><div><div class="who">${T(p.n)}</div><blockquote>${esc(tr(v[1], v[2]))}</blockquote></div></div>`;
+}
+function capsOn(sim) { return CAP_KEYS.filter(k => sim.caps[k] >= (k === 'skill' ? 2 : 1)); }
+function nameList(ids) { return ids.map(id => T(ACT[id].name)).join(tr('、', '; ')) || tr('不追加投入，保留資源', 'no new spending; resources preserved'); }
+function capList(keys) { return keys.map(k => T(capLabels[k])).join(tr('、', ', ')) || tr('無', 'none'); }
+function pendingList(sim) {
+  return sim.pending.map(p => T(ACT[p.id].name) + tr('（', ' (') + (p.ready <= 3 ? tr(YEARS[p.ready - 1] + ' 年成熟', 'matures ' + YEARS[p.ready - 1]) : tr('模擬結束後成熟', 'matures after the simulation')) + tr('）', ')')).join(tr('、', ', ')) || tr('無', 'none');
+}
+function tiles(sim) {
+  const on = capsOn(sim);
+  return `<div class="tiles">
+  <div class="tile"><div class="lab">${tr('可用現金', 'Cash available')}</div><div class="val">${sim.cash}</div><div class="sub">${tr('累計已投入 ', 'Spent so far: ') + sim.spent}</div></div>
+  <div class="tile"><div class="lab">${tr('每回合工程人力', 'Engineering capacity per round')}</div><div class="val">${ENG_CAP}</div><div class="sub">${tr('用不完也不能留到下一回合', 'Unused units cannot be carried over')}</div></div>
+  <div class="tile"><div class="lab">${tr('已成熟能力', 'Matured capabilities')}</div><div class="val">${on.length}<span class="sub"> / 6</span></div><div class="sub">${on.length ? capList(on) : tr('工程技能目前為 1，需達到 2', 'Engineering skills at level 1; level 2 needed')}</div></div>
+  <div class="tile"><div class="lab">${tr('客戶關係', 'Client relationships')}</div><div class="val">${sim.caps.relation}</div><div class="sub">${tr('沒有既有客製服務或技師協作的回合會減 1', 'Falls by 1 in a round with neither existing custom service nor technician collaboration')}</div></div></div>`;
+}
+/* 情境矩陣。o.pick：可點選；o.sel：已選；o.actual：實際路徑；o.name：data-act 名稱 */
+function matrix(o = {}) {
+  const q = id => {
+    const w = W[id], cls = 'quad' + (o.sel === id ? ' sel' : '') + (o.actual === id ? ' actual' : '');
+    const inner = `<h4><i style="background:${w.color}"></i>${esc(T(w.n))}</h4><p>${esc(T(w.d))}</p>${o.sel === id && o.selTag ? `<span class="tag">${esc(o.selTag)}</span>` : ''}`;
+    const badge = o.actual === id ? ` data-badge="${esc(o.actualTag || tr('實際情境', 'Actual scenario'))}"` : '';
+    return o.pick ? `<button type="button" class="${cls}" data-act="${o.pick}" data-id="${id}" aria-pressed="${o.sel === id}"${o.disabled ? ' disabled' : ''}${badge}>${inner}</button>` : `<div class="${cls}"${badge}>${inner}</div>`;
+  };
+  return `<div class="matrix" role="group" aria-label="${esc(tr('四種情境', 'Four scenarios'))}"><span class="corner"></span><span class="xhead">${tr('在地投資冷', 'Weak local investment')}</span><span class="xhead">${tr('在地投資熱', 'Strong local investment')}</span>
+  <span class="ylab" style="grid-row:2">${tr('AI 採用快', 'Fast AI adoption')}</span>${q('dc')}${q('dh')}
+  <span class="ylab" style="grid-row:3">${tr('AI 採用慢', 'Slow AI adoption')}</span>${q('tc')}${q('th')}</div>`;
+}
+function miniMatrix(sel, actual) {
+  const q = id => `<div class="quad${sel === id ? ' sel' : ''}${actual === id ? ' actual' : ''}"${actual === id ? ` data-badge="${esc(tr('實際', 'Actual'))}"` : ''}>${esc(T(W[id].n))}${sel === id ? `<br><span class="tag">${tr('你們的判斷', 'Your reading')}</span>` : ''}</div>`;
+  return `<div class="matrix mini">${q('dc')}${q('dh')}${q('tc')}${q('th')}</div>`;
+}
+
+/* ============================================================
+   任務簡報
+   ============================================================ */
+function briefView() {
+  const answered = WARM.filter((_, i) => state.warm[i]).length, right = WARM.filter((w, i) => state.warm[i] === w[0]).length;
+  const gloss = t => (LANG === 'en' ? '' : ` <small>${t}</small>`);
+  return `
+  <div class="hero">
+    <div>
+      <p class="kicker">${tr('第五週　規劃與策略規劃', 'Week 5: Planning and strategic planning')}</p>
+      <h1 tabindex="-1">${tr('澄川電控的三次選擇', 'Three Choices at Chengchuan Controls')}</h1>
+      <p class="lead">${tr('你們是澄川電控的經營團隊。這家公司替工廠設計、組裝客製控制箱，既有客戶的訂單還在，董事會卻希望公司趕上 AI。接下來你們要做三次決定，分別發生在 2026、2028 與 2030 年，每一次都得決定有限的現金與工程人力要用在哪裡。', 'You are the management team of Chengchuan Controls, a firm that designs and assembles custom control panels for factories. Orders from existing clients keep coming, yet the board wants the firm to catch up with AI. You will make three decisions, in 2026, 2028 and 2030, each time deciding where to use limited cash and engineering capacity.')}</p>
+    </div>
+    <div class="hero-fig">${heroSVG()}</div>
+  </div>
+  <p class="small muted prose" style="margin-top:16px">${tr('這個案例是為課堂模擬虛構的，設計靈感來自「穩穩電控的四個明天」。所有金額與能力點數都是教學假設，與任何真實公司或市場預測無關。你不需要電機背景：控制箱可以想成工廠設備的配電與控制中樞；選型是替每張訂單挑選合適的元件規格；BOM（bill of materials，物料清單）則列出一個控制箱用到的所有零件。', 'This fictional case was written for class and inspired by “Steady Electronics: Four Futures.” All cash and capability figures are teaching assumptions unrelated to any real company or market forecast. No electrical background is needed: think of a control panel as the power-and-control hub of factory equipment; component selection means choosing the right parts and ratings for each order; and a BOM (bill of materials) lists every part a panel contains.')}</p>
+
+  <section class="sec"><h2>${tr('公司現況', 'Where the firm stands')}</h2>
+    <dl class="facts">
+      <div><dt>${tr('產品', 'Product')}</dt><dd>${tr('客製控制箱，每張訂單都要重新選型與繪圖', 'Custom control panels; every order needs fresh component selection and drawings')}</dd></div>
+      <div><dt>${tr('客戶', 'Clients')}</dt><dd>${tr('在地工廠與機電技師，靠多年信任往來', 'Local factories and electromechanical technicians; relationships rest on years of trust')}</dd></div>
+      <div><dt>${tr('團隊', 'Team')}</dt><dd>${tr('資深工程師帶著幾位還無法獨立交付的新人', 'Senior engineers plus new hires who cannot yet deliver on their own')}</dd></div>
+      <div><dt>${tr('知識', 'Know-how')}</dt><dd>${tr('選型規則與物料清單散落在個人電腦與腦袋裡', 'Selection rules and BOMs are scattered across personal computers and people’s heads')}</dd></div>
+    </dl>
+    <h3 style="margin-top:22px">${tr('會議室裡的四種聲音', 'Four voices in the meeting room')}</h3>
+    <div class="voices" style="margin-top:10px">${VOICES.r1.map(voice).join('')}</div>
+  </section>
+
+  <section class="sec"><h2>${tr('這堂課在練什麼', 'What you will practice in this session')}</h2>
+    <p class="prose">${tr('規劃（planning）是設定目標，並決定用哪些行動、資源安排與檢查點來達成。策略規劃（strategic planning）是規劃的一種，多回答三個問題：要為誰創造什麼價值、要走哪一條路徑、願意放棄哪些機會。環境一變，需要修訂的是背後的假設與投入順序，目標本身未必要換。', 'Planning sets goals and decides the actions, resource allocation and checkpoints needed to reach them. Strategic planning is one kind of planning and answers three further questions: what value to create and for whom, which path to take, and which opportunities to give up. When conditions change, revise the underlying assumptions and the order of commitments; the goal itself may still stand.')}</p>
+    <div class="tablewrap" style="margin-top:14px"><table class="levels">
+      <tr><th></th><th>${tr('日常排程', 'Day-to-day scheduling')}</th><th>${tr('作業性規劃', 'Operational planning')}</th><th class="hl">${tr('策略規劃', 'Strategic planning')}</th></tr>
+      <tr><td>${tr('回答的問題', 'Question answered')}</td><td>${tr('這週誰做哪張單？', 'Who handles which order this week?')}</td><td>${tr('目標要靠哪些行動、資源與檢查點達成？', 'Which actions, resources and checkpoints will reach the goal?')}</td><td class="hl">${tr('要為誰創造什麼價值？走哪條路、放棄什麼？', 'What value, for whom? Which path, and what do we give up?')}</td></tr>
+      <tr><td>${tr('時間尺度', 'Time scale')}</td><td>${tr('幾天到幾週', 'Days to weeks')}</td><td>${tr('幾個月到一年', 'Months to a year')}</td><td class="hl">${tr('好幾年，長過能力成熟所需的時間', 'Several years, longer than capabilities take to mature')}</td></tr>
+      <tr><td>${tr('澄川的例子', 'At Chengchuan')}</td><td>${tr('安排阿哲本週畫三張圖', 'Assign Che three drawings this week')}</td><td>${tr('排定 BOM 資料整理的分工、預算與每季檢查點', 'Set the division of work, budget and quarterly checkpoints for structuring BOM data')}</td><td class="hl">${tr('2030 年要靠平台、模組、維修還是客製服務立足', 'Whether the firm will rely on its platform, modules, maintenance or custom service in 2030')}</td></tr>
+      <tr><td>${tr('判斷錯誤的代價', 'Cost of getting it wrong')}</td><td>${tr('下週就能修正', 'Fixable next week')}</td><td>${tr('延誤與超支', 'Delays and overruns')}</td><td class="hl">${tr('能力與時間已經投入，很難回頭', 'Capabilities and time are already committed; hard to reverse')}</td></tr>
+    </table></div>
+    <h3 style="margin-top:26px">${tr('三種容易混淆的方法', 'Three methods that are easy to confuse')}</h3>
+    <div class="methods" style="margin-top:10px">
+      <div class="card method">${methodSVG('forward')}<h3>${tr('前瞻思考', 'Forward-looking thinking')}${gloss('forward-looking')}</h3><p class="small">${tr('從現在往前看，比較幾種合理的未來。本模擬有四種情境，不指定機率。', 'Look ahead from today and compare several plausible futures. This simulation has four scenarios and assigns no probabilities.')}</p></div>
+      <div class="card method">${methodSVG('back')}<h3>${tr('回溯規劃', 'Backcasting')}${gloss('backcasting')}</h3><p class="small">${tr('先描述 2030 年想提供的價值，再回推 2028 年要具備的能力與 2026 年的第一步。回推只說明「要到那裡，必須先有什麼」，未來並沒有因此確定。', 'Describe the value you want to deliver in 2030, then work back to the capabilities needed by 2028 and the first step in 2026. Backcasting only tells you what must be in place to get there; it does not make that future certain.')}</p></div>
+      <div class="card method">${methodSVG('tree')}<h3>${tr('逆向歸納', 'Backward induction')}${gloss('backward induction')}</h3><p class="small">${tr('只適用於規則、時序、結果與評估準則都已寫定的有限決策樹，從最後一步往回解。課末的小練習才會用到。', 'Applies only to a finite decision tree whose rules, timing, outcomes and criterion are fully specified; it is solved from the last move backward. You will use it only in the short exercise at the end.')}</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="warm"><h2>${tr('暖身：這件事由誰決定？', 'Warm-up: who decides this?')}</h2>
+    <p class="prose">${tr('規劃前先分清兩類條件。內在限制是公司自己的條件，可以靠投入慢慢改變；外部不確定性由客戶與市場決定，在本模擬中公司無法左右，只能觀察訊號並準備因應。請替每張卡片選一個類別。', 'Before planning, separate two kinds of conditions. Internal constraints are the firm’s own conditions and can be changed gradually through investment; external uncertainties are decided by clients and the market, and in this simulation the firm cannot influence them, only watch for signals and prepare. Pick a category for each card.')}</p>
+    <div class="warm" style="margin-top:14px">${WARM.map((w, i) => {
+      const a = state.warm[i], ok = a === w[0];
+      return `<div class="wcard${a ? (ok ? ' right' : ' wrong') : ''}"><p>${esc(tr(w[1], w[2]))}</p><div class="choices">
+        <button type="button" data-act="warm" data-i="${i}" data-v="in" class="${a === 'in' ? 'pick' : ''}"${a ? ' disabled' : ''}>${tr('內在限制', 'Internal constraint')}</button>
+        <button type="button" data-act="warm" data-i="${i}" data-v="out" class="${a === 'out' ? 'pick' : ''}"${a ? ' disabled' : ''}>${tr('外部不確定性', 'External uncertainty')}</button></div>
+        ${a ? `<p class="fb"><span class="mark">${ok ? tr('✓ 正確。', '✓ Correct. ') : tr('✗ 這屬於', '✗ Not quite: this is an ') + (w[0] === 'in' ? tr('內在限制。', 'internal constraint. ') : tr('外部不確定性。', 'external uncertainty. '))}</span>${esc(tr(w[3], w[4]))}</p>` : ''}</div>`;
+    }).join('')}</div>
+    <p style="margin-top:12px" class="${answered === WARM.length ? 'diff' : 'hint'}" id="warmSum">${answered === WARM.length
+      ? tr('答對 ' + right + '／' + WARM.length + '。策略規劃得同時處理兩邊：內在限制影響現在做得到哪些事，外部不確定性則影響這些事做了之後的成果。接著請每個人在紙上各寫一項卡片上沒有的內在限制與外部不確定性。', right + ' of ' + WARM.length + ' correct. Strategic planning has to handle both sides: internal constraints affect what can be done now, while external uncertainties affect how those actions turn out. Next, each person writes on paper one internal constraint and one external uncertainty that are not on the cards.')
+      : tr('已完成 ' + answered + '／' + WARM.length + '。暖身不計分，也不影響後面的模擬。', answered + ' of ' + WARM.length + ' answered. The warm-up is ungraded and does not affect the simulation.')}
+      ${answered ? `<button type="button" class="btn small" data-act="warmReset" style="margin-left:10px">${tr('重新作答', 'Try again')}</button>` : ''}</p>
+  </section>
+
+  <section class="sec"><h2>${tr('你們手上有什麼', 'What you have to work with')}</h2>
+    ${tiles(startSim())}
+    <ul class="rules" style="margin-top:16px">
+      <li><strong>${tr('人力有上限', 'Capacity is capped')}</strong><span>${tr('每回合只有 6 單位工程人力，現金再多也不會增加，用不完也無法留到下一回合。', 'Each round has 6 engineering units. More cash does not add capacity, and unused units cannot be carried over.')}</span></li>
+      <li><strong>${tr('能力需要時間', 'Capabilities take time')}</strong><span>${tr('建構能力的行動，成果要到下一回合才成熟；每項能力只需要建構一次，不能重複投入。同一回合買資料又買平台，並不能跳過前置能力。', 'Capabilities built this round mature in the next round; each capability is built once and cannot be bought again. Buying data and a platform in the same round does not bypass prerequisites.')}</span></li>
+      <li><strong>${tr('現金不能預支', 'No spending in advance')}</strong><span>${tr('投入不退還；收入在回合結束才入帳，不能拿來支付當回合的投入。', 'Spending is non-refundable. Revenue arrives at the end of the round and cannot fund that round’s spending.')}</span></li>
+      <li><strong>${tr('關係需要經營', 'Relationships need tending')}</strong><span>${tr('某一回合既沒有承接既有客製服務、也沒有做技師協作，客戶關係就會減 1。客戶關係是討論用的指標，不會直接換算成收入。', 'In any round with neither existing custom service nor technician collaboration, client relationships fall by 1. The relationship score is an indicator for discussion and does not convert directly into revenue.')}</span></li>
+      <li><strong>${tr('保留現金也是選擇', 'Holding cash is a choice')}</strong><span>${tr('現金留在帳上可以保有財務彈性，但不會自動變成能力。', 'Cash kept in the bank preserves financial flexibility but does not turn into capability by itself.')}</span></li>
+    </ul>
+    <div class="fig" style="margin-top:18px"><h3>${tr('能力路徑圖', 'Capability map')}</h3>
+      <p class="cap" style="margin:4px 0 10px">${tr('線路由左到右代表前置關係。左欄的基礎能力今年投入、2028 年才能用；中欄的進階能力最快 2028 年投入、2030 年才能用。想在 2030 年推出平台服務，第一步必須在 2026 年就踏出去。', 'Wires run left to right along prerequisite links. Foundation capabilities in the left column, if built this year, become usable in 2028; advanced capabilities in the middle can be started in 2028 at the earliest and used from 2030. To offer a platform service in 2030, the first step has to be taken in 2026.')}</p>
+      ${capMap(startSim())}</div>
+    <h3 style="margin-top:22px">${tr('分工建議', 'Suggested roles')}</h3>
+    <p class="prose">${tr('主持（掌握流程與時間）、財務（盯現金與機會成本）、能力（盯人力、前置能力與成熟時間）、訊號（盯外部訊號與修訂條件）、挑戰者（質疑假設、查核 AI 的說法）。四人組可由一人兼任訊號與挑戰者。角色每回合輪換。', 'Facilitator (process and time), Finance (cash and opportunity cost), Capabilities (engineering capacity, prerequisites and time to mature), Signals (external signals and revision conditions), Challenger (questions assumptions and reviews what the AI says). In a team of four, one person covers both Signals and Challenger. Rotate roles every round.')}</p>
+  </section>
+
+  <section class="sec"><h2>${tr('四個可能的未來', 'Four possible futures')}</h2>
+    <p class="prose">${tr('兩個公司無法控制的因素交叉出四種情境：客戶採用 AI 與數位採購的速度，以及在地新廠投資的冷熱。本模擬不提供機率；四種情境的用途，是檢查同一條路徑換到不同未來是否還走得通。', 'Two factors beyond the firm’s control combine to give four scenarios: how fast clients adopt AI and digital procurement, and how strong local new-plant investment is. The simulation assigns no probabilities; the four scenarios exist to test whether one path still works across different futures.')}</p>
+    <div style="margin-top:14px">${matrix()}</div>
+  </section>
+
+  <section class="sec" id="backcast"><h2>${tr('先由人回推：從 2030 走回 2026', 'Humans first: backcast from 2030 to 2026')} ${mode('noai')}</h2>
+    <p class="prose">${tr('每個人先寫下自己的初判，小組再從標示 1 的 2030 年開始填，一路回推到 2026 年。只有一臺裝置時，個人初判先寫在紙上。', 'Each person writes an individual initial judgment; the team then starts from 2030 (marked 1) and works back to 2026. If the team shares one device, write individual judgments on paper first.')}</p>
+    ${field('individual', 'brief', { req: 1 })}
+    <div class="back" style="margin-top:20px">
+      <div class="col c3"><div class="yr"><span>1</span>2030</div><div class="arrow">${backArrow()}</div>${field('vision', 'brief', { req: 1, ph: tr('例：客戶送出需求當天，就能拿到可信的規格建議。先寫客戶得到什麼，再談工具。', 'e.g., Clients receive a reliable specification proposal the day they send a request. State what clients gain before naming tools.') })}</div>
+      <div class="col c2"><div class="yr"><span>2</span>2028</div><div class="arrow">${backArrow()}</div>${field('milestone', 'brief', { req: 1, ph: tr('例：資料可重複使用，有兩位新人能獨立交付。', 'e.g., Data is reusable and two new hires can deliver independently.') })}</div>
+      <div class="col c1"><div class="yr"><span>3</span>2026</div><div class="arrow"></div>${field('now', 'brief', { req: 1, ph: tr('例：先整理資料與培訓，本回合少接一部分客製訂單。', 'e.g., Structure data and train first, taking fewer custom orders this round.') })}</div>
+    </div>
+    <div class="toolbar" style="margin-top:20px"><button type="button" class="btn primary" id="start" data-act="start">${state.records.length === 3 ? tr('查看成果與反思', 'Go to the debrief') : state.brief.started ? tr('回到本回合', 'Back to the current round') : tr('開始第一回合', 'Begin round 1')}</button><span class="inline-err" id="err-start" role="alert"></span></div>
+  </section>`;
+}
+function backArrow() {
+  return `<svg class="draw" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><line class="ln" pathLength="1" x1="296" y1="13" x2="14" y2="13" stroke="#8A6D0F" stroke-width="2.5"/><path class="ah" d="M4,13 L18,5 L18,21 z" fill="#8A6D0F"/></svg>`;
+}
+
+/* ============================================================
+   本回合決策
+   ============================================================ */
+/* 句子中列舉行動名稱：每個名稱各自加引號 */
+function quoteList(ids, key = 'name') {
+  const q = ids.map(id => tr('「' + ACT[id][key][0] + '」', '“' + ACT[id][key][1] + '”'));
+  if (q.length <= 1) return q.join('');
+  return tr(q.slice(0, -1).join('、') + '與' + q[q.length - 1], q.slice(0, -1).join(', ') + ' and ' + q[q.length - 1]);
+}
+function need() { return LANG === 'en' ? MIN_CHARS_EN : MIN_CHARS; }
+function actionCard(a, sim, d) {
+  const lock = eligible(a, sim), sel = d.selected.includes(a.id);
+  const reqs = Object.entries(a.req || {}).map(([k, v]) => `<span class="chip ${sim.caps[k] >= v ? 'ok' : 'no'}">${sim.caps[k] >= v ? '✓' : '✗'} ${esc(capText(k, v))}</span>`).join('');
+  const gain = a.gain ? Object.entries(a.gain).map(([k, v]) => `<span class="chip gain">${a.delay ? tr('成熟後', 'On maturity') : tr('當回合', 'This round')}${COLON()}${esc(T(capLabels[k]))} +${v}</span>`).join('') : '';
+  return `<div class="action${sel ? ' selected' : ''}${lock ? ' locked' : ''}"><label><input type="checkbox" data-action="${a.id}"${sel ? ' checked' : ''}${lock ? ' disabled' : ''}><span><span class="a-name">${esc(T(a.name))}</span><br><span class="a-desc">${esc(T(a.desc))}</span></span></label>
+    <div class="chips"><span class="chip">${tr('現金', 'Cash')} ${a.cost}</span><span class="chip">${tr('人力', 'Eng. units')} ${a.eng}</span>${gain}</div>
+    ${reqs ? `<div class="chips"><span class="hint" style="align-self:center">${tr('前置能力', 'Prerequisites')}</span>${reqs}</div>` : ''}
+    ${a.pay ? payBars(a) : ''}${lock && sim.done.includes(a.id) ? `<div class="lock-why">${esc(lock)}</div>` : ''}</div>`;
+}
+function diffText(base, now) {
+  const add = now.filter(id => !base.includes(id)), drop = base.filter(id => !now.includes(id));
+  if (!add.length && !drop.length) return tr('目前的行動與 T0 初判相同。', 'Your current actions match your T0 initial judgment.');
+  return tr('與 T0 初判相比：', 'Compared with your T0 initial judgment: ') + [add.length ? tr('新增', 'added ') + quoteList(add) : '', drop.length ? tr('取消', 'dropped ') + quoteList(drop) : ''].filter(Boolean).join(tr('；', '; ')) + tr('。', '.');
+}
+function roundVoices(r, world) {
+  if (r === 1) return VOICES.r1.slice(1);
+  const v = VOICES[r === 2 ? 'r2' : 'r3'], w = W[world];
+  return [v.ai[w.ai], v.hot[w.hot]];
+}
+function econText(r) {
+  const hot = W[state.world].hot, p = PRESSURE[r - 1];
+  const base = r === 1
+    ? tr('回合末結算時，公司會有一筆基本營運淨流入：在地投資熱為 18，冷為 8（已扣除日常營運支出）。第 1 回合還不知道實際市況；回合末的入帳會透露第一條線索。', 'At settlement the firm receives a base operating inflow: 18 when local investment is strong, 8 when it is weak (net of routine operating costs). In round 1 the actual market is still unknown; the round-end settlement will give the first clue.')
+    : tr('第 1 回合的結算已經顯示在地投資偏' + (hot ? '熱' : '冷') + '。本模擬的投資冷熱在三回合內不變，所以這一回合的基本營運淨流入是 ' + (hot ? BASE.hot : BASE.cold) + '。', 'The round 1 settlement showed that local investment is ' + (hot ? 'strong' : 'weak') + '. In this simulation the investment climate stays the same for all three rounds, so the base operating inflow this round is ' + (hot ? BASE.hot : BASE.cold) + '.');
+  const press = p
+    ? tr('本回合另有外部成本壓力 ' + p + '（例如工資與材料上漲；教學假設）。', ' This round also carries an external cost pressure of ' + p + ' (rising wages and material costs, for example; a teaching assumption).')
+    : tr('本回合沒有外部成本壓力。', ' There is no external cost pressure this round.');
+  return base + press;
+}
+function roundView() {
+  if (state.records.length === 3) return finalView();
+  const sim = current(), r = state.round, d = state.draft, saved = !!d.baseline, yr = YEARS[r - 1];
+  const sig = signals(r, state.world);
+  const stage = saved ? ((d.text.ai || '').trim() || d.offline ? 3 : 2) : 1;
+  return `
+  <p class="kicker">${tr('第 ' + r + ' 回合｜' + yr + ' 年', 'Round ' + r + ' | ' + yr)}</p>
+  <h1 tabindex="-1">${T(ROUND_TITLES[r - 1])}</h1>
+  <ol class="steps" aria-label="${tr('本回合流程', 'Round flow')}">
+    <li class="${stage === 1 ? 'now' : 'done'}"><b>T0${tr('　', ' ')}${tr('小組先自己判斷', 'Team judges first')}</b>THINK · NO AI</li>
+    <li class="${stage === 2 ? 'now' : stage > 2 ? 'done' : ''}"><b>T1${tr('　', ' ')}${tr('請 AI 查核', 'AI reviews')}</b>CONSULT · AI REQUIRED</li>
+    <li class="${stage === 3 ? 'now' : ''}"><b>T2${tr('　', ' ')}${tr('小組做決定', 'Team decides')}</b>CHALLENGE → DECIDE · NO AI</li>
+  </ol>
+  <div class="roundgrid" style="margin-top:22px"><div>
+
+  <section><h2>${tr(yr + ' 年收到的訊號', 'Signals received in ' + yr)}</h2>
+    <div class="signals">${sig.map((s, i) => `<div class="signal${ui.fresh ? ' in' : ''}" style="animation-delay:${i * .12}s"><div class="src">${T(SOURCES[s[0]])}</div><p>${esc(tr(s[1], s[2]))}</p></div>`).join('')}</div>
+    <div class="voices" style="margin-top:14px">${roundVoices(r, state.world).map(voice).join('')}</div>
+    <p class="econ" style="margin-top:14px">${econText(r)}</p>
+    <p style="margin-top:14px"><strong>${tr('本回合要回答：', 'The question for this round: ')}</strong>${T(ROUND_QUESTIONS[r - 1])}</p>
+  </section>
+
+  <section class="sec"><h2>${tr('公司現在的狀態', 'Where the firm stands now')}</h2>
+    ${tiles(sim)}
+    <p class="small" style="margin-top:10px">${tr('成熟中的投資：', 'Investments still maturing: ')}${esc(pendingList(sim))}</p>
+    <div class="fig" style="margin-top:12px"><h3>${tr('能力路徑圖', 'Capability map')}</h3><p class="cap" style="margin:2px 0 8px">${tr('勾選行動後，圖上會以虛線框標出本回合預定投入的能力。', 'When you select actions below, capabilities planned for this round appear with a dashed outline.')}</p><div id="capmap">${capMap(sim, { planned: d.selected })}</div></div>
+  </section>
+
+  <section class="sec" id="belief"><h2>${tr('你們判斷目前最接近哪一種未來？', 'Which future do you think you are closest to right now?')}</h2>
+    <p class="prose">${saved ? tr('這是保存 T0 初判時的判斷。', 'This is the reading you saved with your T0 initial judgment.') : tr('點選一個象限，或選「還無法判斷」。這個判斷會和初判一起保存，記錄你們當下如何解讀訊號，之後可以對照實際情境。', 'Pick a quadrant, or choose “Cannot tell yet.” Your reading is saved with the initial judgment as a record of how you interpreted the signals, to be compared later with the actual scenario.')}</p>
+    <div id="beliefBox" style="margin-top:12px">${beliefBox()}</div>
+  </section>
+
+  <section class="sec" id="acts"><h2>${tr('選擇本回合的行動', 'Choose this round’s actions')}</h2>
+    <p class="prose">${tr('可以複選，也可以什麼都不做，但都要說明理由。每多選一項，能用在別處的現金與人力就少一些。', 'Pick several, or none, but give your reasons either way. Each additional pick leaves less cash and engineering capacity for something else.')}</p>
+    <div class="group-h"><h3>${tr('建構能力', 'Build capability')}</h3><span class="hint">${tr('下一回合才成熟，本回合沒有收入；每項只能建構一次', 'Matures next round; no revenue this round; each can be built only once')}</span></div>
+    <div class="actions">${A.filter(a => a.kind === 'build').map(a => actionCard(a, sim, d)).join('')}</div>
+    <div class="group-h"><h3>${tr('當期交付', 'Deliver now')}</h3><span class="hint">${tr('回合末入帳，金額隨情境而異；每回合都可以再選', 'Revenue at round end; amounts vary by scenario; can be chosen again every round')}</span></div>
+    <div class="actions">${A.filter(a => a.kind === 'earn').map(a => actionCard(a, sim, d)).join('')}</div>
+  </section>
+
+  ${!saved ? `
+  <section class="sec" id="t0"><h2>T0${BAR()}${tr('小組先自己判斷', 'The team judges on its own first')} ${mode('noai')}</h2>
+    <p class="prose">${tr('先有一個可以被質疑的主張，AI 才知道要檢查什麼。五個欄位各寫至少 ' + need() + ' 個字。', 'You need a claim that can be challenged before the AI knows what to check. Write at least ' + need() + ' characters in each of the five boxes.')}</p>
+    ${T0_KEYS.map(k => field(k, 'draft', { req: 1 })).join('')}
+    <div class="toolbar" style="margin-top:18px"><button type="button" class="btn primary" id="baseline" data-act="baseline">${tr('保存初判，進入 AI 查核', 'Save initial judgment and move to AI review')}</button><span class="inline-err" id="err-baseline" role="alert"></span></div>
+    <p class="hint" style="margin-top:8px">${tr('保存後，這份 T0 初判就會鎖定。之後仍可調整行動，但初判的紀錄不會被覆蓋。', 'Once saved, this T0 initial judgment is locked. You can still change your actions afterwards, but the record of the initial judgment stays as it is.')}</p>
+  </section>` : `
+  <section class="sec" id="t0"><h2>T0${BAR()}${tr('初判已保存', 'Initial judgment saved')}</h2>
+    <div class="t0box"><p><strong>${tr('T0 行動：', 'T0 actions: ')}</strong>${esc(nameList(d.baseline.selected))}</p>
+    <details><summary>${tr('檢視 T0 的五項理由', 'View the five T0 reasons')}</summary>${T0_KEYS.map(k => `<p><strong>${T(fields[k])}</strong><br>${esc(d.baseline.text[k])}</p>`).join('')}</details></div>
+  </section>
+  <section class="sec" id="t1"><h2>T1${BAR()}${tr('請 AI 擔任策略查核者', 'Ask the AI to act as a strategy reviewer')} ${mode('ai')}</h2>
+    <p class="prose">${tr('把下面的提示詞（prompt）完整複製到你們可以使用的 AI 工具，再把回答貼回來。AI 的工作是質疑假設與檢查配適，不負責計算遊戲數值，也不能補上案例沒有提供的事實。', 'Copy the full prompt below into an AI tool you can use, then paste the reply back. The AI’s job is to question assumptions and check fit; it does not calculate game results and must not add facts the case does not provide.')}</p>
+    <pre class="prompt" id="prompt" tabindex="0">${esc(buildPrompt())}</pre>
+    <button type="button" class="btn" id="copyPrompt" data-act="copyPrompt">${tr('複製提示詞', 'Copy prompt')}</button>
+    <details><summary>${tr('第二輪追問：先讀完回答，再用自己的話改寫', 'Follow-up: read the reply first, then rewrite this in your own words')}</summary>
+      <p>${tr('找出 AI 回答裡的一個問題，套用下面的句型追問，並把追問與回答一起貼到下方的欄位：', 'Find one problem in the AI’s reply, adapt the template below, and paste both your follow-up and its answer into the box underneath:')}</p>
+      <p class="t0box">${tr('你的分析忽略了〔我們的限制〕。請只根據已提供的資訊，重新檢查〔特定行動〕在〔情境〕下的前置能力、成熟時間與放棄的機會，並列出一項需要由人查證的證據。', 'Your analysis overlooked [our constraint]. Using only the information provided, re-examine the prerequisites, time to mature and forgone opportunities of [specific action] under [scenario], and list one piece of evidence that a human needs to verify.')}</p>
+    </details>
+    ${field('ai', 'draft')}
+    <label class="checkline"><input type="checkbox" id="offline"${d.offline ? ' checked' : ''}><span>${tr('AI 無法使用，改由教師或同儕做同樣的查核（請在下一欄說明）', 'AI unavailable; a teacher or peer performed the same review instead (explain in the next box)')}</span></label>
+  </section>
+  <section class="sec" id="t2"><h2>T2${BAR()}${tr('關掉 AI，由小組做決定', 'Close the AI and decide as a team')} ${mode('noai')}</h2>
+    <p class="prose">${tr('逐項判斷 AI 的建議要採納、修正還是拒絕。可以回到上方調整行動；維持原本的選擇也可以，但要說明原本的選擇通過了哪些檢查。', 'Go through the AI’s points one by one: adopt, revise or reject. You may go back up and adjust your actions; keeping your original choice is fine too, as long as you explain which checks that choice passed.')}</p>
+    <p class="diff" id="diff" style="margin-top:12px">${esc(diffText(d.baseline.selected, d.selected))}</p>
+    ${field('judgment', 'draft', { req: 1 })}${field('finalRationale', 'draft', { req: 1 })}
+    <div class="toolbar" style="margin-top:18px"><button type="button" class="btn primary" id="commit" data-act="commit">${tr('確認投入並結算本回合', 'Commit and settle this round')}</button><span class="inline-err" id="err-commit" role="alert"></span></div>
+    <p class="hint" style="margin-top:8px">${tr('提交後本回合不能重來：已投入的現金與人力不會退回。', 'Once committed, the round cannot be redone: cash and engineering units already used are not returned.')}</p>
+  </section>`}
+  </div>
+  <aside class="panel" id="panel" aria-label="${tr('資源面板', 'Resource panel')}">
+    <h3>${tr('資源面板', 'Resource panel')}</h3>
+    <div class="meters">
+      <div class="meter"><div class="row"><span>${tr('本回合投入', 'Spending this round')}</span><b id="m-cash"></b></div><div class="bar"><i id="m-cashbar" style="width:0"></i></div></div>
+      <div class="meter"><div class="row"><span>${tr('工程人力', 'Engineering units')}</span><b id="m-eng"></b></div><div class="slots" id="m-slots">${'<i></i>'.repeat(ENG_CAP)}</div></div>
+    </div>
+    <dl><dt>${tr('基本營運淨流入', 'Base operating inflow')}</dt><dd id="m-base"></dd>
+      <dt>${tr('行動收入（依情境）', 'Action revenue (by scenario)')}</dt><dd id="m-rev"></dd>
+      <dt>${tr('外部成本壓力', 'External cost pressure')}</dt><dd>−${PRESSURE[r - 1]}</dd>
+      <dt>${tr('回合末現金（依情境）', 'Round-end cash (by scenario)')}</dt><dd id="m-close"></dd></dl>
+    <div class="status" id="budget" role="status"></div>
+  </aside></div>`;
+}
+function beliefBox() {
+  const d = state.draft, saved = !!d.baseline, sel = saved ? d.baseline.belief : d.belief;
+  return matrix({ pick: 'belief', sel, disabled: saved, selTag: tr('你們的判斷', 'Your reading') }) +
+    `<div class="toolbar" style="margin-top:10px"><button type="button" class="btn${sel === 'unsure' ? ' primary' : ''}" data-act="belief" data-id="unsure" aria-pressed="${sel === 'unsure'}"${saved ? ' disabled' : ''}>${tr('還無法判斷', 'Cannot tell yet')}</button><span class="hint">${tr('訊號不足時可以選這一項。', 'Choose this when the signals are not enough.')}</span></div>`;
+}
+function buildPrompt() {
+  const d = state.draft, sim = current(), r = state.round, sep = tr('、', ', ');
+  const caps = [...CAP_KEYS, 'relation'].map(k => T(capLabels[k]) + ' ' + sim.caps[k]).join(sep);
+  const reqText = a => a.req ? Object.entries(a.req).map(([k, v]) => capText(k, v)).join(sep) : tr('無', 'none');
+  const acts = A.map((a, i) => (i + 1) + '. ' + T(a.name) + tr('｜現金 ', ' | cash ') + a.cost + tr('、人力 ', ', engineering units ') + a.eng + tr('｜前置能力：', ' | prerequisites: ') + reqText(a) + tr('｜', ' | ') + (a.delay ? tr('下一回合成熟', 'matures next round') : tr('當期交付，回合末入帳', 'delivered now, revenue at round end')) + (sim.done.includes(a.id) ? tr('｜已投資過，不能重複', ' | already built, cannot be repeated') : '') + tr('｜', ' | ') + T(a.desc)).join('\n');
+  const reasons = T0_KEYS.map(k => '- ' + T(fields[k]) + '\n  ' + (d.baseline.text[k] || '')).join('\n');
+  const belief = d.baseline.belief ? T(BELIEFS[d.baseline.belief]) : tr('未填', 'not stated');
+  return tr(
+`你是策略查核者。學生已經先完成自己的判斷，請不要替他們選出唯一答案。
+
+【案例】澄川電控，一家客製控制箱公司。所有數值都是課堂模擬的教學假設。
+【目前】第 ${r} 回合（${YEARS[r - 1]} 年）。可用現金 ${sim.cash}；每回合工程人力 ${ENG_CAP} 單位。
+【已成熟能力與客戶關係】${caps}
+【成熟中的投資】${pendingList(sim)}
+【2030 年想提供的客戶價值】${state.brief.vision || ''}
+【2028 年的能力與里程碑】${state.brief.milestone || ''}
+【本回合訊號】${signalText(r, state.world, 0)}
+【四種可能的未來】AI 與數位採購採用快或慢 × 在地投資熱或冷，分別稱為：${WORLD_IDS.map(id => W[id].n[0]).join('、')}。不提供機率。
+【規則】建構能力的行動，成果下一回合才成熟，每項能力只能建構一次；行動必須先有已成熟的前置能力；現金不能預支回合末的收入；已投入的成本不退還；工程人力不能留到下一回合；當回合沒有承接既有客製服務或技師協作時，客戶關係減 1。
+【可選行動】共 ${A.length} 項：
+${acts}
+
+【小組 T0 行動】${nameList(d.baseline.selected)}
+【小組判斷目前最接近的未來】${belief}
+【小組 T0 理由】
+${reasons}
+
+請依序輸出：
+1. 兩項最值得質疑的假設。
+2. 外部配適、資源能力配適、時間配適各一項檢查。
+3. 一條可行的替代路徑，以及它放棄的機會。
+4. 兩個可以監測的訊號與對應的修訂條件。
+
+限制：只能使用上面提供的資訊；請區分事實、推論與建議；資訊不足時寫「需要查證」；不要編造機率、需求量或財務預測；不要計算或宣布這個遊戲的勝負。`,
+`You are a strategy reviewer. The students have already formed their own judgment; do not pick a single right answer for them.
+
+[Case] Chengchuan Controls, a custom control-panel firm. All figures are teaching assumptions for a classroom simulation.
+[Now] Round ${r} (${YEARS[r - 1]}). Cash available: ${sim.cash}. Engineering capacity: ${ENG_CAP} units per round.
+[Matured capabilities and client relationships] ${caps}
+[Investments still maturing] ${pendingList(sim)}
+[Client value sought for 2030] ${state.brief.vision || ''}
+[Capabilities and milestones for 2028] ${state.brief.milestone || ''}
+[Signals this round] ${signalText(r, state.world, 1)}
+[Four possible futures] Fast or slow adoption of AI and digital procurement × strong or weak local investment, named: ${WORLD_IDS.map(id => W[id].n[1]).join(', ')}. No probabilities are given.
+[Rules] Capabilities built this round mature in the next round, and each capability can be built only once; an action needs its prerequisites to have matured; round-end revenue cannot be spent in advance; committed costs are not refunded; engineering units cannot be carried over; client relationships fall by 1 in any round with neither existing custom service nor technician collaboration.
+[Available actions] ${A.length} in total:
+${acts}
+
+[Team T0 actions] ${nameList(d.baseline.selected)}
+[Future the team thinks it is closest to] ${belief}
+[Team T0 reasoning]
+${reasons}
+
+Please output, in this order:
+1. The two assumptions most worth challenging.
+2. One check each for external fit, resource and capability fit, and timing fit.
+3. One feasible alternative path and the opportunity it gives up.
+4. Two signals that can be monitored, each with a revision condition.
+
+Constraints: use only the information above; separate facts, inferences and recommendations; write "needs checking" where information is missing; do not invent probabilities, demand figures or financial forecasts; do not calculate or declare a winner of this game.`);
+}
+
+/* ============================================================
+   路徑紀錄與回合結算
+   ============================================================ */
+function story(i, x, rec) {
+  const out = [], r = i + 1, a = (zh, en, cls = '') => out.push({ cls, t: tr(zh, en) });
+  const many = x.built.length > 1, rev = rec.offline ? tr('替代', 'substitute') : 'AI';
+  if (r === 1) a('回合末入帳後，市況露出第一條線索：基本營運淨流入為 ' + x.base + '，在地投資偏' + (x.base === BASE.hot ? '熱' : '冷') + '。', 'The round-end settlement gives the first clue: the base operating inflow is ' + x.base + ', pointing to ' + (x.base === BASE.hot ? 'strong' : 'weak') + ' local investment.');
+  if (!rec.selected.length) a('這一回合沒有新的投入：現金留住了，但沒有任何新能力開始成熟。', 'No new spending this round: cash was preserved, but no new capability started to mature.');
+  if (x.built.length) a(quoteList(x.built) + '已經投入，' + (r < 3 ? '要到 ' + YEARS[r] + ' 年才成熟' : '要到模擬結束之後才成熟') + '，這一回合還沒有收入。', quoteList(x.built) + (many ? ' are' : ' is') + ' now under way and will mature ' + (r < 3 ? 'in ' + YEARS[r] : 'only after the simulation ends') + '; ' + (many ? 'they bring' : 'it brings') + ' no revenue this round.', 'plus');
+  if (x.sold.length) a('行動收入 ' + x.revenue + ' 於回合末入帳（' + x.sold.map(s => T(ACT[s.id].short) + ' ' + s.pay).join('、') + '）。', 'Action revenue of ' + x.revenue + ' arrived at round end (' + x.sold.map(s => T(ACT[s.id].short) + ' ' + s.pay).join(', ') + ').', 'plus');
+  if (x.relDelta < 0) a('這一回合沒有承接既有客製服務，也沒有做技師協作，客戶關係由 ' + x.before.caps.relation + ' 降為 ' + x.after.caps.relation + '。', 'This round had neither existing custom service nor technician collaboration; client relationships fell from ' + x.before.caps.relation + ' to ' + x.after.caps.relation + '.', 'minus');
+  else if (x.relDelta > 0) a('這一回合有維繫客戶關係的行動，客戶關係由 ' + x.before.caps.relation + ' 升為 ' + x.after.caps.relation + '。', 'This round included actions that maintain client relationships; they rose from ' + x.before.caps.relation + ' to ' + x.after.caps.relation + '.', 'plus');
+  if (x.eng < ENG_CAP) a('有 ' + (ENG_CAP - x.eng) + ' 單位工程人力沒有安排；人力無法留到下一回合。', pl(ENG_CAP - x.eng, 'engineering unit') + ' went unassigned; engineering units cannot be carried over.');
+  const same = rec.baseline.selected.length === rec.selected.length && rec.baseline.selected.every(id => rec.selected.includes(id));
+  a(same ? '經過' + (rec.offline ? '替代' : ' AI ') + '查核後，你們維持原本的行動組合。' : '經過' + (rec.offline ? '替代' : ' AI ') + '查核後，你們調整了行動。' + diffText(rec.baseline.selected, rec.selected),
+    same ? 'After the ' + rev + ' review you kept your original set of actions.' : 'After the ' + rev + ' review you adjusted your actions. ' + diffText(rec.baseline.selected, rec.selected));
+  return out;
+}
+function pathLine() {
+  const dropTip = tr('T0 選了、T2 取消', 'Chosen at T0, dropped at T2');
+  return `<div class="pathline">${[0, 1, 2].map(i => {
+    const rec = state.records[i];
+    if (!rec) return `<div class="pcol todo"><div class="py">${YEARS[i]}<small>${tr('第 ' + (i + 1) + ' 回合', 'Round ' + (i + 1))}</small></div><p class="small" style="margin-top:8px">${i === state.records.length ? tr('尚未決定', 'Not yet decided') : tr('還沒走到', 'Not reached yet')}</p></div>`;
+    const drop = rec.baseline.selected.filter(id => !rec.selected.includes(id));
+    return `<div class="pcol"><div class="py">${YEARS[i]}<small>${tr('第 ' + (i + 1) + ' 回合', 'Round ' + (i + 1))}</small></div><div class="pchips">${rec.selected.map(id => `<span class="pchip ${ACT[id].kind === 'build' ? 'build' : ''}">${esc(T(ACT[id].short))}</span>`).join('') || `<span class="pchip none">${tr('保留資源', 'Resources preserved')}</span>`}${drop.map(id => `<span class="pchip drop" title="${dropTip}">${esc(T(ACT[id].short))}</span>`).join('')}</div></div>`;
+  }).join('')}</div>
+  <div class="legend"><span><i style="background:#fff;border:1.5px solid var(--navy)"></i>${tr('建構能力', 'Build capability')}</span><span><i style="background:var(--navy)"></i>${tr('當期交付', 'Deliver now')}</span><span><i style="background:#fff;border:1.5px solid var(--line)"></i>${dropTip}</span></div>`;
+}
+function settleBlock(i, ledger) {
+  const rec = state.records[i], x = ledger[i], r = i + 1, hot = ui.reveal === r;
+  return `<section class="sec${hot ? ' reveal' : ''}" id="settle-${r}"><h2>${tr('第 ' + r + ' 回合結算｜' + YEARS[i] + ' 年', 'Round ' + r + ' settlement | ' + YEARS[i])}</h2>
+    <div class="settle">
+      <div class="fig"><h3>${tr('現金怎麼變化', 'How cash moved')}</h3>${waterfall(x)}
+        <p class="cap">${tr('回合初 ', 'Opening ') + x.before.cash + tr(' − 投入 ', ' − spending ') + x.cost + tr(' + 基本營運 ', ' + base inflow ') + x.base + tr(' + 行動收入 ', ' + action revenue ') + x.revenue + tr(' − 成本壓力 ', ' − cost pressure ') + x.shock + ' = <strong>' + x.after.cash + '</strong>' + tr('；工程人力使用 ', '; engineering units used ') + x.eng + ' / ' + ENG_CAP}</p></div>
+      <div><ul class="story">${story(i, x, rec).map((s, k) => `<li class="${s.cls}" style="animation-delay:${(1.5 + k * .25).toFixed(2)}s">${esc(s.t)}</li>`).join('')}</ul></div>
+    </div>
+    <details><summary>${tr('完整紀錄：T0 初判、AI 回答與 T2 理由', 'Full record: T0 initial judgment, AI reply and T2 reasoning')}</summary>
+      <p><strong>${tr('T0 行動：', 'T0 actions: ')}</strong>${esc(nameList(rec.baseline.selected))}<br><strong>${tr('T2 行動：', 'T2 actions: ')}</strong>${esc(nameList(rec.selected))}<br><strong>${tr('當時判斷最接近的未來：', 'Future judged closest at the time: ')}</strong>${rec.baseline.belief ? esc(T(BELIEFS[rec.baseline.belief])) : tr('未填', 'not stated')}</p>
+      ${T0_KEYS.filter(k => rec.baseline.text[k]).map(k => `<p><strong>T0 ${T(fields[k])}</strong><br>${esc(rec.baseline.text[k])}</p>`).join('')}
+      ${['ai', 'judgment', 'finalRationale'].filter(k => rec.text[k]).map(k => `<p><strong>${T(fields[k])}</strong><br>${esc(rec.text[k])}</p>`).join('')}
+    </details></section>`;
+}
+function historyView() {
+  const n = state.records.length;
+  if (!n) return `<h1 tabindex="-1">${tr('路徑紀錄', 'Path so far')}</h1><p class="prose">${tr('還沒有完成任何一回合。每次提交後，這裡會顯示現金結算、能力變化，以及三回合連成的路徑。', 'No round has been committed yet. After each commitment this page shows the cash settlement, the capability changes and the path formed across the three rounds.')}</p><div style="margin-top:18px">${pathLine()}</div>`;
+  const { sim, ledger } = simulate(picks(), state.world);
+  const next = n < 3 ? `<button type="button" class="btn primary" data-act="nextRound">${tr('揭露 ' + YEARS[n] + ' 年的新訊號', 'Reveal the ' + YEARS[n] + ' signals')}</button>` : `<button type="button" class="btn primary" data-view="final">${tr('查看成果與反思', 'Go to the debrief')}</button>`;
+  return `<h1 tabindex="-1">${tr('路徑紀錄', 'Path so far')}</h1>
+    <p class="prose">${tr('每回合的選擇都會保留在這裡，並決定下一回合的起始狀態。', 'Each round’s choices are kept here and determine the starting state of the next round.')}</p>
+    <div style="margin-top:16px">${pathLine()}</div>
+    <div class="toolbar" style="margin-top:18px">${next.replace('<button', n < 3 ? '<button id="nextRound"' : '<button id="toFinal"')}</div>
+    ${settleBlock(n - 1, ledger)}
+    <section class="sec"><h2>${tr('目前的公司狀態', 'The firm as it stands')}</h2>
+      <div class="fig"><h3>${tr('各回合末的現金', 'Cash at the end of each round')}</h3>${cashLine([{ name: tr('現金', 'Cash'), color: '#002B5C', values: [START_CASH, ...ledger.map(l => l.after.cash)] }], { draw: !!ui.reveal })}</div>
+      <div class="fig" style="margin-top:14px"><h3>${tr('能力路徑圖', 'Capability map')}</h3><p class="cap" style="margin:2px 0 8px">${n < 3 ? tr('成熟中的能力要到下一回合才亮燈。', 'Maturing capabilities light up only in the next round.') : tr('2030 年才投入的能力，要到模擬結束後才成熟。', 'Capabilities started in 2030 mature only after the simulation ends.')}</p>${capMap(sim)}</div>
+    </section>
+    ${[...Array(n - 1).keys()].reverse().map(i => settleBlock(i, ledger)).join('')}
+    <div class="toolbar" style="margin-top:26px">${next}</div>`;
+}
+
+/* ============================================================
+   成果與反思
+   ============================================================ */
+const CHAINS = {
+  platformSale: ['2026 年完成資料整理與培訓，2028 年做平台試辦，2030 年才接得到第一張單', 'structuring data and training staff in 2026, running the platform pilot in 2028, and only then taking the first order in 2030'],
+  moduleSale: ['2026 年完成資料整理與培訓，2028 年建置模組化產品系列，2030 年才能交付', 'structuring data and training staff in 2026, building the modular product family in 2028, and only then delivering in 2030'],
+  maintSale: ['2026 年先完成培訓，2028 年建立維修交付能力，2030 年才能承接服務包', 'finishing training in 2026, building maintenance delivery capability in 2028, and only then selling packages in 2030'],
+  coop: ['先完成培訓與技師訪談，下一回合才能開始協作', 'finishing training and technician interviews first, with collaboration starting the round after']
+};
+function finalView() {
+  if (state.records.length < 3) return `<h1 tabindex="-1">${tr('成果與反思', 'Debrief')}</h1><p class="prose">${tr('完成三回合之後，這裡會顯示成果、四種情境的壓力測試、機會成本對照與反思題。目前已完成 ', 'After all three rounds, this page shows the outcomes, the four-scenario stress test, the opportunity-cost comparison and the reflection prompts. Rounds completed so far: ') + state.records.length + tr(' 回合。', '.')}</p><div class="toolbar" style="margin-top:16px"><button type="button" class="btn primary" data-view="${state.brief.started ? 'round' : 'brief'}">${state.brief.started ? tr('回到本回合', 'Back to the current round') : tr('前往任務簡報', 'Go to the briefing')}</button></div>`;
+  const P = picks(), { sim, ledger } = simulate(P, state.world), wn = T(W[state.world].n);
+  const on = capsOn(sim), open = openActions(sim).filter(a => a.pay), locked = A.filter(a => a.pay && eligible(a, sim));
+  const cashSeq = [START_CASH, ...ledger.map(l => l.after.cash)], relSeq = [3, ...ledger.map(l => l.after.caps.relation)];
+  const capSeq = [...ledger.map(l => capsOn(l.before).length), on.length];
+  const worlds = WORLD_IDS.map(id => ({ id, w: W[id], res: trySimulate(P, id) }));
+  const feas = worlds.filter(x => !x.res.failAt), cashes = feas.map(x => x.res.sim.cash);
+  const bench = Object.fromEntries(Object.entries(BENCH).map(([k, b]) => [k, simulate(b.picks, state.world)]));
+  const mx = Math.max(sim.cash, bench.idle.sim.cash, bench.service.sim.cash);
+  const gap = bench.service.sim.cash - sim.cash;
+  const ext = worlds.map(x => ({ ...x, mine: x.res.failAt ? null : bestExtension(x.res.sim, x.id), svc: bestExtension(simulate(BENCH.service.picks, x.id).sim, x.id) }));
+  const extMax = Math.max(1, ...ext.flatMap(e => [e.mine ? e.mine.net : 0, e.svc.net]));
+  const changed = state.records.filter(r => r.baseline.selected.length !== r.selected.length || r.baseline.selected.some(id => !r.selected.includes(id))).length;
+  const beliefs = state.records.map(r => r.baseline.belief), hits = beliefs.filter(b => b === state.world).length, shifts = beliefs.filter((b, i) => i && b !== beliefs[i - 1]).length;
+  const built = P.flat().filter(id => ACT[id].kind === 'build'), spentBuild = built.reduce((s, id) => s + ACT[id].cost, 0), idleEng = ledger.reduce((s, l) => s + ENG_CAP - l.eng, 0);
+  const worst = worlds.find(x => x.res.failAt) || feas.slice().sort((a, b) => a.res.sim.cash - b.res.sim.cash)[0];
+  if (!ui.tree.world) ui.tree.world = state.world;
+  const sep = tr('、', ', ');
+  const pendNames = sim.pending.map(p => tr('「' + ACT[p.id].short[0] + '」', '“' + ACT[p.id].short[1] + '”')).join(sep);
+  const bought = on.length
+    ? tr('這筆差額換來的是：' + capList(on), 'What that difference bought: ' + capList(on)) + (sim.pending.length ? tr('；另有尚未成熟的' + pendNames, '; ' + pendNames + (sim.pending.length > 1 ? ' are' : ' is') + ' still maturing') : '') + tr('。', '.')
+    : sim.pending.length ? tr('這筆差額換來的能力（' + pendNames + '）尚未成熟。', 'The capabilities that difference bought (' + pendNames + ') have not matured yet.') : tr('這筆差額目前沒有換到任何能力。', 'That difference has not bought any capability so far.');
+  const have = on.length ? tr('同時具備：' + capList(on) + '。', ' You also hold: ' + capList(on) + '.') : '';
+  const costText = gap > 0 ? tr('與「三回合只接既有客製服務」相比，你們 2030 年底的現金少 ' + gap + '。', 'Compared with “existing custom service only,” your cash at the end of 2030 is lower by ' + gap + '. ') + bought
+    : gap < 0 ? tr('與「三回合只接既有客製服務」相比，你們 2030 年底的現金多 ' + (-gap) + '。', 'Compared with “existing custom service only,” your cash at the end of 2030 is higher by ' + (-gap) + '.') + have
+    : tr('你們 2030 年底的現金與「三回合只接既有客製服務」相同。', 'Your cash at the end of 2030 equals that of “existing custom service only.”') + have;
+  const hitText = hits === 0 ? tr('三回合的判斷都與實際情境不同', 'In none of the 3 rounds did your reading match the actual scenario') : tr('三回合中有 ' + hits + ' 回合的判斷與實際情境相同', 'In ' + hits + ' of the 3 rounds your reading matched the actual scenario');
+  const shiftText = shifts === 0 ? tr('判斷沒有改變', 'your reading did not change') : tr('判斷改變了 ' + shifts + ' 次', 'your reading changed ' + times(shifts));
+  return `
+  <p class="kicker">${tr('2030 年底｜三回合結束', 'End of 2030 | Three rounds complete')}</p>
+  <h1 tabindex="-1">${tr('成果、能力與還能走的路', 'Outcomes, capabilities and the paths still open')}</h1>
+  <p class="lead prose">${tr('實際的情境是「' + wn + '」。下面的數字沒有合成單一總分：現金、能力、客戶關係與彈性要分開看。彈性要同時看現金與已成熟能力所容許的選項；第四個指標只列出其中可以接單的服務。', 'The actual scenario was “' + wn + '.” The figures below are not combined into one total score: cash, capabilities, client relationships and flexibility are read separately. Flexibility depends on the options that both cash and matured capabilities allow; the fourth indicator lists only the services open for orders.')}</p>
+  <nav class="toc" aria-label="${tr('本頁內容', 'On this page')}"><a href="#s-path">${tr('路徑', 'Path')}</a><a href="#s-cost">${tr('機會成本', 'Opportunity cost')}</a><a href="#s-stress">${tr('壓力測試', 'Stress test')}</a><a href="#s-ext">${tr('期限之外', 'Beyond the horizon')}</a><a href="#s-belief">${tr('情境判斷', 'Scenario readings')}</a><a href="#s-lab">${tr('路徑試算', 'Path lab')}</a><a href="#s-tree">${tr('逆向歸納', 'Backward induction')}</a><a href="#s-essence">${tr('策略規劃的本質', 'What strategic planning is')}</a><a href="#s-reflect">${tr('個人反思', 'Reflection')}</a></nav>
+
+  <div class="tiles" style="margin-top:22px">
+    <div class="tile"><div class="lab">${tr('2030 年底現金', 'Cash at the end of 2030')}</div><div class="val">${sim.cash}</div><div class="sub">${tr('三回合共投入 ', 'Spent over three rounds: ') + sim.spent}</div>${spark(cashSeq)}</div>
+    <div class="tile"><div class="lab">${tr('已成熟能力', 'Matured capabilities')}</div><div class="val">${on.length}<span class="sub"> / 6</span></div><div class="sub">${esc(capList(on))}</div>${spark(capSeq)}</div>
+    <div class="tile"><div class="lab">${tr('客戶關係', 'Client relationships')}</div><div class="val">${sim.caps.relation}</div><div class="sub">${tr('起始為 3', 'Started at 3')}</div>${spark(relSeq)}</div>
+    <div class="tile"><div class="lab">${tr('彈性：2030 年底可接單的服務', 'Flexibility: services open at the end of 2030')}</div><div class="val">${open.length}<span class="sub"> / 5</span></div><div class="sub">${esc(open.map(a => T(a.short)).join(sep))}</div></div>
+  </div>
+
+  <section class="sec" id="s-path"><h2>${tr('你們走出的路徑', 'The path you took')}</h2>
+    ${pathLine()}
+    <div class="fig" style="margin-top:16px"><h3>${tr('2030 年底的能力路徑圖', 'Capability map at the end of 2030')}</h3><p class="cap" style="margin:2px 0 8px">${tr('2030 年投入但尚未成熟：', 'Started in 2030 and not yet matured: ')}${esc(sim.pending.map(p => T(ACT[p.id].name)).join(tr('、', '; ')) || tr('無', 'none'))}</p>${capMap(sim)}</div>
+  </section>
+
+  <section class="sec" id="s-cost"><h2>${tr('機會成本：和兩條基準路徑比一比', 'Opportunity cost: two benchmark paths')}</h2>
+    <p class="prose">${tr('機會成本指的是放棄的最佳替代方案的價值。這裡用兩條簡單的路徑做近似，而且只比現金：同樣在「' + wn + '」情境下，把你們的路徑與兩種做法放在一起。基準只用來看清楚取捨，三條路徑都沒有被設定為正解。', 'Opportunity cost is the value of the best alternative given up. Here it is approximated with two simple paths and in cash terms only: under the same “' + wn + '” scenario, your path is set beside two alternatives. The benchmarks are there to make the trade-off visible; none of the three paths is presented as the right answer.')}</p>
+    <div class="fig" style="margin-top:14px"><h3>${tr('2030 年底現金', 'Cash at the end of 2030')}</h3><div class="hbars">
+      <div class="hbar me"><span class="nm">${tr('你們的路徑', 'Your path')}</span><span class="trk"${tip(tr('你們的路徑', 'Your path') + COLON() + sim.cash)}><i style="width:${sim.cash / mx * 100}%"></i></span><b>${sim.cash}</b></div>
+      ${['service', 'idle'].map(k => `<div class="hbar"><span class="nm">${T(BENCH[k].n)}</span><span class="trk"${tip(T(BENCH[k].n) + COLON() + bench[k].sim.cash)}><i class="alt" style="width:${bench[k].sim.cash / mx * 100}%"></i></span><b>${bench[k].sim.cash}</b></div>`).join('')}
+    </div>
+    <p class="cap">${esc(costText)}${tr('「三回合只接既有客製服務」在 2030 年底沒有任何成熟能力（工程技能仍是 1）。', ' “Existing custom service only” ends 2030 with no matured capability (engineering skills still at level 1).')}</p></div>
+  </section>
+
+  <section class="sec" id="s-stress"><h2>${tr('同一條路徑，換到四種情境', 'The same path under four scenarios')}</h2>
+    <p class="prose">${tr('把你們三回合的行動固定不動，只替換情境。這張圖回答的是「這條路徑有多依賴某一種未來」；圖中沒有假設你們會中途調整，也不代表各情境下的最佳做法。投資冷熱相同的兩個情境，在行動收入出現差異之前，線條會重疊。', 'Your three rounds of actions are held fixed and only the scenario is swapped. The chart answers how much the path depends on one particular future; it does not assume you would adapt along the way, nor does it show the best choice in each scenario. Two scenarios with the same investment climate overlap on the chart until their action revenue differs.')}</p>
+    <div class="fig" style="margin-top:14px"><h3>${tr('各情境下的回合末現金', 'Round-end cash in each scenario')}</h3>
+      ${cashLine(worlds.map((x, k) => ({ name: T(x.w.n) + (x.id === state.world ? ' ★' : ''), color: x.w.color, shape: k, values: [START_CASH, ...x.res.ledger.map(l => l.after.cash)], fail: x.res.failAt })), { draw: true, label: tr('同一條路徑在四種情境下的回合末現金', 'Round-end cash of the same path under four scenarios') })}
+      <div class="legend">${worlds.map((x, k) => `<span><svg viewBox="0 0 16 16" aria-hidden="true">${marker(k, 8, 8, x.w.color)}</svg>${esc(T(x.w.n))}${x.id === state.world ? tr(' ★ 實際情境', ' ★ actual scenario') : ''}</span>`).join('')}<span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3,3 L13,13 M13,3 L3,13" stroke="#B3261E" stroke-width="2.5" stroke-linecap="round"/></svg>${tr('下一回合不可行，這條路徑走不下去', 'The next round is infeasible; the path cannot continue')}</span></div>
+      <details><summary>${tr('以表格檢視', 'View as a table')}</summary><div class="tablewrap"><table><tr><th>${tr('情境', 'Scenario')}</th><th class="num">2026</th><th class="num">2028</th><th class="num">2030</th><th>${tr('結果', 'Result')}</th></tr>
+      ${worlds.map(x => `<tr><td>${esc(T(x.w.n))}${x.id === state.world ? ' ★' : ''}</td>${[0, 1, 2].map(i => `<td class="num">${x.res.ledger[i] ? x.res.ledger[i].after.cash : '—'}</td>`).join('')}<td>${x.res.failAt ? tr('第 ' + x.res.failAt + ' 回合不可行：', 'Infeasible in round ' + x.res.failAt + ': ') + esc(x.res.error) : tr('可行；2030 年底客戶關係 ', 'Feasible; client relationships at the end of 2030: ') + x.res.sim.caps.relation}</td></tr>`).join('')}</table></div></details>
+    </div>
+  </section>
+
+  <section class="sec" id="s-ext"><h2>${tr('期限之外：如果還有 2032 年', 'Beyond the horizon: what if there were a 2032?')}</h2>
+    <p class="prose">${tr('模擬在 2030 年結束，能力的作用卻不會跟著結束。這個延伸試算沿用同一套規則多看一回合：2030 年投入的能力在 2032 年成熟，再以屆時的能力、現金與 6 單位工程人力，挑出淨收入（收入減成本）最高的交付組合。各路徑的基本營運與成本壓力相同，所以不列入。', 'The simulation stops in 2030, but capabilities keep working after that. This extension applies the same rules for one more round: capabilities started in 2030 mature in 2032, and with the capabilities, cash and 6 engineering units available then, it picks the delivery mix with the highest net revenue (revenue minus cost). Base inflow and cost pressure are the same for every path, so they are left out.')}</p>
+    <div class="fig" style="margin-top:14px"><h3>${tr('2032 年現有能力可支撐的最高行動淨收入', 'Highest net action revenue the existing capabilities could support in 2032')}</h3>
+      <div class="hbars">${ext.map(e => `<div class="hbar me"><span class="nm">${esc(T(e.w.n))}${e.id === state.world ? ' ★' : ''}${BAR()}${tr('你們', 'yours')}</span>${e.mine ? `<span class="trk"${tip(e.mine.ids.map(id => T(ACT[id].short)).join(sep) || tr('沒有可獲利的交付', 'No profitable delivery'))}><i class="ext" style="width:${e.mine.net / extMax * 100}%"></i></span><b>+${e.mine.net}</b>` : `<span class="small muted">${tr('原路徑在此情境無法走完三回合', 'The path cannot be completed in this scenario')}</span><b>—</b>`}</div>
+        <div class="hbar"><span class="nm">${tr('　只接既有客製服務', '  existing custom service only')}</span><span class="trk"${tip(T(ACT.service.short) + ' +' + e.svc.net)}><i class="alt" style="width:${e.svc.net / extMax * 100}%"></i></span><b>+${e.svc.net}</b></div>`).join('')}</div>
+      <div class="legend"><span><i style="background:var(--gold)"></i>${tr('你們的路徑', 'Your path')}</span><span><i style="background:var(--navy-300)"></i>${tr('基準：三回合只接既有客製服務', 'Benchmark: existing custom service only')}</span></div>
+      <p class="cap">${tr('這張示意圖用來觀察能力在模擬期限之後的作用；圖中沒有折現，也沒有估計更遠的年度，不能當成公司價值。請把這張圖和上面的 2030 年底現金一起看：短期現金與長期選項往往無法同時最大化。', 'This illustration shows how capabilities keep working beyond the simulation horizon; it applies no discounting, estimates no later years and must not be read as a company valuation. Read it together with cash at the end of 2030 above: short-term cash and long-term options often cannot both be maximized.')}</p></div>
+  </section>
+
+  <section class="sec" id="s-belief"><h2>${tr('情境判斷回顧', 'Looking back at your scenario readings')}</h2>
+    <p class="prose">${tr('請回頭看你們當時根據哪些訊號判斷，之後有沒有依證據修正。猜中的次數不列入評量。', 'Look back at which signals each reading rested on and whether you revised it on evidence. The number of matches is not assessed.')}</p>
+    <div class="beliefs" style="margin-top:14px">${state.records.map((r, i) => `<div class="belief card"><h4>${tr(YEARS[i] + ' 年的判斷', YEARS[i] + ' reading')}${r.baseline.belief === 'unsure' ? tr('：還無法判斷', ': cannot tell yet') : !r.baseline.belief ? tr('：未填', ': not stated') : ''}</h4>${miniMatrix(r.baseline.belief, state.world)}</div>`).join('')}</div>
+    <p class="cap" style="margin-top:10px">${hitText + tr('，', '; ') + shiftText + tr('。', '.')}</p>
+  </section>
+
+  <section class="sec" id="s-lab"><h2>${tr('路徑試算：換一種未來，你們會怎麼改？', 'Path lab: in a different future, what would you change?')}</h2>
+    <p class="prose">${tr('選一個情境，重新安排三回合的行動，看看現金、可行性與 2030 年底的能力怎麼變。跨組討論時，請提出一條在另一種情境下的調整路徑，並說明是哪個訊號讓你們改變。', 'Pick a scenario, rearrange the three rounds of actions and watch how cash, feasibility and capabilities at the end of 2030 respond. For the cross-team discussion, propose an adjusted path for a different scenario and say which signal would make you change.')}</p>
+    <div id="lab" style="margin-top:14px">${labHTML()}</div>
+  </section>
+
+  <section class="sec" id="s-tree"><h2>${tr('小練習：有限樹上的逆向歸納', 'Short exercise: backward induction on a finite tree')}</h2>
+    <p class="prose">${tr('這是另外設定的兩期決策樹，條件比主模擬單純得多：情境已知、資料與技能已經備妥、現金足夠。2028 年只能在平台試辦與維修建置之間擇一，2030 年再決定用新能力接單或只接既有客製服務。唯一的準則是兩期的淨現金增量，不含基本營運、成本壓力與客戶關係。', 'This is a separately specified two-period decision tree, far simpler than the main simulation: the scenario is known, data and skills are in place, and cash is sufficient. In 2028 you choose either the platform pilot or the maintenance build; in 2030 you decide whether to sell with the new capability or only serve existing custom orders. The single criterion is two-period net incremental cash, excluding base inflow, cost pressure and client relationships.')}</p>
+    <div id="tree" style="margin-top:14px">${treeHTML()}</div>
+  </section>
+
+  <section class="sec" id="s-essence"><h2>${tr('策略規劃的本質：從你們的紀錄來看', 'What strategic planning is, seen through your own record')}</h2>
+    <div class="insights">
+      <div class="insight"><h3>${tr('一、取捨', '1. Trade-offs')}</h3><p>${tr('資源有限，選了一項就少了另一項。規劃要說得出放棄了什麼。', 'Resources are limited, so choosing one thing means less of another. A plan should be able to say what was given up.')}</p>
+        <p class="fact">${tr('你們三回合共投入現金 ' + sim.spent + '，其中 ' + spentBuild + ' 用於建構能力；' + (idleEng ? '有 ' + idleEng + ' 單位工程人力沒有安排。' : '工程人力全部用完。'), 'Over three rounds you spent ' + sim.spent + ' in cash, of which ' + spentBuild + ' went to building capability; ' + (idleEng ? pl(idleEng, 'engineering unit') + ' went unassigned.' : 'all engineering units were used.'))}</p>
+        <p class="ask">${tr('如果重來，哪一筆投入你會留給別的用途？理由是什麼？', 'If you could replay it, which spending would you redirect, and why?')}</p></div>
+      <div class="insight"><h3>${tr('二、順序與路徑依賴', '2. Sequence and path dependence')}</h3><p>${tr('能力需要時間成熟。今天能走的路，是前幾回合的選擇留下來的。這裡的路徑依賴，指早期選擇限制了後來可選的範圍；真實情況還會有自我強化與鎖定效果。', 'Capabilities need time to mature. The paths open today are what earlier rounds left behind. Path dependence here means that early choices limit what can be chosen later; in reality it also involves self-reinforcement and lock-in.')}</p>
+        <p class="fact">${locked.length ? tr('2030 年底還不能接單的服務：' + locked.map(a => a.short[0]).join('、') + '。以「' + locked[0].short[0] + '」為例：' + CHAINS[locked[0].id][0] + '。', 'Services still closed at the end of 2030: ' + locked.map(a => a.short[1]).join(', ') + '. Take “' + locked[0].short[1] + '”: it would have required ' + CHAINS[locked[0].id][1] + '.') : tr('2030 年底五種服務都可以接單，前置能力已全部成熟。', 'All five services are open at the end of 2030; every prerequisite has matured.')}</p>
+        <p class="ask">${tr('哪一個回合的哪一項選擇，決定了你們 2030 年能做與不能做的事？', 'Which choice, in which round, determined what you could and could not do in 2030?')}</p></div>
+      <div class="insight"><h3>${tr('三、配適', '3. Fit')}</h3><p>${tr('好的路徑要同時對得上外部環境、手上的資源能力，以及時間。', 'A sound path has to fit the external environment, the resources and capabilities in hand, and the timing, all at once.')}</p>
+        <p class="fact">${feas.length === 4 ? tr('同一條路徑在四種情境下都走得完，2030 年底現金介於 ' + Math.min(...cashes) + ' 與 ' + Math.max(...cashes) + ' 之間；在「' + worst.w.n[0] + '」最吃力。', 'The same path can be completed in all four scenarios, with cash at the end of 2030 between ' + Math.min(...cashes) + ' and ' + Math.max(...cashes) + '; it is under the most strain in “' + worst.w.n[1] + '.”') : tr('同一條路徑有 ' + (4 - feas.length) + ' 種情境走不完，例如「' + worst.w.n[0] + '」在第 ' + worst.res.failAt + ' 回合現金不足。', 'The same path cannot be completed in ' + pl(4 - feas.length, 'scenario') + '; in “' + worst.w.n[1] + ',” for example, cash runs short in round ' + worst.res.failAt + '.')}</p>
+        <p class="ask">${tr('在最吃力的情境裡，是外部、資源能力還是時間配適先出問題？', 'In the scenario under the most strain, which fit fails first: external, resource and capability, or timing?')}</p></div>
+      <div class="insight"><h3>${tr('四、依證據修訂', '4. Revising on evidence')}</h3><p>${tr('計畫會變，所以要問的是：哪個事先設定的訊號出現了而需要修訂，或是沒有出現而應該維持。已經投入的成本收不回來，不該影響接下來的比較。', 'Plans change. Ask which signal you set in advance has appeared and calls for a revision, or has not appeared and supports keeping the plan. Costs already sunk cannot be recovered and should not enter the comparison of what to do next.')}</p>
+        <p class="fact">${tr('三回合中，有 ' + changed + ' 回合在查核後調整了行動；' + (shifts ? '對未來的判斷改變了 ' + shifts + ' 次。' : '對未來的判斷沒有改變。'), 'In ' + changed + ' of the 3 rounds you adjusted your actions after the review; ' + (shifts ? 'your reading of the future changed ' + times(shifts) + '.' : 'your reading of the future did not change.'))}</p>
+        <p class="ask">${tr('每一次調整或維持，各對應哪一個事先寫下的監測訊號？', 'Which monitoring signal, written down in advance, does each change (or each decision not to change) correspond to?')}</p></div>
+    </div>
+    <p class="prose" style="margin-top:16px">${tr('把四點合起來看：策略規劃是在不確定的環境中，朝著想為客戶創造的價值，為有限的資源安排一條有先後順序、對得上外部環境與自身能力的路徑，並且事先說好看到什麼證據就修訂。這份計畫最後不一定照原樣實現；規劃的用處在於讓團隊知道自己依據哪些假設行動、放棄了什麼，以及何時該改。', 'Taken together: strategic planning, working toward the value you want to create for clients in an uncertain environment, arranges a sequenced path for limited resources that fits both the external environment and your own capabilities, and agrees in advance on the evidence that would trigger revision. The plan may not unfold as written; planning is useful because it makes clear which assumptions the team is acting on, what it has given up, and when to change course.')}</p>
+  </section>
+
+  <section class="sec" id="s-reflect"><h2>${tr('個人反思', 'Individual reflection')} ${mode('noai')}</h2>
+    <p class="prose">${tr('這兩題每個人各自完成。共用裝置時，請各自寫在紙上或自己的裝置。', 'Each person completes these two prompts individually. If the team shares a device, write on paper or on your own device.')}</p>
+    ${field('exit', 'final', { hint: tr('也請寫下：AI 改變了你的哪個判斷？下一次你會觀察什麼？', 'Also note: which of your judgments did the AI change, and what will you watch for next time?') })}
+    ${field('cmp', 'final', { hint: tr('請依下列結構寫：希望帶來的價值／外部的需要／現有的能力／缺口／第一個小範圍驗證／什麼證據會讓你修訂。', 'Use this structure: the value you hope to create / the external need / current capabilities / the gap / a first small-scale test / the evidence that would make you revise.') })}
+    <p class="hint" style="margin-top:10px">${tr('寫完後請用頁面下方的按鈕匯出 JSON 備份與個人筆記。', 'When you finish, use the buttons at the bottom of the page to export the JSON backup and your notes.')}</p>
+  </section>`;
+}
+
+/* 路徑試算 */
+function labLoad(kind) {
+  const demo = [['data', 'talent'], ['pilot', 'listen'], ['platformSale', 'coop', 'service']];
+  const src = kind === 'demo' ? demo : kind === 'empty' ? [[], [], []] : state.records.length === 3 ? picks() : [[], [], []];
+  ui.lab = { world: (ui.lab && ui.lab.world) || state.world, picks: src.map(p => [...p]) };
+}
+function labNormalize() {
+  const L = ui.lab, sim = startSim();
+  for (let i = 0; i < 3; i++) {
+    mature(sim, i + 1);
+    L.picks[i] = L.picks[i].filter(id => !eligible(ACT[id], sim));
+    if (check(L.picks[i], sim)) break;
+    execute(sim, L.picks[i], i + 1, L.world);
+  }
+}
+function labHTML() {
+  if (!ui.lab) labLoad(state.records.length === 3 ? 'mine' : 'demo');
+  const L = ui.lab, sim = startSim(), cols = [], sep = tr('、', ', '); let dead = false;
+  for (let i = 0; i < 3; i++) {
+    mature(sim, i + 1);
+    if (dead) { cols.push({ dead: true }); continue; }
+    const start = clone(sim), err = check(L.picks[i], sim), t = totals(L.picks[i]);
+    let x = null; if (err) dead = true; else x = execute(sim, L.picks[i], i + 1, L.world);
+    cols.push({ start, err, t, x });
+  }
+  const res = trySimulate(L.picks, L.world), mine = state.records.length === 3 ? trySimulate(picks(), L.world) : null;
+  const series = [];
+  if (mine) series.push({ name: tr('你們的原路徑', 'Your original path'), color: '#A9B7CC', shape: 1, wide: true, values: [START_CASH, ...mine.ledger.map(l => l.after.cash)], fail: mine.failAt });
+  series.push({ name: tr('試算路徑', 'Lab path'), color: W[L.world].color, shape: 0, values: [START_CASH, ...res.ledger.map(l => l.after.cash)], fail: res.failAt });
+  const ext = res.failAt ? null : bestExtension(res.sim, L.world);
+  return `<div class="toolbar"><span class="seg" role="group" aria-label="${tr('情境', 'Scenario')}">${WORLD_IDS.map(id => `<button type="button" data-act="labWorld" data-id="${id}" aria-pressed="${L.world === id}">${esc(T(W[id].n))}</button>`).join('')}</span>
+    ${state.records.length === 3 ? `<button type="button" class="btn small" data-act="labLoad" data-id="mine">${tr('載入我們的路徑', 'Load our path')}</button>` : ''}<button type="button" class="btn small" data-act="labLoad" data-id="demo">${tr('載入教師示範路徑', 'Load the teacher’s demo path')}</button><button type="button" class="btn small" data-act="labLoad" data-id="empty">${tr('清空', 'Clear')}</button></div>
+  <div class="lab-grid" style="margin-top:12px">${cols.map((c, i) => c.dead ? `<div class="lab-col dead"><h4>${YEARS[i]}</h4><p class="lab-sum">${tr('前一回合不可行，這一回合無法進行。', 'The previous round is infeasible, so this round cannot proceed.')}</p></div>` : `<div class="lab-col"><h4>${YEARS[i]}<small>${tr('可用現金 ', 'Cash ') + c.start.cash}</small></h4>
+      <div class="lab-chips">${A.map(a => { const lock = eligible(a, c.start), on = L.picks[i].includes(a.id); return `<button type="button" data-act="labPick" data-r="${i}" data-id="${a.id}" aria-pressed="${on}"${lock ? ' disabled' : ''} title="${esc(lock || T(a.name) + tr('｜現金 ', ' | cash ') + a.cost + tr('、人力 ', ', engineering units ') + a.eng)}">${esc(T(a.short))}</button>`; }).join('')}</div>
+      <p class="lab-sum${c.err ? ' err' : ''}">${c.err ? esc(c.err) : tr('投入 ', 'Spending ') + c.t.cost + tr('、人力 ', ', engineering units ') + c.t.eng + ' / ' + ENG_CAP + tr('；回合末現金 ', '; round-end cash ') + c.x.after.cash}</p></div>`).join('')}</div>
+  <div class="grid2" style="margin-top:12px"><div class="fig"><h3>${tr('回合末現金｜', 'Round-end cash | ') + esc(T(W[L.world].n))}</h3>${cashLine(series, { minW: 440, label: tr('試算路徑的回合末現金', 'Round-end cash of the lab path') })}
+    <div class="legend">${series.map(s => `<span><svg viewBox="0 0 16 16" aria-hidden="true">${marker(s.shape, 8, 8, s.color)}</svg>${esc(s.name)}</span>`).join('')}</div></div>
+    <div class="fig"><h3>${tr('試算結果', 'Lab result')}</h3>${res.failAt ? `<p class="lab-sum err">${tr('第 ' + res.failAt + ' 回合不可行：', 'Infeasible in round ' + res.failAt + ': ')}${esc(res.error)}</p>` : `<p>${tr('2030 年底現金 ', 'Cash at the end of 2030: ')}<strong>${res.sim.cash}</strong>${tr('；客戶關係 ', '; client relationships: ')}<strong>${res.sim.caps.relation}</strong></p><p>${tr('2030 年底成熟能力：', 'Matured capabilities at the end of 2030: ')}${esc(capList(capsOn(res.sim)))}</p><p>${tr('2030 年投入、尚未成熟：', 'Started in 2030, not yet matured: ')}${esc(res.sim.pending.map(p => T(ACT[p.id].short)).join(sep) || tr('無', 'none'))}</p><p>${tr('2032 延伸試算的最高行動淨收入：', 'Highest net action revenue in the 2032 extension: ')}<strong>+${ext.net}</strong>${ext.ids.length ? tr('（', ' (') + esc(ext.ids.map(id => T(ACT[id].short)).join(sep)) + tr('）', ')') : ''}</p>`}
+    <p class="cap">${tr('試算不會改動你們已提交的紀錄。', 'The lab never alters the rounds you have already committed.')}</p></div></div>`;
+}
+/* 逆向歸納 */
+function treeHTML() {
+  const t = ui.tree, d = treeData(t.world), sg = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v);
+  const nm = id => T(ACT[id].short), q = s => tr('「' + s + '」', '“' + s + '”');
+  const pick = (a, b, an, bn) => a === b ? tr('兩者相同', 'the two are equal') : tr('選', 'choose ') + q(a > b ? an : bn);
+  const add = v => (v < 0 ? ' − ' : ' + ') + Math.abs(v);
+  const svc = Math.max(payoff(ACT.service, t.world) - ACT.service.cost, 0);
+  const text = [
+    tr('先看最右邊的四個結果：每一個的淨額（收入減成本）都已經知道，中間與最左邊的決策節點還沒有答案。', 'Start with the four outcomes on the right: each net value (revenue minus cost) is known, while the decision nodes in the middle and on the left have no answer yet.'),
+    tr('平台試辦完成後，比較' + q(nm('platformSale')) + sg(d.P.sale) + ' 與' + q(nm('service')) + sg(d.P.svc) + '：' + pick(d.P.sale, d.P.svc, nm('platformSale'), nm('service')) + '，這個節點的值是 ' + sg(d.P.max) + '。', 'With the pilot complete, compare ' + q(nm('platformSale')) + ' ' + sg(d.P.sale) + ' with ' + q(nm('service')) + ' ' + sg(d.P.svc) + ': ' + pick(d.P.sale, d.P.svc, nm('platformSale'), nm('service')) + ', so this node is worth ' + sg(d.P.max) + '.'),
+    tr('維修能力建立後，比較' + q(nm('maintSale')) + sg(d.M.sale) + ' 與' + q(nm('service')) + sg(d.M.svc) + '：' + pick(d.M.sale, d.M.svc, nm('maintSale'), nm('service')) + '，這個節點的值是 ' + sg(d.M.max) + '。', 'With maintenance built, compare ' + q(nm('maintSale')) + ' ' + sg(d.M.sale) + ' with ' + q(nm('service')) + ' ' + sg(d.M.svc) + ': ' + pick(d.M.sale, d.M.svc, nm('maintSale'), nm('service')) + ', so this node is worth ' + sg(d.M.max) + '.'),
+    tr('把兩個結果帶回 2028 年：' + nm('pilot') + ' −' + ACT.pilot.cost + add(d.P.max) + ' = ' + sg(d.rootP) + '；' + nm('maint') + ' −' + ACT.maint.cost + add(d.M.max) + ' = ' + sg(d.rootM) + '。在這棵樹、這個已知情境下，' + pick(d.rootP, d.rootM, nm('pilot'), nm('maint')) + '。', 'Carry both results back to 2028: ' + nm('pilot') + ' −' + ACT.pilot.cost + add(d.P.max) + ' = ' + sg(d.rootP) + '; ' + nm('maint') + ' −' + ACT.maint.cost + add(d.M.max) + ' = ' + sg(d.rootM) + '. In this tree, under this known scenario, ' + pick(d.rootP, d.rootM, nm('pilot'), nm('maint')) + '.')
+  ][t.step];
+  return `<div class="toolbar"><span class="hint">${tr('假設已知的情境：', 'Scenario assumed known: ')}</span><span class="seg" role="group" aria-label="${tr('情境', 'Scenario')}">${WORLD_IDS.map(id => `<button type="button" data-act="treeWorld" data-id="${id}" aria-pressed="${t.world === id}">${esc(T(W[id].n))}</button>`).join('')}</span></div>
+  <div class="fig" style="margin-top:12px">${treeSVG(t.world, t.step)}
+    <p style="margin-top:10px" aria-live="polite"><strong>${tr('步驟 ' + (t.step + 1) + '／4　', 'Step ' + (t.step + 1) + ' of 4: ')}</strong>${esc(text)}</p>
+    <div class="toolbar" style="margin-top:10px"><button type="button" class="btn primary" data-act="treeNext"${t.step >= 3 ? ' disabled' : ''}>${tr('下一步', 'Next step')}</button><button type="button" class="btn" data-act="treeReset"${t.step === 0 ? ' disabled' : ''}>${tr('重來', 'Start again')}</button></div>
+    <p class="cap">${tr('逆向歸納的做法，是先在最後一層決策節點選出較好的行動，再把結果帶回前一個節點。換一個情境再解一次，答案可能不同；真實的策略還有未指定機率的不確定性、多重目標與不完整的資訊，所以這棵樹解出來的只是這棵樹的答案。主模擬中「從 2030 回推到 2026」屬於回溯規劃，和這裡的方法不同。', 'Backward induction first picks the better action at the last layer of decision nodes and then carries the result back to the node before. Solve it again under another scenario and the answer may differ; real strategy also involves uncertainty without specified probabilities, multiple goals and incomplete information, so the tree’s solution holds only for the tree. Working back from 2030 to 2026 in the main simulation is backcasting, which is a different method.')}</p>
+    <p class="cap">${tr('這棵樹刻意只放兩個分支，沒有「2028 年不建構能力、2030 年只接既有客製服務」這個選項；若只看兩期現金，那個選項的淨額是 ' + sg(svc) + '，在四種情境都高於兩個分支。這個練習示範的是求解順序，不能用來判斷該不該投資。', 'The tree deliberately has only two branches and leaves out “build nothing in 2028 and serve only existing custom orders in 2030”; on two-period cash alone that option nets ' + sg(svc) + ', higher than both branches in all four scenarios. The exercise demonstrates the order of solving and cannot be used to judge whether to invest.')}</p></div>`;
+}
+
+/* ============================================================
+   教師與規則、教材來源
+   ============================================================ */
+const FLOW = [
+  ['0–15', [[15, 'h']], '概念與限制：區分策略規劃與日常排程；暖身後各寫一項內在限制與外部不確定性', 'Concepts and constraints: strategic planning versus day-to-day scheduling; after the warm-up, each student writes one internal constraint and one external uncertainty', '計畫會變，為什麼仍要規劃？', 'Plans change, so why plan at all?'],
+  ['15–30', [[15, 'h']], '個人初判與回溯規劃（2030→2028→2026）', 'Individual initial judgment and backcasting (2030→2028→2026)', '先想客戶價值，再想工具。', 'Client value first, tools second.'],
+  ['30–60', [[10, 'h'], [15, 'ai'], [5, 'h']], '第一回合：自主判斷 10 分鐘、AI 查核約 15 分鐘、結算 5 分鐘', 'Round 1: 10 min own judgment, about 15 min AI review, 5 min settlement', '你今天放棄什麼，才能讓未來有什麼？', 'What are you giving up today, and what will that make possible later?'],
+  ['60–90', [[10, 'h'], [15, 'ai'], [5, 'h']], '第二回合：重新檢查三種配適', 'Round 2: re-examine the three fits', '這是訊號，還是你已經把它當成確定的未來？', 'Is this a signal, or are you already treating it as a certain future?'],
+  ['90–100', [[10, 'rest']], '休息；每組匯出 JSON 備份', 'Break; every team exports a JSON backup', '確認備份檔已下載', 'Confirm the backup has been downloaded'],
+  ['100–130', [[10, 'h'], [15, 'ai'], [5, 'h']], '第三回合：運用已成熟的能力', 'Round 3: using capabilities that have matured', '現在做不到的事，是哪個早期選擇造成的？', 'Which earlier choice explains what you cannot do now?'],
+  ['130–155', [[25, 'h']], '四情境壓力測試、機會成本對照與有限樹練習', 'Four-scenario stress test, opportunity-cost comparison and the finite-tree exercise', '換了情境，哪些選擇失去配適？', 'In another scenario, which choices lose their fit?'],
+  ['155–175', [[20, 'h']], '跨組挑戰；應用到 CMP 與個人生涯', 'Cross-team challenge; applying the session to the CMP and to one’s own career', '同樣的現金可以來自很不同的能力結構。維持與轉向各需要什麼證據？', 'The same cash can come from very different capability structures. What evidence would justify staying, and what would justify changing?'],
+  ['175–180', [[5, 'h']], '個人反思與匯出筆記', 'Individual reflection and note export', 'AI 改變了你的哪個判斷？下次會觀察什麼？', 'Which of your judgments did the AI change, and what will you watch for next time?']
+];
+const ISSUES = [
+  ['「錢最多就是贏。」', '“Most cash wins.”', '把現金與策略目標分開，比較能力、客戶關係與下一步可行的選項。', 'Separate cash from the strategic goal; compare capabilities, client relationships and the options open next.', '哪項能力支持你們設定的客戶價值？', 'Which capability supports the client value you set out to deliver?'],
+  ['「AI 發展快，所有公司都該做平台。」', '“AI moves fast, so every firm should build a platform.”', '客戶採用、公司能力與交付責任仍要彼此配適。', 'Client adoption, firm capabilities and delivery accountability still have to fit one another.', '目前哪個需求訊號支持你們的範圍？', 'Which demand signal currently supports your scope?'],
+  ['同一回合想買資料又買平台', 'Buying data and the platform in the same round', '說明能力成熟有時間差，現金買不到已經完成的能力。', 'Explain the time lag before a capability matures; cash cannot buy a ready-made capability.', '寫出 2026→2028→2030 的前置鏈', 'Write out the 2026→2028→2030 prerequisite chain'],
+  ['只為未來投資，不管既有客戶', 'Investing only for the future and neglecting existing clients', '指出當期訂單、人力負荷與客戶關係之間的取捨。', 'Point to the trade-off among current orders, engineering capacity and client relationships.', '本回合停止服務的機會成本', 'The opportunity cost of not serving clients this round'],
+  ['一有新訊號就全面轉向', 'Pivoting completely at the first new signal', '追問：哪個事先設定的修訂條件被觸發了？', 'Ask which pre-set revision condition has been triggered.', '訊號、門檻、修訂範圍', 'Signal, threshold and scope of revision'],
+  ['「已經花了錢，只能繼續。」', '“We have already spent the money, so we must continue.”', '已經花掉的錢收不回來，不該列入接下來的比較；請比較剩餘投入與替代路徑。', 'Money already spent cannot be recovered and should not enter the comparison; compare the remaining spending with alternative paths.', '從現在起算的能力缺口與投入', 'The capability gap and spending counted from now'],
+  ['AI 補出機率，或案例沒有提供的需求量', 'The AI supplies probabilities or demand figures the case never gave', '請學生回查輸入內容，把該段標示為「推論／需要查證」。', 'Have students trace back to the input and label the passage “inference / needs checking.”', '原資料的對應位置，或承認案例未提供', 'The matching place in the source material, or an admission that the case does not say'],
+  ['壓力測試顯示原路徑不可行', 'The stress test shows the path is infeasible', '這是模型的正常結果：換了情境，前期現金可能不夠。', 'This is a normal model result: in another scenario, early cash may fall short.', '哪個回合現金不足？要重設什麼？', 'In which round does cash run short, and what needs redesigning?'],
+  ['第三回合繼續建構能力，沒有當期成果', 'Still building capability in round 3 with no current result', '請學生說明較長期限的理由；尚未成熟的能力不能算成已取得。', 'Ask for the longer-horizon reasoning; a capability that has not matured does not count as acquired.', '超出模擬期限的里程碑', 'A milestone beyond the simulation horizon'],
+  ['「服務路線現金比較多，平台是不是沒用？」', '“The service route ends with more cash, so is the platform pointless?”', '主模型只計算三回合內的現金，沒有估值，也沒有期限之後的現金流，不能據此宣布任何未來都不該建平台。可搭配成果頁的「期限之外」延伸試算討論。', 'The main model counts only cash within three rounds, with no valuation and no cash flows beyond the horizon, so it cannot show that a platform should never be built in any future. Use the “Beyond the horizon” extension on the debrief page for discussion.', '分清短期現金、能力與未估計的長期價值', 'Separate short-term cash, capabilities and unestimated long-term value'],
+  ['組內強勢的同學決定一切', 'One dominant member decides everything', '個人先寫、角色輪換，最後的反思個別完成。', 'Individual writing first, rotating roles, and an individual final reflection.', '每個人的原始判斷與最後的差異', 'Each person’s original judgment and how their final view differs from it'],
+  ['瀏覽器裡的紀錄不見了', 'Entries in the browser have disappeared', '用 JSON 備份還原；出問題時先保留原檔，不要只依賴自動保存。', 'Restore from the JSON backup; when something goes wrong keep the original file, and do not rely on autosave alone.', '可讀取的 JSON 備份', 'A readable JSON backup']
+];
+function shareURL() { return location.href.split('#')[0] + '#w=' + state.world + (state.lang === 'en' ? '&lang=en' : ''); }
+function teacherView() {
+  const demo = [['data', 'talent'], ['pilot', 'listen'], ['platformSale', 'coop', 'service']];
+  const dh = simulate(demo, 'dh'), dc = trySimulate(demo, 'dc');
+  const sum = dh.ledger.map((x, i) => tr('第 ' + (i + 1) + ' 回合', 'Round ' + (i + 1)) + COLON() + x.before.cash + ' − ' + x.cost + ' + ' + x.base + (x.revenue ? ' + ' + x.revenue : '') + (x.shock ? ' − ' + x.shock : '') + ' = ' + x.after.cash).join(tr('；', '; '));
+  const started = !!state.brief.started;
+  const heat = v => { const f = v / 54; return `background:rgba(0,43,92,${(0.06 + f * 0.6).toFixed(2)});color:${f > 0.8 ? '#fff' : '#12203A'}`; };
+  return `
+  <h1 tabindex="-1">${tr('教師帶領與公開規則', 'Teacher guide and open rules')}</h1>
+  <p class="prose">${tr('這個概念模擬沒有要重現電控產業的財務狀況。評量與討論的重點放在三種配適的說理，以及有憑有據的修訂。本頁內容對學生公開，沒有隱藏的答案。', 'This conceptual simulation does not try to reproduce the finances of the control-panel industry. Assessment and discussion focus on reasoning about the three fits and on revisions backed by evidence. Everything on this page is open to students; there are no hidden answers.')}</p>
+
+  <section class="sec" id="worldSetup"><h2>${tr('一、設定全班共同的事件路徑', '1. Set the event path for the whole class')}</h2>
+    <p class="prose">${tr('開始前先選一個情境作為事件路徑，讓各組的結果可以互相比較。各組的裝置不會自動同步：請把下方連結發給學生（也可以轉成 QR code），連結已帶有路徑設定；或請各組自行在這裡點選。第一回合開始後，事件路徑就不能更改。', 'Before play begins, choose one scenario as the event path so that team results can be compared. Devices do not sync with one another: share the link below with students (or a QR code made from it), as it already carries the path setting; alternatively each team can select the path here. Once round 1 begins, the event path cannot be changed.')}</p>
+    <div style="margin-top:14px" id="worldBox">${matrix({ pick: 'world', sel: state.world, disabled: started, selTag: tr('目前設定', 'Current setting') })}</div>
+    <p class="hint" style="margin-top:8px" id="worldNote">${started ? tr('模擬已經開始，事件路徑鎖定為「' + W[state.world].n[0] + '」。', 'The simulation has started; the event path is locked to “' + W[state.world].n[1] + '.”') : tr('目前設定為「' + W[state.world].n[0] + '」。', 'Currently set to “' + W[state.world].n[1] + '.”')}</p>
+    <div class="sharelink"><code id="shareUrl">${esc(shareURL())}</code><button type="button" class="btn small" data-act="copyShare">${tr('複製連結', 'Copy link')}</button></div>
+  </section>
+
+  <section class="sec"><h2>${tr('二、180 分鐘流程', '2. The 180-minute sequence')}</h2>
+    <div class="flow" role="group" aria-label="${tr('180 分鐘的時間分配', 'Time allocation across 180 minutes')}">${FLOW.flatMap(f => f[1]).map(([m, k]) => `<i class="${k === 'ai' ? 'ai' : k === 'rest' ? 'rest' : ''}" style="flex:${m}"${tip(m + tr(' 分鐘｜', ' min | ') + (k === 'ai' ? tr('AI 查核', 'AI review') : k === 'rest' ? tr('休息', 'Break') : tr('不使用 AI', 'No AI')))}>${m}</i>`).join('')}</div>
+    <div class="legend"><span><i style="background:var(--navy)"></i>${tr('由人判斷與討論（不使用 AI）', 'Human judgment and discussion (no AI)')}</span><span><i style="background:var(--gold)"></i>${tr('AI 查核，合計約 45 分鐘', 'AI review, about 45 minutes in total')}</span><span><i style="background:#A3ACBD"></i>${tr('休息', 'Break')}</span></div>
+    <div class="tablewrap" style="margin-top:12px"><table><tr><th>${tr('分鐘', 'Minutes')}</th><th>${tr('活動', 'Activity')}</th><th>${tr('教師的追問', 'Teacher’s question')}</th></tr>
+      ${FLOW.map(f => `<tr><td style="white-space:nowrap">${f[0]}</td><td>${tr(f[2], f[3])}</td><td>${tr(f[4], f[5])}</td></tr>`).join('')}</table></div>
+    <p class="prose" style="margin-top:12px">${tr('每回合都依 T0（先保存小組初判）→ T1（請 AI 查核，再自行改寫追問）→ T2（關掉 AI，由小組決定）進行。AI 無法使用時，由同儕或教師做同樣的查核，並在頁面上勾選替代查核。', 'Every round follows T0 (save the team’s initial judgment) → T1 (ask the AI to review, then write your own follow-up) → T2 (close the AI and decide as a team). If AI is unavailable, a peer or the teacher performs the same review and the team selects the substitute-review option on the page.')}</p>
+  </section>
+
+  <section class="sec"><h2>${tr('三、配適的三個問題', '3. The three fit questions')}</h2>
+    <ul class="rules">
+      <li><strong>${tr('外部配適', 'External fit')}</strong><span>${tr('客戶的需要，以及技術與投資的訊號，支持哪一個選擇？', 'Which choice is supported by client needs and by the technology and investment signals?')}</span></li>
+      <li><strong>${tr('資源能力配適', 'Resource and capability fit')}</strong><span>${tr('現金、人力、資料與技能撐得起這項承諾嗎？', 'Can cash, engineering capacity, data and skills sustain this commitment?')}</span></li>
+      <li><strong>${tr('時間配適', 'Timing fit')}</strong><span>${tr('能力何時成熟？太早投入或錯過時機，各要付出什麼代價？', 'When does the capability mature, and what does acting too early or too late cost?')}</span></li>
+    </ul>
+  </section>
+
+  <section class="sec"><h2>${tr('四、模型數值與結算方式', '4. Model figures and settlement')}</h2>
+    <p class="prose">${tr('三個回合代表三段規劃期間，數字沒有對應到年度財報；現金以教學單位表示。初始現金 100，每回合工程人力 6。基本營運淨流入在投資熱與冷時分別為 18 與 8（已扣除日常營運支出），投資冷熱在三回合內不變；外部成本壓力三回合依序為 0、6、8。各行動的成本與收入另外計算，不與基本營運重複。', 'The three rounds stand for three planning periods, and the figures do not correspond to annual accounts; cash is in teaching units. Starting cash is 100 and engineering capacity is 6 units per round. The base operating inflow is 18 when investment is strong and 8 when weak (net of routine operating costs), and the investment climate stays the same across the three rounds; external cost pressure is 0, 6 and 8 in rounds 1 to 3. Action costs and revenue are counted separately and do not overlap with the base inflow.')}</p>
+    <p class="prose">${tr('回合末現金 = 回合初現金 − 本回合投入 + 基本營運淨流入 + 行動收入 − 外部成本壓力。建構能力的行動每項只能做一次，成果下一回合才成熟；當期交付的行動每回合都可以再選。當回合沒有承接既有客製服務或技師協作時，客戶關係減 1（最低為 0）；客戶關係是討論用的指標，不會直接換算成收入。判斷行動能不能執行時，不計入尚未成熟的能力。模型沒有擲骰子，也沒有總分排名。', 'Round-end cash = opening cash − spending this round + base operating inflow + action revenue − external cost pressure. Each capability-building action can be taken only once and matures in the next round; delivery actions can be chosen again every round. In a round with neither existing custom service nor technician collaboration, client relationships fall by 1 (never below 0); the relationship score is an indicator for discussion and is not converted into revenue. Capabilities that have not matured are not counted when checking whether an action can be taken. There are no dice and no overall ranking.')}</p>
+    <div class="tablewrap" style="margin-top:12px"><table class="heat"><tr><th>${tr('行動', 'Action')}</th><th class="num">${tr('現金', 'Cash')}</th><th class="num">${tr('人力', 'Eng. units')}</th><th>${tr('前置能力', 'Prerequisites')}</th><th>${tr('取得', 'Gain')}</th>${WORLD_IDS.map(id => `<th style="text-align:center">${esc(T(W[id].n))}</th>`).join('')}</tr>
+      ${A.map(a => `<tr><td>${esc(T(a.name))}</td><td class="num">${a.cost}</td><td class="num">${a.eng}</td><td>${a.req ? Object.entries(a.req).map(([k, v]) => esc(capText(k, v))).join('<br>') : '—'}</td><td>${a.gain ? Object.entries(a.gain).map(([k, v]) => esc(T(capLabels[k])) + ' +' + v).join('') + (a.delay ? tr('（下一回合）', ' (next round)') : tr('（當回合）', ' (this round)')) : '—'}</td>${WORLD_IDS.map(id => a.pay ? `<td class="h" style="${heat(payoff(a, id))}">${payoff(a, id)}</td>` : '<td class="h muted">—</td>').join('')}</tr>`).join('')}</table></div>
+    <p class="hint" style="margin-top:6px">${tr('右邊四欄是各情境下的回合末收入；顏色愈深代表收入愈高。', 'The four columns on the right are round-end revenue by scenario; a darker cell means higher revenue.')}</p>
+  </section>
+
+  <section class="sec"><h2>${tr('五、教師示範：只示範規則，不宣布最佳路徑', '5. Teacher demo: showing the rules, not the best path')}</h2>
+    <p class="prose">${tr('在「數位擴張」情境下，第一回合做資料整理與培訓，第二回合做平台試辦與訪談驗證，第三回合推出平台服務、技師協作並承接既有客製服務：', 'Under “Digital expansion”: in round 1, structure data and train staff; in round 2, run the platform pilot and the interviews; in round 3, launch the platform service, collaborate with technicians and serve existing custom orders:')}</p>
+    <p class="t0box" style="margin-top:8px">${esc(sum)}</p>
+    <p class="prose" style="margin-top:8px">${dc.failAt ? tr('同樣的投入換到「數位價格壓力」，第 ' + dc.failAt + ' 回合的回合初現金只有 ' + dc.sim.cash + '，付不出該回合的投入，壓力測試會標示這條路徑走不下去。學生需要重新安排路徑；請不要把這條示範當成正解。', 'With the same actions under “Digital price pressure,” opening cash in round ' + dc.failAt + ' is only ' + dc.sim.cash + ', not enough for that round’s spending, and the stress test marks the path as unable to continue. Students need to redesign the path; please do not present this demo as the right answer.') : ''}</p>
+    <div class="toolbar" style="margin-top:12px"><button type="button" class="btn" data-act="teacherLab">${ui.teacherLab ? tr('收起路徑試算', 'Hide the path lab') : tr('開啟路徑試算（教師示範用）', 'Open the path lab (for teacher demos)')}</button><span class="hint">${tr('學生完成三回合後，成果頁會出現同一個試算工具。', 'Students get the same tool on the debrief page once they finish three rounds.')}</span></div>
+    ${ui.teacherLab ? `<div id="lab" style="margin-top:14px">${labHTML()}</div>` : ''}
+  </section>
+
+  <section class="sec"><h2>${tr('六、學生常見的狀況與應對', '6. Common student issues and responses')}</h2>
+    <div class="tablewrap"><table><tr><th>${tr('學生可能出現的狀況', 'What students may say or do')}</th><th>${tr('教師的應對', 'Teacher’s response')}</th><th>${tr('可以要求的具體證據', 'Concrete evidence to ask for')}</th></tr>
+      ${ISSUES.map(r => `<tr><td>${tr(r[0], r[1])}</td><td>${tr(r[2], r[3])}</td><td>${tr(r[4], r[5])}</td></tr>`).join('')}</table></div>
+  </section>
+
+  <section class="sec"><h2>${tr('七、板書配置', '7. Board layout')}</h2>
+    <div class="board">
+      <div><b>${tr('① 未來價值 → 能力缺口 → 當期行動', '① Future value → capability gap → action now')}</b>${tr('分成 2030／2028／2026 三欄。上方另外寫：前瞻思考不等於預言；回溯規劃不等於有限樹上的逆向歸納。', 'Three columns for 2030 / 2028 / 2026. Above them write: forward-looking thinking is not prophecy; backcasting is not backward induction on a finite tree.')}</div>
+      <div><b>${tr('② 三種配適', '② Three fits')}</b>${tr('外部：需求／技術／投資。內部：現金／人力／成熟能力。時間：先後／時間差／時機。每回合圈出最脆弱的一項。', 'External: demand / technology / investment. Internal: cash / engineering capacity / matured capabilities. Timing: sequence / lag / window. Circle the weakest one each round.')}</div>
+      <div><b>${tr('③ 每回合的主張', '③ Each round’s claim')}</b>${tr('假設｜投入｜放棄｜訊號｜修訂。先寫 T0，再用另一種顏色標出 T2 的改變與理由。', 'Assumption | spending | what is given up | signal | revision. Write T0 first, then mark the T2 changes and reasons in another color.')}</div>
+      <div><b>${tr('④ 成果四欄', '④ Four outcome columns')}</b>${tr('現金｜能力｜客戶關係｜彈性。彈性以現金與成熟能力所容許的選項來說明，不另設總分。', 'Cash | capabilities | client relationships | flexibility. Explain flexibility through the options that cash and matured capabilities allow; no total score.')}</div>
+    </div>
+  </section>
+
+  <section class="sec"><h2>${tr('八、形成性評量建議', '8. Suggested formative assessment')}</h2>
+    <p class="prose">${tr('觀察五個面向，每項 0–2 分：目標與假設、三種配適、時間與機會成本、對 AI 的查核、修訂與個人應用。2 分是理由與證據完整，1 分是部分說明，0 分是沒有紀錄或直接照收 AI 的說法。遊戲現金、提示詞長度與使用次數都不列入評分，也不更動課程既有的正式評分比重。', 'Observe five dimensions, 0–2 points each: goals and assumptions, the three fits, timing and opportunity cost, reviewing the AI’s output, and revision plus individual application. Score 2 for complete reasons and evidence, 1 for a partial explanation, and 0 for no record or for accepting the AI’s output uncritically. Game cash, prompt length and number of AI uses are not graded, and the course’s existing formal grade weights are unchanged.')}</p>
+  </section>`;
+}
+function sourcesView() {
+  const link = (u, t) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
+  return `
+  <h1 tabindex="-1">${tr('教材脈絡與來源', 'Teaching context and sources')}</h1>
+  <p class="prose">${tr('第五週延續第四週「先定義問題、辨識假設與限制，再找解方」的習慣，把分析轉成目標、能力、順序與修訂條件。以下內容都是改寫與原創模擬，沒有重製教材全文或原始圖表。', 'Week 5 builds on the Week 4 habit of defining the problem and identifying assumptions and constraints before looking for solutions, and turns that analysis into goals, capabilities, sequencing and revision conditions. Everything here is paraphrase or original simulation; no textbook text or source figure is reproduced.')}</p>
+  <section class="sec"><h2>${tr('來源', 'Sources')}</h2>
+  <ul class="stack prose" style="padding-left:1.2em">
+    <li>${tr('課程大綱第五週「規劃與策略規劃」，以及課程影片「計畫一定趕不上變化」與「建立有效的策略與執行」。影片請回 NTU COOL 觀看。', 'Week 5 of the course syllabus, “Planning and strategic planning,” and the course videos “Plans never keep up with change” and “Building effective strategy and execution.” Please watch the videos on NTU COOL.')}</li>
+    <li>${tr('「', '“')}${link('https://537sonic.github.io/SONIC/share/steady-electronics-four-futures-20260930/#h0', tr('穩穩電控的四個明天', 'Steady Electronics: Four Futures'))}${tr('」：情境軸與分階段承諾的靈感來源。原頁面標示方法依據為 Steve Tighe 的《Rethinking Strategy》，企劃為元智大學終身教育部吳相勳主任。本模擬的案例與數值都另行編寫，與原作者的財務模型無關。', ',” the inspiration for the scenario axes and staged commitments. The source page credits its method to Steve Tighe’s Rethinking Strategy and names Wu Hsiang-Hsun, director of lifelong education at Yuan Ze University, as its planner. The case and figures in this simulation were written separately and are unrelated to the original author’s financial model.')}</li>
+    <li>${link('https://openstax.org/books/principles-management/pages/9-3-the-role-of-strategic-analysis-in-formulating-a-strategy', 'OpenStax, Principles of Management 9.3')}${tr('、', ' and ')}${link('https://openstax.org/books/principles-management/pages/9-6-measuring-and-evaluating-strategic-performance', '9.6')}${tr('：內外部環境分析、策略形成與績效回饋。', ': internal and external analysis, strategy formulation and performance feedback.')}</li>
+    <li>${link('https://biz.libretexts.org/Bookshelves/Management/Principles_of_Management/04%3A_Developing_Mission_Vision_and_Values/04.3%3A_The_Roles_of_Mission_Vision_and_Values', 'LibreTexts, Principles of Management 4.3')}${tr('：使命、願景、策略與目標之間的關係。', ': how mission, vision, strategy and goals relate.')}</li>
+    <li>Charles Conn &amp; Robert McLean, <em>Bulletproof Problem Solving</em> (2019)${tr('：問題定義中的決策準則、限制、假設、優先排序與工作計畫。本模擬沒有把這本書當作情境規劃或逆向歸納的原始出處。', ': decision criteria, constraints, assumptions, prioritization and work planning in problem definition. This simulation does not treat the book as the original source of scenario planning or backward induction.')}</li>
+  </ul></section>
+  <section class="sec"><h2>${tr('三種方法的區分', 'Telling the three methods apart')}</h2>
+    <p class="prose">${tr('前瞻思考比較幾種合理的未來。回溯規劃從想達成的價值回推必要條件。逆向歸納則是在有限、規則已定的決策樹上，從末端的選擇往回求解。主模擬用到前兩種；成果頁另有一棵小型的有限樹，用來練習第三種。', 'Forward-looking thinking compares several plausible futures. Backcasting works from the value you want to achieve back to the conditions it requires. Backward induction solves a finite decision tree with fixed rules from the final choices backward. The main simulation uses the first two; the debrief page adds a small finite tree for practicing the third.')}</p>
+  </section>`;
+}
+
+/* ============================================================
+   狀態、保存、事件與匯出
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const PORTABLE_ID = JSON.parse($('portable-id').textContent);
+/* 同一個資料夾不論網址有沒有 index.html，都使用同一份紀錄 */
+const KEY = 'mgmt2026-w5-strategy-v2:' + (PORTABLE_ID || location.pathname.replace(/index\.html?$/i, ''));
+const OLD_KEY = 'mgmt2026-w5-strategy-v1:' + (PORTABLE_ID || location.pathname);
+const VIEWS = ['brief', 'round', 'history', 'final', 'teacher', 'sources'];
+
+function newDraft() { return { selected: [], text: {}, baseline: null, offline: false, belief: '' }; }
+function blank() { return { version: VERSION, lang: 'zh', view: 'brief', world: 'dh', brief: {}, warm: {}, round: 1, records: [], draft: newDraft(), final: {} }; }
+let state = blank(), storageOK = true;
+const ui = { reveal: 0, fresh: false, tree: { world: null, step: 0 }, lab: null, teacherLab: false, focusH1: false, warned: false, loadFailed: false };
+
+const picks = () => state.records.map(r => r.selected);
+function current() { const { sim } = simulate(picks(), state.world); return mature(sim, state.round); }
+function requiredText(keys, o, min = MIN_CHARS) { return keys.every(k => (o[k] || '').trim().length >= min); }
+/* 只保留已知欄位的文字；過長的內容截斷而不丟棄 */
+function stringMap(o) {
+  const out = {};
+  if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) if (typeof v === 'string' && own(fields, k)) out[k] = v.slice(0, MAX_CHARS);
+  return out;
+}
+const okBelief = b => (own(BELIEFS, b) ? b : '');
+const idList = a => (Array.isArray(a) ? [...new Set(a.filter(id => own(ACT, id)))] : []);
+
+/* 驗證並整理匯入或本機保存的資料；接受第 1 版與第 2 版格式。資料不合規則時丟出錯誤。 */
+function validateImport(p) {
+  if (!p || typeof p !== 'object' || ![1, 2].includes(p.version) || !own(W, p.world) || !['zh', 'en'].includes(p.lang) || !Array.isArray(p.records) || p.records.length > 3) throw Error('Invalid file');
+  const s = blank();
+  s.world = p.world; s.lang = p.lang; s.brief = stringMap(p.brief); s.final = stringMap(p.final);
+  if (p.warm && typeof p.warm === 'object') WARM.forEach((_, i) => { if (p.warm[i] === 'in' || p.warm[i] === 'out') s.warm[i] = p.warm[i]; });
+  s.brief.started = (p.brief && p.brief.started === 'yes') || p.records.length ? 'yes' : '';
+  for (let i = 0; i < p.records.length; i++) {
+    const r = p.records[i];
+    if (!r || typeof r !== 'object' || !r.baseline || !Array.isArray(r.baseline.selected) || !Array.isArray(r.selected)) throw Error('Missing baseline');
+    const prior = mature(simulate(s.records.map(x => x.selected), s.world).sim, i + 1);
+    const t0 = stringMap(r.baseline.text), t2 = stringMap(r.text);
+    if (check(r.baseline.selected, prior) || !requiredText(T0_KEYS, t0)) throw Error('Invalid baseline');
+    if (check(r.selected, prior)) throw Error('Invalid round');
+    if (!requiredText(['judgment', 'finalRationale'], t2) || (!r.offline && !(t2.ai || '').trim())) throw Error('Incomplete round');
+    s.records.push({ selected: [...r.selected], text: t2, baseline: { selected: [...r.baseline.selected], text: t0, belief: okBelief(r.baseline.belief) }, offline: !!r.offline });
+  }
+  s.round = Math.min(3, s.records.length + 1);
+  if (s.records.length < 3) {
+    const sim = mature(simulate(s.records.map(x => x.selected), s.world).sim, s.round), d = (p.draft && typeof p.draft === 'object') ? p.draft : {};
+    s.draft = { selected: idList(d.selected).filter(id => !eligible(ACT[id], sim)), text: stringMap(d.text), baseline: null, offline: !!d.offline, belief: okBelief(d.belief) };
+    if (d.baseline) {
+      const t0 = stringMap(d.baseline.text);
+      if (!Array.isArray(d.baseline.selected) || check(d.baseline.selected, sim) || !requiredText(T0_KEYS, t0)) throw Error('Invalid baseline');
+      s.draft.baseline = { selected: [...d.baseline.selected], text: t0, belief: okBelief(d.baseline.belief) };
+    }
+  }
+  s.view = VIEWS.includes(p.view) ? p.view : 'brief';
+  if (!s.brief.started && s.view === 'round') s.view = 'brief';
+  if (s.records.length === 3 && s.view === 'round') s.view = 'final';
+  return s;
+}
+/* 網址參數：#w=dc 設定事件路徑，#lang=en 設定語言。只在模擬尚未開始時生效。 */
+function applyHash() {
+  const h = new URLSearchParams(location.hash.replace(/^#/, '')), w = h.get('w'), l = h.get('lang');
+  if (state.brief.started) return own(W, w) && w !== state.world ? 'locked' : '';
+  let changed = '';
+  if (own(W, w) && w !== state.world) { state.world = w; changed = 'yes'; }
+  if (['zh', 'en'].includes(l) && l !== state.lang) { state.lang = l; changed = 'yes'; }
+  return changed;
+}
+/* 開始前在頁面上改了路徑或語言時，讓網址參數跟著更新，避免重新載入後被舊參數蓋回去 */
+function syncHash() {
+  if (state.brief.started || !/(^#|&)(w|lang)=/.test(location.hash)) return;
+  try { history.replaceState(null, '', '#w=' + state.world + (state.lang === 'en' ? '&lang=en' : '')); } catch (e) { /* file:// 下某些瀏覽器不允許，忽略 */ }
+}
+function load() {
+  let raw = null;
+  try { raw = localStorage.getItem(KEY) || localStorage.getItem(OLD_KEY); } catch (e) { storageOK = false; }
+  const stored = !!raw;
+  if (!raw) raw = $('portable-state').textContent;
+  try { const p = JSON.parse(raw); if (p) state = validateImport(p); }
+  catch (e) {
+    state = blank();
+    if (stored) { ui.loadFailed = true; try { localStorage.setItem(KEY + ':unreadable', raw); } catch (e2) { /* 無法另存就略過 */ } }
+  }
+  applyHash();
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); storageOK = true; } catch (e) { storageOK = false; }
+  const warn = tr('這個瀏覽器目前無法保存紀錄，請立即匯出 JSON 備份。', 'This browser cannot save entries right now; export a JSON backup immediately.');
+  $('footer').textContent = tr('紀錄只存在這個瀏覽器，不會上傳，也不會自動繳交；頁面沒有連接任何 AI 服務。請定期匯出 JSON 備份。', 'Entries are kept only in this browser; nothing is uploaded or submitted automatically, and no AI service is connected. Export a JSON backup regularly.') + (storageOK ? '' : tr('', ' ') + warn);
+  if (!storageOK && !ui.warned) { ui.warned = true; toast(warn, true); }
+  if (storageOK) ui.warned = false;
+}
+
+/* ---------- 提示 ---------- */
+let toastTimer = 0;
+function toast(msg, err) {
+  const t = $('toast'); t.textContent = msg; t.className = 'on' + (err ? ' err' : '');
+  $('live').textContent = msg;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.className = ''; }, err ? 6000 : 3200);
+}
+function clearErrs() { document.querySelectorAll('.inline-err').forEach(x => { x.textContent = ''; }); }
+function showErr(id, msg) { const e = $('err-' + id); if (e) e.textContent = msg; toast(msg, true); }
+function updateCount(el) {
+  const c = $('c-' + el.dataset.field); if (!c) return;
+  const n = el.value.trim().length, min = need(), short = n < min;
+  c.textContent = short ? tr('至少 ' + min + ' 個字，還差 ' + (min - n) + ' 個字', 'At least ' + min + ' characters; ' + (min - n) + ' to go') : tr('已寫 ' + n + ' 字', pl(n, 'character'));
+  c.classList.toggle('short', short && n > 0);
+  if (!short) el.classList.remove('bad');
+}
+/* 檢查必填欄位；未完成者標紅並捲動到第一個 */
+function missing(keys, group) {
+  const vals = group === 'draft' ? state.draft.text : state[group];
+  const bad = keys.filter(k => (vals[k] || '').trim().length < need());
+  keys.forEach(k => { const el = $('f-' + k); if (el) el.classList.toggle('bad', bad.includes(k)); });
+  if (bad.length) { const el = $('f-' + bad[0]); if (el) { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); el.focus({ preventScroll: true }); } }
+  return bad;
+}
+
+/* ---------- 畫面更新 ---------- */
+function render() {
+  LANG = state.lang;
+  const n = state.records.length, started = !!state.brief.started;
+  if (state.view === 'round' && (n === 3 || !started)) state.view = n === 3 ? 'final' : 'brief';
+  document.documentElement.lang = LANG === 'en' ? 'en' : 'zh-Hant';
+  document.title = tr('W5 澄川電控的三次選擇｜規劃與策略規劃', 'W5 Three Choices at Chengchuan Controls | Planning and Strategic Planning');
+  $('brandSmall').textContent = tr('臺大管理學 2026', 'NTU Principles of Management 2026');
+  $('brandTitle').textContent = tr('第五週　規劃與策略規劃', 'Week 5: Planning and strategic planning');
+  $('langBtn').textContent = LANG === 'en' ? '繁體中文' : 'English';
+  $('langBtn').setAttribute('lang', LANG === 'en' ? 'zh-Hant' : 'en');
+  $('tabs').setAttribute('aria-label', tr('分頁', 'Sections'));
+  $('track').innerHTML = YEARS.map((y, i) => `${i ? `<span class="wire${n >= i ? ' done' : ''}"></span>` : ''}<span class="stop${n > i ? ' done' : started && n === i ? ' now' : ''}"><span class="lamp"></span>${y}</span>`).join('');
+  $('track').setAttribute('aria-label', tr('進度：已完成 ' + n + ' 回合，共 3 回合', 'Progress: ' + n + ' of 3 rounds complete'));
+  const navs = [['brief', '任務簡報', 'Briefing'], ['round', n === 3 ? '三回合已完成' : '本回合決策', n === 3 ? 'All rounds done' : 'This round'], ['history', '路徑紀錄', 'Path so far'], ['final', '成果與反思', 'Debrief'], ['teacher', '教師與規則', 'Teacher and rules'], ['sources', '教材來源', 'Sources']];
+  $('nav').innerHTML = navs.map(([id, z, e]) => `<button type="button" data-view="${id}" aria-current="${state.view === id}"${id === 'round' && (!started || n === 3) ? ' disabled' : ''}>${tr(z, e)}</button>`).join('');
+  const view = { brief: briefView, round: roundView, history: historyView, final: finalView, teacher: teacherView, sources: sourcesView }[state.view];
+  $('main').innerHTML = view() + `<section class="backup"><h2>${tr('備份與課後筆記', 'Backup and notes')}</h2>
+    <div class="toolbar" style="margin-top:10px"><button type="button" class="btn" id="exportJson" data-act="exportJson">${tr('匯出 JSON 備份', 'Export JSON backup')}</button><button type="button" class="btn" id="exportMd" data-act="exportMd">${tr('Markdown 筆記', 'Markdown notes')}</button><button type="button" class="btn" id="exportHtml" data-act="exportHtml">${tr('HTML 筆記', 'HTML notes')}</button><button type="button" class="btn" id="downloadApp" data-act="downloadApp">${tr('下載可繼續操作的網頁', 'Download a portable copy')}</button><button type="button" class="btn" id="importJson" data-act="importJson">${tr('還原 JSON 備份', 'Restore JSON backup')}</button><button type="button" class="btn" id="resetGame" data-act="resetGame">${tr('重新開始', 'Start over')}</button></div>
+    <input id="importFile" type="file" accept="application/json,.json" hidden>
+    <p class="hint" style="margin-top:8px">${tr('JSON 可以還原進度；Markdown 與 HTML 筆記供閱讀與繳交。「可繼續操作的網頁」會把目前的紀錄一起存進檔案。共用裝置請先備份再重新開始。', 'JSON restores progress; the Markdown and HTML notes are for reading and submission. The portable copy stores your current entries inside the file. On a shared device, back up before starting over.')}</p></section>`;
+  document.documentElement.classList.toggle('has-panel', state.view === 'round');
+  document.querySelectorAll('textarea[data-req]').forEach(updateCount);
+  updatePanel();
+  save();
+  ui.fresh = false;
+}
+function go(view, anchor) {
+  if (view !== 'history') ui.reveal = 0;
+  clearTimeout(toastTimer); $('toast').className = '';
+  state.view = view; render();
+  const el = anchor && $(anchor);
+  if (el) el.scrollIntoView({ block: 'start' }); else window.scrollTo(0, 0);
+  ui.focusH1 = !el;
+  if (el) { const h = el.querySelector('h2'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
+}
+function updatePanel() {
+  const b = $('budget'); if (!b) return;
+  const sim = current(), d = state.draft, t = totals(d.selected), err = check(d.selected, sim), r = state.round;
+  /* 第 1 回合結算後已知投資冷熱，之後只列出仍有可能的情境 */
+  const hot = W[state.world].hot, ids = r === 1 ? WORLD_IDS : WORLD_IDS.filter(id => W[id].hot === hot);
+  $('m-cash').textContent = t.cost + ' / ' + sim.cash;
+  const cb = $('m-cashbar'); cb.style.width = Math.min(100, sim.cash ? t.cost / sim.cash * 100 : (t.cost ? 100 : 0)) + '%'; cb.className = t.cost > sim.cash ? 'over' : '';
+  $('m-eng').textContent = t.eng + ' / ' + ENG_CAP;
+  [...$('m-slots').children].forEach((el, i) => { el.className = i < t.eng ? (t.eng > ENG_CAP ? 'over' : 'on') : ''; });
+  const revs = ids.map(id => d.selected.reduce((s, a) => s + payoff(ACT[a], id), 0));
+  const closes = ids.map((id, i) => sim.cash - t.cost + (W[id].hot ? BASE.hot : BASE.cold) + revs[i] - PRESSURE[r - 1]);
+  const range = a => { const lo = Math.min(...a), hi = Math.max(...a); return lo === hi ? String(lo) : lo + '–' + hi; };
+  $('m-base').textContent = r === 1 ? '+' + BASE.hot + tr(' 或 ', ' or ') + '+' + BASE.cold : '+' + (hot ? BASE.hot : BASE.cold);
+  $('m-rev').textContent = '+' + range(revs);
+  $('m-close').textContent = t.cost > sim.cash ? '—' : range(closes);
+  const left = ENG_CAP - t.eng;
+  b.textContent = err && err !== 'invalid' ? err : !d.selected.length ? tr('尚未選擇行動。不行動也可以，但要說明理由。', 'No action selected. Doing nothing is allowed, but give your reasons.')
+    : tr('可行。' + (left ? '還有 ' + left + ' 單位人力、' : '工程人力全部用完，還有 ') + (sim.cash - t.cost) + ' 現金沒有安排。', 'Feasible. ' + (left ? pl(left, 'engineering unit') + ' and ' : 'All engineering units are used; ') + (sim.cash - t.cost) + ' cash ' + (left ? 'remain' : 'remains') + ' unassigned.');
+  b.className = 'status' + (err ? ' err' : '');
+  document.querySelectorAll('[data-action]').forEach(i => i.closest('.action').classList.toggle('selected', i.checked));
+  const cm = $('capmap'); if (cm) cm.innerHTML = capMap(sim, { planned: d.selected });
+  const df = $('diff'); if (df && d.baseline) df.textContent = diffText(d.baseline.selected, d.selected);
+}
+function redrawLab() { const el = $('lab'); if (el) el.innerHTML = labHTML(); }
+function redrawTree() { const el = $('tree'); if (el) el.innerHTML = treeHTML(); }
+/* 重新繪製時保留捲動位置與已展開的區塊 */
+function keepScroll(fn) {
+  const y = window.scrollY, open = [...document.querySelectorAll('main details')].map(d => d.open);
+  fn();
+  const now = document.querySelectorAll('main details');
+  if (now.length === open.length) now.forEach((d, i) => { d.open = open[i]; });
+  window.scrollTo(0, y);
+}
+
+/* ---------- 動作 ---------- */
+const ACTIONS = {
+  start() {
+    if (state.records.length === 3) return go('final');
+    if (state.brief.started) return go('round');
+    const bad = missing(BRIEF_KEYS, 'brief');
+    if (bad.length) return showErr('start', tr('還有 ' + bad.length + ' 個欄位未完成，每欄至少寫 ' + need() + ' 個字。', pl(bad.length, 'box', 'boxes') + ' still incomplete; write at least ' + need() + ' characters in each.'));
+    state.brief.started = 'yes'; ui.fresh = true; go('round');
+  },
+  warm(el) {
+    state.warm[el.dataset.i] = el.dataset.v; keepScroll(render);
+    const nxt = document.querySelector('[data-act=warm]:not(:disabled)') || document.querySelector('[data-act=warmReset]');
+    if (nxt) nxt.focus({ preventScroll: true });
+  },
+  warmReset() { state.warm = {}; keepScroll(render); },
+  belief(el) { if (state.draft.baseline) return; state.draft.belief = el.dataset.id; $('beliefBox').innerHTML = beliefBox(); clearErrs(); save(); },
+  world(el) {
+    if (state.brief.started) return toast(tr('模擬已經開始，事件路徑不能更改。', 'The simulation has started; the event path cannot be changed.'), true);
+    state.world = el.dataset.id; ui.lab = null; syncHash(); keepScroll(render);
+    toast(tr('事件路徑已設定為「' + W[state.world].n[0] + '」。', 'Event path set to “' + W[state.world].n[1] + '.”'));
+  },
+  baseline() {
+    const d = state.draft, err = check(d.selected, current());
+    if (err) { $('acts').scrollIntoView({ behavior: 'smooth' }); return showErr('baseline', err); }
+    if (!d.belief) { $('belief').scrollIntoView({ behavior: 'smooth' }); return showErr('baseline', tr('請先選擇你們判斷最接近的未來；選「還無法判斷」也可以。', 'First choose the future you think you are closest to; “Cannot tell yet” is a valid choice.')); }
+    const bad = missing(T0_KEYS, 'draft');
+    if (bad.length) return showErr('baseline', tr('還有 ' + bad.length + ' 項理由未完成，每項至少寫 ' + need() + ' 個字。', pl(bad.length, 'reason') + ' still incomplete; write at least ' + need() + ' characters in each.'));
+    d.baseline = clone({ selected: d.selected, text: Object.fromEntries(T0_KEYS.map(k => [k, d.text[k]])), belief: d.belief });
+    go('round', 't1'); toast(tr('T0 初判已保存。', 'T0 initial judgment saved.'));
+  },
+  commit() {
+    const d = state.draft;
+    if (!d.baseline || state.records.length >= 3) return;
+    const err = check(d.selected, current());
+    if (err) { $('acts').scrollIntoView({ behavior: 'smooth' }); return showErr('commit', err); }
+    if (!d.offline && !(d.text.ai || '').trim()) { $('f-ai').classList.add('bad'); $('f-ai').scrollIntoView({ block: 'center', behavior: 'smooth' }); return showErr('commit', tr('請貼上 AI 的回答；若 AI 無法使用，請勾選替代查核。', 'Paste the AI’s reply, or select the substitute-review box if AI is unavailable.')); }
+    const bad = missing(['judgment', 'finalRationale'], 'draft');
+    if (bad.length) return showErr('commit', tr('請完成對 AI 建議的判斷與最終理由，每欄至少寫 ' + need() + ' 個字。', 'Complete both your assessment of the AI’s advice and your final reasons, at least ' + need() + ' characters each.'));
+    state.records.push(clone({ selected: d.selected, text: { ai: d.text.ai || '', judgment: d.text.judgment, finalRationale: d.text.finalRationale }, baseline: d.baseline, offline: d.offline }));
+    state.draft = newDraft(); state.round = Math.min(3, state.records.length + 1);
+    ui.lab = null; ui.reveal = state.records.length; go('history');
+  },
+  nextRound() { state.round = state.records.length + 1; ui.fresh = true; go('round'); },
+  copyPrompt() { copyText(buildPrompt(), tr('提示詞已複製。', 'Prompt copied.')); },
+  copyShare() { copyText(shareURL(), tr('連結已複製。', 'Link copied.')); },
+  labWorld(el) { ui.lab.world = el.dataset.id; labNormalize(); redrawLab(); },
+  labLoad(el) { labLoad(el.dataset.id); labNormalize(); redrawLab(); },
+  labPick(el) {
+    const p = ui.lab.picks[+el.dataset.r], id = el.dataset.id, i = p.indexOf(id);
+    if (i >= 0) p.splice(i, 1); else p.push(id);
+    labNormalize(); redrawLab();
+  },
+  teacherLab() { ui.teacherLab = !ui.teacherLab; if (ui.teacherLab) labLoad('demo'); keepScroll(render); },
+  treeWorld(el) { ui.tree = { world: el.dataset.id, step: 0 }; redrawTree(); },
+  treeNext() { ui.tree.step = Math.min(3, ui.tree.step + 1); redrawTree(); if (ui.tree.step === 3) { const r = document.querySelector('[data-act=treeReset]'); if (r) r.focus({ preventScroll: true }); } },
+  treeReset() { ui.tree.step = 0; redrawTree(); },
+  exportJson() { download('MGMT_W5_Learning_Record.json', 'application/json', JSON.stringify(state, null, 2)); },
+  exportMd() { download('MGMT_W5_Learning_Notes.md', 'text/markdown;charset=utf-8', notes()); },
+  exportHtml() {
+    const title = tr('第五週策略規劃模擬：學習筆記', 'Week 5 Strategy Simulation: Learning Notes');
+    download('MGMT_W5_Learning_Notes.html', 'text/html;charset=utf-8', `<!doctype html><html lang="${LANG === 'en' ? 'en' : 'zh-Hant'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><style>body{max-width:960px;margin:32px auto;padding:0 20px;font:17px/1.8 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;color:#12203A}h1{color:#002B5C}pre{white-space:pre-wrap;font:inherit}</style></head><body><h1>${esc(title)}</h1><pre>${esc(notes())}</pre></body></html>`);
+  },
+  downloadApp() {
+    const doc = document.documentElement.cloneNode(true), q = s => doc.querySelector(s);
+    q('#portable-id').textContent = JSON.stringify(Date.now().toString(36) + '-' + Math.random().toString(36).slice(2));
+    q('#portable-state').textContent = JSON.stringify(state).replace(/</g, '\\u003c');
+    ['#main', '#nav', '#track', '#live', '#toast', '#tip', '#footer'].forEach(s => { const e = q(s); if (e) e.textContent = ''; });
+    q('#toast').className = ''; q('#tip').className = ''; doc.className = '';
+    download('MGMT_W5_Strategy_Lab_Portable.html', 'text/html;charset=utf-8', '<!doctype html>\n' + doc.outerHTML);
+  },
+  importJson() { $('importFile').click(); },
+  resetGame() {
+    if (!confirm(tr('重新開始會清除這個瀏覽器裡目前的紀錄。確定已經備份並要繼續嗎？', 'Starting over clears the current entries in this browser. Have you backed up, and do you want to continue?'))) return;
+    const lang = state.lang, world = state.world; state = blank(); state.lang = lang; state.world = world;
+    applyHash();
+    ui.reveal = 0; ui.lab = null; ui.teacherLab = false; ui.tree = { world: null, step: 0 }; go('brief');
+    toast(tr('已重新開始。事件路徑為「' + W[state.world].n[0] + '」。', 'Started over. The event path is “' + W[state.world].n[1] + '.”'));
+  }
+};
+async function copyText(text, okMsg) {
+  try { await navigator.clipboard.writeText(text); toast(okMsg); }
+  catch (e) {
+    const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.select(); let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+    ta.remove(); toast(ok ? okMsg : tr('無法自動複製，請手動選取文字後複製。', 'Automatic copy failed; select the text and copy it manually.'), !ok);
+  }
+}
+function download(name, type, content) {
+  const u = URL.createObjectURL(new Blob([content], { type })), a = document.createElement('a');
+  a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(u), 1500);
+}
+
+/* ---------- 學習筆記 ---------- */
+function notes() {
+  const P = picks(), L = [], capLine = sim => [...CAP_KEYS, 'relation'].map(k => T(capLabels[k]) + ' ' + sim.caps[k]).join(tr('、', ', '));
+  const quote = v => String(v).split('\n').map(l => '> ' + l).join('\n');   // 使用者輸入一律以引文呈現，避免被當成標題
+  L.push('# ' + tr('第五週　規劃與策略規劃：澄川電控的三次選擇', 'Week 5 Planning and Strategic Planning: Three Choices at Chengchuan Controls'), '');
+  L.push(tr('事件路徑：', 'Event path: ') + T(W[state.world].n), '');
+  L.push('## ' + tr('回溯規劃', 'Backcasting'), '');
+  for (const k of BRIEF_KEYS) if (state.brief[k]) L.push('### ' + T(fields[k]), quote(state.brief[k]), '');
+  if (P.length) {
+    const { ledger } = simulate(P, state.world);
+    state.records.forEach((r, i) => {
+      const x = ledger[i];
+      L.push('## ' + tr('第 ' + (i + 1) + ' 回合（' + YEARS[i] + ' 年）', 'Round ' + (i + 1) + ' (' + YEARS[i] + ')'), '');
+      L.push('- ' + tr('T0 行動：', 'T0 actions: ') + nameList(r.baseline.selected));
+      L.push('- ' + tr('T2 行動：', 'T2 actions: ') + nameList(r.selected));
+      L.push('- ' + tr('當時判斷最接近的未來：', 'Future judged closest at the time: ') + (r.baseline.belief ? T(BELIEFS[r.baseline.belief]) : tr('未填', 'not stated')));
+      L.push('- ' + tr('查核方式：', 'Review mode: ') + (r.offline ? tr('教師或同儕替代查核', 'substitute review by teacher or peer') : 'AI'));
+      L.push('- ' + tr('現金：回合初 ', 'Cash: opening ') + x.before.cash + tr(' − 投入 ', ' − spending ') + x.cost + tr(' + 基本營運 ', ' + base inflow ') + x.base + tr(' + 行動收入 ', ' + action revenue ') + x.revenue + tr(' − 成本壓力 ', ' − cost pressure ') + x.shock + ' = ' + x.after.cash);
+      L.push('- ' + tr('工程人力：', 'Engineering units: ') + x.eng + ' / ' + ENG_CAP);
+      L.push('- ' + tr('回合末能力與客戶關係：', 'Capabilities and relationships at round end: ') + capLine(x.after));
+      L.push('- ' + tr('成熟中的投資：', 'Investments still maturing: ') + pendingList(x.after), '');
+      for (const k of T0_KEYS) if (r.baseline.text[k]) L.push('### T0 ' + T(fields[k]), quote(r.baseline.text[k]), '');
+      for (const k of ['ai', 'judgment', 'finalRationale']) if (r.text[k]) L.push('### ' + T(fields[k]), quote(r.text[k]), '');
+    });
+  }
+  if (P.length < 3) {
+    const d = state.draft;
+    L.push('## ' + tr('尚未提交的草稿（第 ' + state.round + ' 回合）', 'Uncommitted draft (round ' + state.round + ')'), '');
+    L.push('- ' + tr('目前勾選：', 'Currently selected: ') + nameList(d.selected));
+    if (d.baseline) L.push('- ' + tr('T0 行動：', 'T0 actions: ') + nameList(d.baseline.selected));
+    L.push('');
+    for (const [k, v] of Object.entries({ ...(d.baseline ? d.baseline.text : {}), ...d.text })) if (own(fields, k) && v) L.push('### ' + T(fields[k]), quote(v), '');
+  } else {
+    L.push('## ' + tr('四情境壓力測試（行動固定，只換情境）', 'Four-scenario stress test (actions fixed, scenario swapped)'), '');
+    for (const id of WORLD_IDS) {
+      const res = trySimulate(P, id);
+      L.push('- ' + T(W[id].n) + (id === state.world ? ' ★' : '') + COLON() + (res.failAt ? tr('第 ' + res.failAt + ' 回合不可行（', 'infeasible in round ' + res.failAt + ' (') + res.error + tr('）', ')') : tr('2030 年底現金 ', 'cash at the end of 2030 ') + res.sim.cash + tr('；2032 延伸試算 +', '; 2032 extension +') + bestExtension(res.sim, id).net));
+    }
+    L.push('');
+  }
+  for (const k of ['exit', 'cmp']) if (state.final[k]) L.push('## ' + T(fields[k]), quote(state.final[k]), '');
+  return L.join('\n');
+}
+
+/* ---------- 事件 ---------- */
+function selectorOf(el) {
+  if (el.id) return '#' + el.id;
+  const d = el.dataset;
+  if (d.act) return `[data-act="${d.act}"]` + ['id', 'i', 'v', 'r'].filter(k => d[k] !== undefined).map(k => `[data-${k}="${d[k]}"]`).join('');
+  return '';
+}
+/* 重新繪製後把鍵盤焦點放回原來的控制項；換頁時放到新頁面的標題 */
+function restoreFocus(sel) {
+  if (ui.focusH1) { ui.focusH1 = false; const h = document.querySelector('main h1'); if (h) h.focus({ preventScroll: true }); return; }
+  if (document.activeElement && document.activeElement !== document.body) return;
+  const el = sel && document.querySelector(sel);
+  if (el && !el.disabled) el.focus({ preventScroll: true });
+}
+document.addEventListener('click', e => {
+  const v = e.target.closest('[data-view]');
+  if (v) { if (!v.disabled) { go(v.dataset.view); restoreFocus(''); } return; }
+  const a = e.target.closest('[data-act]');
+  if (a && !a.disabled && ACTIONS[a.dataset.act]) { const sel = selectorOf(a); ACTIONS[a.dataset.act](a, e); restoreFocus(sel); }
+});
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.matches && el.matches('textarea[data-field]')) {
+    (el.dataset.group === 'draft' ? state.draft.text : state[el.dataset.group])[el.dataset.field] = el.value;
+    if (el.dataset.req) updateCount(el); else el.classList.remove('bad');
+    clearErrs();
+    save();
+  }
+});
+document.addEventListener('change', async e => {
+  const el = e.target;
+  if (el.dataset && el.dataset.action) {
+    const id = el.dataset.action, s = state.draft.selected;
+    state.draft.selected = el.checked ? [...s.filter(x => x !== id), id] : s.filter(x => x !== id);
+    clearErrs(); save(); updatePanel();
+  } else if (el.id === 'offline') {
+    state.draft.offline = el.checked; clearErrs();
+    if (el.checked && $('f-ai')) $('f-ai').classList.remove('bad');
+    save();
+  } else if (el.id === 'importFile') {
+    const file = el.files[0]; el.value = '';
+    if (!file) return;
+    let restored;
+    try {
+      if (file.size > 2000000) throw Error('Too large');
+      restored = validateImport(JSON.parse(await file.text()));
+    } catch (err) { return toast(tr('這個檔案的格式或回合紀錄不符合規則，原有的紀錄沒有變動。', 'This file’s format or round history is invalid. Your existing entries are unchanged.'), true); }
+    if (!confirm(tr('還原會取代目前的紀錄。確定已經備份並要繼續嗎？', 'Restoring replaces the current entries. Have you backed up, and do you want to continue?'))) return;
+    const prev = state, prevUi = { reveal: ui.reveal, lab: ui.lab, tree: ui.tree };
+    try {
+      state = restored; ui.reveal = 0; ui.lab = null; ui.tree = { world: null, step: 0 }; render(); window.scrollTo(0, 0);
+      toast(tr('紀錄已還原。', 'Entries restored.'));
+    } catch (err) {
+      state = prev; Object.assign(ui, prevUi); render();
+      toast(tr('這個檔案無法顯示，原有的紀錄沒有變動。', 'This file could not be displayed. Your existing entries are unchanged.'), true);
+    }
+  }
+});
+$('langBtn').addEventListener('click', () => { state.lang = state.lang === 'zh' ? 'en' : 'zh'; syncHash(); keepScroll(render); });
+/* 同一份連結在開始前才生效；已開始時只提醒 */
+window.addEventListener('hashchange', () => {
+  const r = applyHash();
+  if (r === 'yes') { ui.lab = null; keepScroll(render); toast(tr('已依連結設定事件路徑為「' + W[state.world].n[0] + '」。', 'Event path set from the link: “' + W[state.world].n[1] + '.”')); }
+  else if (r === 'locked') toast(tr('模擬已經開始，連結中的事件路徑沒有套用。', 'The simulation has started, so the event path in the link was not applied.'), true);
+});
+/* 另一個分頁寫入紀錄時同步，避免舊分頁覆蓋新進度 */
+window.addEventListener('storage', e => {
+  if (e.key !== KEY || !e.newValue || e.newValue === JSON.stringify(state)) return;
+  try {
+    const s = validateImport(JSON.parse(e.newValue)), view = state.view;
+    s.lang = state.lang; s.view = view;
+    state = s; ui.reveal = 0; ui.lab = null; render();
+    toast(tr('另一個分頁更新了紀錄，這個分頁已同步為最新內容。', 'Another tab updated the entries; this tab now shows the latest version.'));
+  } catch (err) { /* 另一個分頁寫入的內容無法讀取時，維持現狀 */ }
+});
+/* 圖表提示框 */
+(() => {
+  const box = $('tip');
+  const show = el => { box.textContent = el.dataset.tip; const r = el.getBoundingClientRect(); box.classList.add('on'); const w = box.offsetWidth, h = box.offsetHeight; let x = r.left + r.width / 2 - w / 2, y = r.top - h - 8; x = Math.max(8, Math.min(x, innerWidth - w - 8)); if (y < 8) y = r.bottom + 8; box.style.left = x + 'px'; box.style.top = y + 'px'; };
+  const hide = () => box.classList.remove('on');
+  document.addEventListener('pointerover', e => { const el = e.target.closest && e.target.closest('[data-tip]'); if (el) show(el); else hide(); });
+  document.addEventListener('focusin', e => { const el = e.target.closest && e.target.closest('[data-tip]'); if (el) show(el); });
+  document.addEventListener('focusout', hide);
+  document.addEventListener('scroll', hide, { passive: true });
+})();
+
+load();
+render();
+if (ui.loadFailed) toast(tr('先前保存的紀錄無法讀取，已另外留存一份並從頭開始。若有 JSON 備份，請用「還原 JSON 備份」。', 'The previously saved entries could not be read; a copy was kept aside and the page started fresh. If you have a JSON backup, use “Restore JSON backup.”'), true);
+</script>
+</body>
+</html>
